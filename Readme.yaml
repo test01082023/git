@@ -15,14 +15,14 @@ sections:
     subsections:
       - title: "Cách 1: Dùng Docker"
         code: |
-          git clone https://github.com/yourname/yamlx
+          git clone https://github.com/git19112019/yamlx
           cd yamlx
           docker build -t yamlx-cli .
           docker run --rm -w /app -e USER=$(whoami) yamlx-cli
 
       - title: "Cách 2: Dùng local Python"
         code: |
-          git clone https://github.com/yourname/yamlx
+          git clone https://github.com/git19112019/yamlx
           cd yamlx
           pip install -e .
           yamlx example.yaml
