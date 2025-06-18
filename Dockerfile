@@ -217,5 +217,5 @@ EOF
 # Install tool
 RUN pip install --no-cache-dir -e /app
 
-#ENTRYPOINT ["yamlx"]
-#CMD["example.yaml"]
+ENTRYPOINT ["yamlx"]
+CMD ["example.yaml"]
