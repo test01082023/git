@@ -77,7 +77,7 @@ RUN cat <<EOF > /app/setup.py
 from setuptools import setup, find_packages
 setup(
     name="yamlx",
-    version="core-shell-py-bin",
+    version="3.0.0",
     packages=find_packages(),
     install_requires=["pyyaml", "requests", "jinja2"],
     entry_points={"console_scripts": ["yamlx = yamlx.cli:main"]},
@@ -127,21 +127,22 @@ def _(task):
     os.remove(path)
 EOF
 
-# example.yaml
+# Sample YAML
 RUN cat <<EOF > /app/example.yaml
 metadata:
-  title: "⚙️ Core Actions Test"
+  title: "⚙️ Core Actions Demo"
 tasks:
   - action: run_command
-    command: "echo '🌀 Shell command from ENV: {{ env.USER }}'"
+    command: "echo 'Hello from {{ env.USER }}'"
   - action: python_execute
     code: |
-      print("Python code is running!")
+      print("→ Running embedded Python")
   - action: binary_execute
     binary_code: !!binary |
-      IyEvYmluL3NoCmVjaG8gIkhlbGxvIGZyb20gYmluYXJ5IGZpbGUhIgo=
+      IyEvYmluL3NoCmVjaG8gIkhlbG8gZnJvbSBCYXNlNjQgYmluYXIhIgo=
 EOF
 
+# Cài công cụ & mặc định chạy example.yaml
 RUN pip install --no-cache-dir -e /app
 ENTRYPOINT ["yamlx"]
 CMD ["example.yaml"]
