@@ -72,12 +72,12 @@ def main():
     execute_yaml(args.yaml_file)
 EOF
 
-# setup.py
+# setup.py (đã sửa version hợp lệ)
 RUN cat <<EOF > /app/setup.py
 from setuptools import setup, find_packages
 setup(
     name="yamlx",
-    version="core",
+    version="0.1.0",
     packages=find_packages(),
     install_requires=["pyyaml", "requests", "jinja2"],
     entry_points={"console_scripts": ["yamlx = yamlx.cli:main"]},
