@@ -1,0 +1,155 @@
+FROM python:3.11-slim
+
+LABEL maintainer="you@example.com"
+LABEL description="LogicMap Runtime – máy chạy chương trình tư duy logic dạng graph"
+
+WORKDIR /logicx
+
+RUN pip install --no-cache-dir pyyaml
+
+# -------------------------
+# 🧠 logic_engine.py
+# -------------------------
+RUN cat <<EOF > logic_engine.py
+import os, yaml, time
+from string import Template
+
+CONTEXT = {}
+
+def load_program(name):
+    path = f"./programs/{name}.logicmap"
+    if not os.path.exists(path):
+        raise FileNotFoundError(f"❌ Program not found: {name}")
+    with open(path) as f:
+        return yaml.safe_load(f)
+
+def render(s): return Template(str(s)).safe_substitute(CONTEXT)
+
+def run_step(step):
+    if isinstance(step, dict):
+        if "loop" in step:
+            return handle_loop(step["loop"])
+        elif "retry" in step:
+            return handle_retry(step["retry"])
+        elif "action" in step:
+            return handle_action(step)
+        elif "set" in step:
+            return handle_set(step["set"])
+        else:
+            keys = list(step.keys())
+            if len(keys) == 1:
+                return run_program(keys[0], CONTEXT)
+            else:
+                print(f"⚠️ Không rõ step: {step}")
+    elif isinstance(step, str):
+        return run_program(step, CONTEXT)
+
+def handle_set(cfg):
+    for k, v in cfg.items():
+        CONTEXT[k] = render(v)
+
+def handle_action(task):
+    name = task["action"]
+    if name == "print":
+        msg = render(task.get("message") or CONTEXT.get("message") or CONTEXT.get("item") or "(no message)")
+        print("[PRINT]", msg)
+    elif name == "fail":
+        raise Exception("💥 Intentional failure")
+
+def handle_loop(cfg):
+    items = cfg.get("over") or []
+    do = cfg.get("do") or []
+    for item in items:
+        CONTEXT["item"] = item
+        for step in do: run_step(step)
+
+def handle_retry(cfg):
+    tries = cfg.get("max_attempts", 1)
+    delay = cfg.get("delay_seconds", 0)
+    steps = cfg.get("do", [])
+    for i in range(tries):
+        try:
+            for step in steps: run_step(step)
+            break
+        except Exception as e:
+            print(f"[RETRY {i+1}/{tries}] ⚠️ {e}")
+            if i < tries - 1: time.sleep(delay)
+
+def run_program(name, args):
+    prog = load_program(name)
+    print(f"\\n▶️  RUN: {prog.get('program')}")
+    CONTEXT.update(args)
+    for step in prog.get("process", []): run_step(step)
+    for k, v in (prog.get("output") or {}).items():
+        CONTEXT[k] = render(v)
+    return CONTEXT
+
+if __name__ == "__main__":
+    import sys
+    prog = sys.argv[1] if len(sys.argv) > 1 else "main"
+    run_program(prog, {})
+EOF
+
+# -------------------------
+# 📦 Sample logicmap files
+# -------------------------
+RUN mkdir programs
+
+# main.logicmap
+RUN cat <<EOF > programs/main.logicmap
+program: main
+
+input:
+  user_name: string
+
+process:
+  - set:
+      message: "👋 Hello {{ user_name }}"
+  - action: print
+
+  - greet_user
+
+  - loop:
+      over: ["Alice", "Bob"]
+      do:
+        - set: { message: "🎤 Xin chào {{ item }}" }
+        - action: print
+        - say_hello
+
+  - retry:
+      max_attempts: 3
+      delay_seconds: 1
+      do:
+        - action: fail
+        - set: { message: "✅ Phục hồi sau lỗi" }
+        - action: print
+
+output:
+  final_message: "🚀 DONE"
+EOF
+
+# greet_user.logicmap
+RUN cat <<EOF > programs/greet_user.logicmap
+program: greet_user
+
+process:
+  - set:
+      message: "🧠 Đang gọi từ module greet_user"
+  - action: print
+EOF
+
+# say_hello.logicmap
+RUN cat <<EOF > programs/say_hello.logicmap
+program: say_hello
+
+process:
+  - set: { message: "🫱 Mình là {{ item }}" }
+  - action: print
+EOF
+
+# -------------------------
+# 🏁 Entry point
+# -------------------------
+ENTRYPOINT ["python", "logic_engine.py"]
+CMD ["main"]
+
