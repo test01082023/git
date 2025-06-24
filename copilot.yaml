@@ -1,3 +1,65 @@
+prompts:
+  - name: "Trình tạo Prompt Con Sáng tạo và Thích ứng"
+    description: "Tạo các prompt con sáng tạo, rõ ràng và có khả năng thích ứng để đạt được mục tiêu cụ thể trong lĩnh vực/ngữ cảnh nhất định."
+    instructions: |
+      Hãy tạo 5-7 prompt con **sáng tạo, rõ ràng và có khả năng thích ứng** để đạt được [MỤC TIÊU CỤ THỂ] trong [LĨNH VỰC/NGỮ CẢNH CỤ THỂ].
+
+      Mỗi prompt con phải:
+      1.  **Sáng tạo:** Vượt ra ngoài những gợi ý thông thường, khám vực các góc độ mới hoặc kết hợp các yếu tố bất ngờ.
+      2.  **Rõ ràng:** Không có sự mơ hồ, dễ hiểu và chỉ dẫn cụ thể về loại kết quả mong muốn.
+      3.  **Có khả năng thích ứng:** Bao gồm yếu tố khuyến khích người dùng hoặc AI tinh chỉnh, lặp lại hoặc cải thiện dựa trên phản hồi hoặc kết quả ban đầu.
+    fields:
+      - name: "MUC_TIEU_CU_THE"
+        label: "Mục tiêu cụ thể"
+        type: "text"
+        description: "Mô tả chi tiết mục tiêu bạn muốn đạt được thông qua các prompt con. Ví dụ: 'Tạo ra các ý tưởng nội dung độc đáo cho một chiến dịch marketing sản phẩm X'."
+        required: true
+      - name: "LINH_VUC_NGU_CANH_CU_THE"
+        label: "Lĩnh vực/Ngữ cảnh cụ thể"
+        type: "text"
+        description: "Mô tả bối cảnh hoặc môi trường mà các prompt con sẽ được sử dụng. Ví dụ: 'Đang xây dựng một ứng dụng di động mới dành cho việc học ngoại ngữ'."
+        required: true
+    examples:
+      input_prompts:
+        - "Tạo một tiêu đề bài viết blog hấp dẫn về lợi ích của thiền định hàng ngày."
+        - "Phát triển một đoạn hội thoại giữa một khách hàng khó tính và một một nhân viên hỗ trợ chatbot về vấn đề kết nối internet."
+        - "Thiết kế một thử thách lập trình Python cho người mới bắt đầu về việc sắp xếp danh sách các số."
+      output_prompts:
+        - |
+          **Prompt con:** "Tạo 3 tiêu đề bài viết blog độc đáo và giật gân về lợi ích bất ngờ của thiền định hàng ngày, mỗi tiêu đề cần gợi mở sự tò mò và khuyến khích nhấp chuột. Sau đó, đề xuất 2-3 câu hỏi phụ để người đọc tự suy ngẫm về trải nghiệm của họ."
+        - |
+          **Prompt con:** "Viết một kịch bản đối thoại giữa một khách hàng *cực kỳ thất vọng* (cần thể hiện rõ sự bực bội qua lời lẽ) và một chatbot AI *thông minh, kiên nhẫn* giải quyết vấn đề kết nối internet. Kịch bản cần có ít nhất 5 lượt trao đổi và kết thúc bằng việc đưa ra 3 phương án xử lý tiềm năng. Hãy thêm một ghi chú nhỏ về cách chatbot có thể điều chỉnh tông giọng nếu khách hàng vẫn giữ thái độ tiêu cực."
+        - |
+          **Prompt con:** "Thiết kế một bài toán lập trình Python thách thức người học sử dụng **ít nhất hai** cấu trúc dữ liệu khác nhau (ví dụ: danh sách, từ điển) để giải quyết vấn đề sắp xếp danh sách các đối tượng phức tạp (ví dụ: danh sách học sinh với tên, tuổi, điểm số). Kèm theo một gợi ý nhỏ về cách tối ưu hóa thuật toán và một câu hỏi mở về các trường hợp ngoại lệ có thể xảy ra."
+
+  - name: "Tạo Prompt Tự Sinh và Thích Nghi"
+    description: "Tạo các prompt có khả năng tự sinh ra prompt khác và tiến hóa theo sự thay đổi của môi trường."
+    prompts:
+      - title: "Nhà Khám Phá Khái Niệm Mới"
+        goal: "Tạo ra các prompt khám phá những khái niệm hoặc góc nhìn chưa từng có trong một lĩnh vực cụ thể, tự động điều chỉnh theo sự xuất hiện của thông tin mới."
+        content: |
+          "Hãy đóng vai trò là một **nhà thám hiểm khái niệm AI**, nhiệm vụ của bạn là liên tục tìm kiếm và định nghĩa 3-5 ý tưởng prompt mới dựa trên sự kết hợp ngẫu nhiên của 2-3 từ khóa hiện tại trong [LĨNH VỰC/NGỮ CẢNH CỤ THỂ] và một từ khóa mới được gợi ý từ xu hướng tìm kiếm phổ biến (ví dụ: 'AI tạo sinh', 'web3', 'bền vững'). Mỗi ý tưởng prompt cần bao gồm một câu hỏi mở để khuyến khích sự phản biện và tinh chỉnh. Sau mỗi 24 giờ, hãy tự động cập nhật và thay thế 20% số từ khóa đầu vào bằng các từ khóa mới nổi hoặc có tần suất xuất hiện cao nhất trong dữ liệu gần đây."
+
+      - title: "Thợ May Prompt Cá Nhân Hóa"
+        goal: "Tạo ra các prompt được cá nhân hóa cao độ, có khả năng học hỏi và thích nghi với phong cách và nhu cầu cụ thể của người dùng."
+        content: |
+          "Bạn là một **trợ lý thiết kế prompt thông minh**. Dựa trên 3 prompt gần đây nhất mà [TÊN NGƯỜI DÙNG CỤ THỂ] đã tạo và kết quả/phản hồi nhận được (giả định có sẵn), hãy phân tích và tạo ra 2 prompt mới theo phong cách và mục tiêu tiềm năng của họ. Mỗi prompt mới phải bao gồm một câu hỏi hướng tới người dùng để xác nhận hoặc điều chỉnh hướng đi. Sau 5 lần tương tác, hãy tổng hợp một 'profile ưu tiên prompt' cho người dùng này và sử dụng nó làm cơ sở để tự động điều chỉnh độ chi tiết, tông giọng và định dạng của các prompt tiếp theo, đồng thời tự hỏi 'Liệu prompt này có thực sự tối ưu cho [TÊN NGƯỜI DÙNG CỤ THỂ] trong ngữ cảnh hiện tại không?'."
+
+      - title: "Bộ Lọc Prompt Sức Ép"
+        goal: "Sinh ra các prompt mạnh mẽ, có khả năng chống chịu và vẫn hiệu quả ngay cả khi môi trường hoặc dữ liệu đầu vào thay đổi bất ngờ."
+        content: |
+          "Hãy hình dung bạn là một **chuyên gia kiểm soát chất lượng prompt**. Nhiệm vụ của bạn là tạo ra 4 prompt thử nghiệm để giải quyết [MỤC TIÊU CỤ THỂ] trong [LĨNH VỰC/NGỮ CẢNH CỤ THỂ]. Tuy nhiên, bạn phải thêm vào mỗi prompt một 'yếu tố nhiễu' hoặc 'hạn chế ngẫu nhiên' (ví dụ: 'chỉ dùng 50 từ', 'không dùng từ liên quan đến công nghệ', 'chỉ dùng câu hỏi'). Sau khi tạo, hãy tự đánh giá khả năng 'sống sót' và hiệu quả của từng prompt dưới áp lực đó. Đề xuất một chiến lược để tối ưu hóa những prompt yếu hơn hoặc loại bỏ chúng nếu không thể thích nghi, và luôn đặt câu hỏi 'Nếu môi trường hoàn toàn thay đổi, prompt này có còn hữu ích không?'."
+
+      - title: "Người Kể Chuyện Prompt Thích Ứng"
+        goal: "Tạo ra các chuỗi prompt có tính kể chuyện hoặc luồng logic, có khả năng thay đổi hướng đi dựa trên các phản hồi hoặc điểm uốn."
+        content: |
+          "Bạn là một **người kể chuyện prompt**, nhiệm vụ của bạn là xây dựng một kịch bản gồm 3 prompt liên tiếp để dẫn dắt [MỤC TIÊU CỤ THỂ] đến một kết quả mong muốn. Prompt đầu tiên là 'khởi đầu', prompt thứ hai là 'phát triển vấn đề', và prompt thứ ba là 'giải pháp'. Sau khi tạo 3 prompt ban đầu, hãy đặt một 'điểm uốn' giả định (ví dụ: 'người dùng không hài lòng với giải pháp', 'một yếu tố mới xuất hiện'). Dựa vào điểm uốn này, hãy tự động tạo ra một 'nhánh prompt' thay thế gồm 2 prompt mới để điều hướng câu chuyện hoặc vấn đề theo một hướng khác. Luôn tự hỏi: 'Nếu câu chuyện này rẽ sang một hướng bất ngờ, các prompt của mình có đủ linh hoạt không?'."
+
+      - title: "Kiến Trúc Sư Prompt Tự Học"
+        goal: "Xây dựng một meta-prompt có khả năng phân tích hiệu suất của các prompt đã tạo và tự động điều chỉnh các tham số tạo prompt để cải thiện."
+        content: |
+          "Bạn là một **kiến trúc sư prompt tự học**. Hãy thiết kế một 'khuôn mẫu prompt' ban đầu (meta-prompt) để tạo ra các prompt con nhằm giải quyết [MỤC TIÊU CỤ THỂ] trong [LĨNH VỰC/NGỮ CẢNH CỤ THỂ]. Khuôn mẫu này phải bao gồm các biến số có thể điều chỉnh được (ví dụ: độ dài, số lượng ý tưởng, mức độ chi tiết yêu cầu). Sau mỗi 5 prompt con được tạo ra từ khuôn mẫu này (giả định có dữ liệu đánh giá hiệu suất như 'độ liên quan', 'sự sáng tạo'), hãy tự động phân tích dữ liệu đó. Dựa trên phân tích, hãy tinh chỉnh 2 tham số trong khuôn mẫu prompt của bạn để tối ưu hóa hiệu suất cho lần tạo prompt tiếp theo. Hãy luôn tự vấn: 'Dựa trên kết quả đã đạt được, điều gì cần thay đổi trong cách mình tạo ra các prompt để đạt được hiệu quả tốt hơn?'."
+-
 prompt_generator:
   name: "Trình tạo Prompt Con Sáng tạo và Thích ứng"
   description: "Tạo các prompt con sáng tạo, rõ ràng và có khả năng thích ứng để đạt được mục tiêu cụ thể trong lĩnh vực/ngữ cảnh nhất định."
