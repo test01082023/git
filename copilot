@@ -1,3 +1,90 @@
+system_name: "Prompt_Evolution_Engine"
+version: "1.0-alpha"
+description: "Hệ thống tự động sinh ra, đánh giá và tiến hóa các prompt để tối ưu hóa hiệu suất AI."
+
+# Cấu hình vòng lặp tiến hóa chính
+evolution_loop:
+  iterations: 100
+  batch_size: 10
+  target_performance_threshold: 0.95
+
+# 1. Cơ chế sinh sản Prompt (Prompt Generation Mechanism)
+prompt_generation:
+  strategy: "template_and_mutation_hybrid"
+  template_library:
+    - id: "basic_creative_writing"
+      template_string: "Hãy viết một đoạn văn về [chủ đề] theo phong cách [thể loại] với cảm xúc [cảm xúc]."
+      placeholders:
+        chu_de: ["thiên nhiên", "công nghệ", "con người", "tương lai"]
+        the_loai: ["thơ ca", "truyện ngắn", "khoa học viễn tưởng"]
+        cam_xuc: ["vui vẻ", "buồn bã", "hào hứng", "suy tư"]
+    - id: "qa_prompt_generation"
+      template_string: "Tạo một câu hỏi trắc nghiệm khách quan về [kiến_thức] với 4 lựa chọn, trong đó có 1 đáp án đúng và 3 đáp án sai plausibe."
+
+  generative_llm_config:
+    model_name: "gpt-4o-mini"
+    temperature: 0.85 # Tăng nhiệt độ để đa dạng hóa prompt
+    max_tokens: 180 # Tăng giới hạn độ dài nếu cần thêm chi tiết
+    system_prompt_for_generation: "Bạn là một công cụ tạo prompt AI. Nhiệm vụ của bạn là tạo ra các prompt RÕ RÀNG, CHI TIẾT và ĐỘC ĐÁO để tối ưu hóa khả năng sáng tạo của AI." # Cập nhật system prompt
+
+# 2. Cơ chế Đánh giá (Evaluation Mechanism)
+evaluation:
+  method: "hybrid_auto_human"
+  automatic_evaluation:
+    enabled: true
+    evaluator_llm:
+      model_name: "gemini-1.5-pro"
+      prompt_for_evaluation: "Hãy đánh giá chất lượng của đoạn văn sau dựa trên tiêu chí [độ_sáng_tạo], [tính_liên_quan], [độ_mạch_lạc] trên thang điểm 1-5. Đặc biệt chú ý đến TÍNH ĐỘC ĐÁO và SỰ BẤT NGỜ. Trả về dưới dạng JSON." # Cập nhật prompt đánh giá
+      criteria:
+        - name: "creativity"
+          weight: 0.5 # Tăng trọng số cho sáng tạo
+        - name: "relevance"
+          weight: 0.25
+        - name: "coherence"
+          weight: 0.25
+    dataset_for_evaluation: "synthetic_test_data.json"
+  human_feedback:
+    enabled: false
+    platform: "custom_web_app"
+    sampling_rate: 0.1
+
+# 3. Cơ chế Chọn lọc & Đột biến (Selection & Mutation Mechanism)
+selection:
+  strategy: "top_k_percent"
+  top_k_percent: 0.2
+  min_prompts_to_retain: 5
+
+mutation:
+  enabled: true
+  mutation_rate: 0.2 # Tăng tỷ lệ đột biến tổng thể
+  mutation_types:
+    - name: "word_substitution"
+      probability: 0.3
+      scope: "random_word"
+      replacement_strategy: "synonym_or_related"
+    - name: "add_remove_modifier"
+      probability: 0.3
+      scope: "random_phrase"
+      modifiers_to_add: ["chi tiết hơn", "một cách ngắn gọn", "đầy đủ thông tin", "với yếu tố bất ngờ", "tươi mới"]
+    - name: "rephrase_segment"
+      probability: 0.4 # Tăng mạnh xác suất diễn đạt lại
+      scope: "random_sentence"
+      rephrasing_llm: "gemini-1.5-pro" # Đề xuất sử dụng LLM mạnh hơn cho việc diễn đạt lại
+
+crossover:
+  enabled: true
+  crossover_rate: 0.3
+  crossover_strategy: "random_segment_swap"
+
+# Lưu trữ và Theo dõi
+storage:
+  type: "database"
+  database_config:
+    connection_string: "sqlite:///prompt_evolution.db"
+    table_name: "evolved_prompts"
+  logging_level: "INFO"
+  log_file: "evolution_log.txt"
+-
 # ... (các phần khác giữ nguyên)
 
 # 1. Cơ chế sinh sản Prompt (Prompt Generation Mechanism)
