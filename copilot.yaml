@@ -3,6 +3,7 @@ Metaprompt:
 > Hãy tạo một prompt có thể sinh ra những prompt con sáng tạo và phù hợp cho [lĩnh vực/mục tiêu]. 
 Mỗi prompt con nên mang tính sáng tạo, rõ ràng, và có khả năng thích ứng để cải tiến dựa trên phản hồi hoặc kết quả đầu ra. 
 Hãy bao gồm cả mục tiêu, ngữ cảnh, và ví dụ đầu vào/đầu ra mẫu.
+
 -
 system_name: "Prompt_Evolution_Engine"
 version: "1.0-alpha"
