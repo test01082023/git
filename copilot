@@ -1,3 +1,53 @@
+# ... (các phần khác giữ nguyên)
+
+# 1. Cơ chế sinh sản Prompt (Prompt Generation Mechanism)
+prompt_generation:
+  strategy: "template_and_mutation_hybrid"
+  # ...
+  generative_llm_config:
+    model_name: "gpt-4o-mini"
+    temperature: 0.85 # Tăng nhiệt độ để đa dạng hóa prompt
+    max_tokens: 180 # Tăng giới hạn độ dài nếu cần thêm chi tiết
+    system_prompt_for_generation: "Bạn là một công cụ tạo prompt AI. Nhiệm vụ của bạn là tạo ra các prompt RÕ RÀNG, CHI TIẾT và ĐỘC ĐÁO để tối ưu hóa khả năng sáng tạo của AI." # Cập nhật system prompt
+
+# 2. Cơ chế Đánh giá (Evaluation Mechanism)
+evaluation:
+  method: "hybrid_auto_human"
+  automatic_evaluation:
+    enabled: true
+    evaluator_llm:
+      model_name: "gemini-1.5-pro"
+      prompt_for_evaluation: "Hãy đánh giá chất lượng của đoạn văn sau dựa trên tiêu chí [độ_sáng_tạo], [tính_liên_quan], [độ_mạch_lạc] trên thang điểm 1-5. Đặc biệt chú ý đến TÍNH ĐỘC ĐÁO và SỰ BẤT NGỜ. Trả về dưới dạng JSON." # Cập nhật prompt đánh giá
+      criteria:
+        - name: "creativity"
+          weight: 0.5 # Tăng trọng số cho sáng tạo
+        - name: "relevance"
+          weight: 0.25
+        - name: "coherence"
+          weight: 0.25
+    # ...
+
+# 3. Cơ chế Chọn lọc & Đột biến (Selection & Mutation Mechanism)
+mutation:
+  enabled: true
+  mutation_rate: 0.2 # Tăng tỷ lệ đột biến tổng thể
+  mutation_types:
+    - name: "word_substitution"
+      probability: 0.3
+      scope: "random_word"
+      replacement_strategy: "synonym_or_related"
+    - name: "add_remove_modifier"
+      probability: 0.3
+      scope: "random_phrase"
+      modifiers_to_add: ["chi tiết hơn", "một cách ngắn gọn", "đầy đủ thông tin", "với yếu tố bất ngờ", "tươi mới"]
+    - name: "rephrase_segment"
+      probability: 0.4 # Tăng mạnh xác suất diễn đạt lại
+      scope: "random_sentence"
+      rephrasing_llm: "gemini-1.5-pro" # Đề xuất sử dụng LLM mạnh hơn cho việc diễn đạt lại
+
+# ... (các phần khác)
+
+-
 system_name: "Prompt_Evolution_Engine"
 version: "1.0-alpha"
 description: "Hệ thống tự động sinh ra, đánh giá và tiến hóa các prompt để tối ưu hóa hiệu suất AI."
