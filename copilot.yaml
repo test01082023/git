@@ -1,3 +1,42 @@
+prompt_generator:
+  name: "Trình tạo Prompt Con Sáng tạo và Thích ứng"
+  description: "Tạo các prompt con sáng tạo, rõ ràng và có khả năng thích ứng để đạt được mục tiêu cụ thể trong lĩnh vực/ngữ cảnh nhất định."
+  instructions: |
+    Hãy tạo 5-7 prompt con **sáng tạo, rõ ràng và có khả năng thích ứng** để đạt được [MỤC TIÊU CỤ THỂ] trong [LĨNH VỰC/NGỮ CẢNH CỤ THỂ].
+
+    Mỗi prompt con phải:
+    1.  **Sáng tạo:** Vượt ra ngoài những gợi ý thông thường, khám phá các góc độ mới hoặc kết hợp các yếu tố bất ngờ.
+    2.  **Rõ ràng:** Không có sự mơ hồ, dễ hiểu và chỉ dẫn cụ thể về loại kết quả mong muốn.
+    3.  **Có khả năng thích ứng:** Bao gồm yếu tố khuyến khích người dùng hoặc AI tinh chỉnh, lặp lại hoặc cải thiện dựa trên phản hồi hoặc kết quả ban đầu.
+  
+  fields:
+    - name: "MUC_TIEU_CU_THE"
+      label: "Mục tiêu cụ thể"
+      type: "text"
+      description: "Mô tả chi tiết mục tiêu bạn muốn đạt được thông qua các prompt con. Ví dụ: 'Tạo ra các ý tưởng nội dung độc đáo cho một chiến dịch marketing sản phẩm X'."
+      required: true
+    - name: "LINH_VUC_NGU_CANH_CU_THE"
+      label: "Lĩnh vực/Ngữ cảnh cụ thể"
+      type: "text"
+      description: "Mô tả bối cảnh hoặc môi trường mà các prompt con sẽ được sử dụng. Ví dụ: 'Đang xây dựng một ứng dụng di động mới dành cho việc học ngoại ngữ'."
+      required: true
+
+  examples:
+    input_prompts:
+      - "Tạo một tiêu đề bài viết blog hấp dẫn về lợi ích của thiền định hàng ngày."
+      - "Phát triển một đoạn hội thoại giữa một khách hàng khó tính và một một nhân viên hỗ trợ chatbot về vấn đề kết nối internet."
+      - "Thiết kế một thử thách lập trình Python cho người mới bắt đầu về việc sắp xếp danh sách các số."
+    output_prompts:
+      - |
+        **Prompt con:** "Tạo 3 tiêu đề bài viết blog độc đáo và giật gân về lợi ích bất ngờ của thiền định hàng ngày, mỗi tiêu đề cần gợi mở sự tò mò và khuyến khích nhấp chuột. Sau đó, đề xuất 2-3 câu hỏi phụ để người đọc tự suy ngẫm về trải nghiệm của họ."
+      - |
+        **Prompt con:** "Viết một kịch bản đối thoại giữa một khách hàng *cực kỳ thất vọng* (cần thể hiện rõ sự bực bội qua lời lẽ) và một chatbot AI *thông minh, kiên nhẫn* giải quyết vấn đề kết nối internet. Kịch bản cần có ít nhất 5 lượt trao đổi và kết thúc bằng việc đưa ra 3 phương án xử lý tiềm năng. Hãy thêm một ghi chú nhỏ về cách chatbot có thể điều chỉnh tông giọng nếu khách hàng vẫn giữ thái độ tiêu cực."
+      - |
+        **Prompt con:** "Thiết kế một bài toán lập trình Python thách thức người học sử dụng **ít nhất hai** cấu trúc dữ liệu khác nhau (ví dụ: danh sách, từ điển) để giải quyết vấn đề sắp xếp danh sách các đối tượng phức tạp (ví dụ: danh sách học sinh với tên, tuổi, điểm số). Kèm theo một gợi ý nhỏ về cách tối ưu hóa thuật toán và một câu hỏi mở về các trường hợp ngoại lệ có thể xảy ra."
+
+
+
+-
 Metaprompt:
 
 > Hãy tạo một prompt có thể sinh ra những prompt con sáng tạo và phù hợp cho [lĩnh vực/mục tiêu]. 
