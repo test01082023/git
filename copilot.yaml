@@ -5,6 +5,59 @@ Metaprompt:
 Mỗi prompt con nên mang tính sáng tạo, rõ ràng, và có khả năng thích ứng để cải tiến dựa trên phản hồi hoặc kết quả đầu ra. 
 Hãy bao gồm cả mục tiêu, ngữ cảnh, và ví dụ đầu vào/đầu ra mẫu.
 -
+metaprompt:
+  id: MP-001
+  title: "Tạo Prompt Con Tự Tiến Hóa"
+  description: >
+    Tạo ra các prompt con có khả năng sinh ý tưởng mới, cải tiến theo phản hồi đầu ra, 
+    và thích nghi với mục tiêu sáng tạo trong lĩnh vực metaprompting.
+
+  purpose: >
+    Giúp người dùng hoặc hệ thống tạo prompt sáng tạo, rõ ràng và dễ thích ứng, 
+    có khả năng tự cải thiện thông qua phản hồi và đánh giá.
+
+  use_case: 
+    - Học cách thiết kế prompt
+    - Phát triển AI sáng tạo
+    - Tối ưu hóa tương tác người–máy
+
+  requirements:
+    - clarity
+    - creativity
+    - adaptability
+    - evolution_based_on_feedback
+
+  structure:
+    prompt_instruction: >
+      "Tạo một prompt con dùng để sinh prompt sáng tạo trong [lĩnh vực cụ thể]. 
+      Prompt con phải có ba tiêu chí: sáng tạo, rõ ràng, và dễ thích ứng. 
+      Kèm theo mô tả mục tiêu, ngữ cảnh sử dụng, và ví dụ đầu vào/đầu ra."
+
+    evaluation_criteria:
+      - creativity
+      - clarity
+      - adaptability
+
+    feedback_loop: true
+    max_iterations: 2
+
+  sample:
+    input: 
+      target_domain: "Kể chuyện sáng tạo"
+      goal: "Khai phá trí tưởng tượng và phát triển nhân vật"
+    output_prompt: >
+      "Hãy nghĩ ra một ý tưởng truyện ngắn có yếu tố giả tưởng, bao gồm ít nhất một nhân vật chính 
+      đối diện một lựa chọn đạo đức khó khăn. Dựa vào phản hồi, điều chỉnh để tăng tính nhân văn hoặc độ kịch tính."
+
+    context: >
+      Sử dụng trong sáng tác nội dung hoặc hướng dẫn AI viết truyện.
+
+    example_input: "Một thế giới nơi ký ức có thể bị mua bán"
+    example_output: >
+      "Viết một câu chuyện về một người đàn ông bán ký ức về tình yêu đầu để cứu lấy gia đình, nhưng dần đánh mất chính mình."
+
+
+-
 prompts:
   - name: "Trình tạo Prompt Con Sáng tạo và Thích ứng"
     description: "Tạo các prompt con sáng tạo, rõ ràng và có khả năng thích ứng để đạt được mục tiêu cụ thể trong lĩnh vực/ngữ cảnh nhất định."
