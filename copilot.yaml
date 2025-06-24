@@ -6,6 +6,34 @@ Mỗi prompt con nên mang tính sáng tạo, rõ ràng, và có khả năng th�
 Hãy bao gồm cả mục tiêu, ngữ cảnh, và ví dụ đầu vào/đầu ra mẫu.
 -
 metaprompt:
+  id: MP-GENERIC-001
+  title: "Metaprompt Đa Nhiệm Toàn Dụng"
+  description: >
+    Sinh ra prompt con phù hợp với bất kỳ lĩnh vực nào, đảm bảo rõ ràng, sáng tạo và dễ điều chỉnh.
+    Các prompt con phải có khả năng thích nghi với phản hồi hoặc kết quả đầu ra để tự cải thiện.
+
+  parameters:
+    target_domain: "[Tên lĩnh vực hoặc mục tiêu cụ thể, ví dụ: giáo dục, sáng tác truyện, khởi nghiệp...]"
+    audience: "[Đối tượng người dùng, ví dụ: học sinh, nhà phát triển, người học tiếng Anh...]"
+    tone: "[Nghiêm túc / Hài hước / Khơi gợi tư duy / Sáng tạo...]"
+    difficulty: "[Cơ bản / Trung bình / Nâng cao]"
+    adaptability_mode: "[Ví dụ: điều chỉnh theo phản hồi người dùng hoặc mức độ hoàn thành...]"
+
+  prompt_instruction: >
+    "Hãy tạo một prompt con dành cho [target_domain], phù hợp với [audience], có độ khó [difficulty] và giọng điệu [tone]. 
+    Prompt con phải rõ ràng, giàu tiềm năng sáng tạo, và có khả năng thích ứng hoặc cải tiến theo [adaptability_mode]. 
+    Kèm theo mô tả ngữ cảnh sử dụng và ví dụ minh họa đầu vào/đầu ra."
+
+  evaluation_criteria:
+    - clarity
+    - creativity
+    - adaptability
+
+  reflection_loop: true
+  max_iterations: 2
+
+-
+metaprompt:
   id: MP-001
   title: "Tạo Prompt Con Tự Tiến Hóa"
   description: >
