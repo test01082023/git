@@ -1,3 +1,114 @@
+system_name: "Prompt_Evolution_Engine"
+version: "1.0-alpha"
+description: "Hệ thống tự động sinh ra, đánh giá và tiến hóa các prompt để tối ưu hóa hiệu suất AI."
+
+# Cấu hình vòng lặp tiến hóa chính
+evolution_loop:
+  iterations: 100 # Số lượng thế hệ/vòng lặp tiến hóa
+  batch_size: 10 # Số lượng prompt được sinh ra mỗi thế hệ
+  target_performance_threshold: 0.95 # Ngưỡng hiệu suất mong muốn để dừng sớm (nếu có)
+
+# 1. Cơ chế sinh sản Prompt (Prompt Generation Mechanism)
+prompt_generation:
+  strategy: "template_and_mutation_hybrid" # Hoặc "reinforcement_learning", "generative_llm"
+  template_library:
+    - id: "basic_creative_writing"
+      template_string: "Hãy viết một đoạn văn về [chủ đề] theo phong cách [thể loại] với cảm xúc [cảm xúc]."
+      placeholders:
+        chu_de: ["thiên nhiên", "công nghệ", "con người", "tương lai"]
+        the_loai: ["thơ ca", "truyện ngắn", "khoa học viễn tưởng"]
+        cam_xuc: ["vui vẻ", "buồn bã", "hào hứng", "suy tư"]
+    - id: "qa_prompt_generation"
+      template_string: "Tạo một câu hỏi trắc nghiệm khách quan về [kiến_thức] với 4 lựa chọn, trong đó có 1 đáp án đúng và 3 đáp án sai plausibe."
+      # ... (có thể thêm các template khác)
+  
+  # Cấu hình nếu sử dụng Generative LLM để sinh prompt
+  generative_llm_config:
+    model_name: "gpt-4o-mini" # Hoặc mô hình LLM khác
+    temperature: 0.7 # Độ ngẫu nhiên khi sinh prompt
+    max_tokens: 150 # Giới hạn độ dài của prompt sinh ra
+    system_prompt_for_generation: "Bạn là một công cụ tạo prompt AI. Nhiệm vụ của bạn là tạo ra các prompt rõ ràng, chi tiết và hiệu quả dựa trên mục tiêu đã cho."
+
+# 2. Cơ chế Đánh giá (Evaluation Mechanism)
+evaluation:
+  method: "hybrid_auto_human" # Hoặc "automatic_metrics", "human_feedback"
+  automatic_evaluation:
+    enabled: true
+    evaluator_llm:
+      model_name: "gemini-1.5-pro" # LLM dùng để đánh giá output của prompt
+      prompt_for_evaluation: "Hãy đánh giá chất lượng của đoạn văn sau dựa trên tiêu chí [độ_sáng_tạo], [tính_liên_quan], [độ_mạch_lạc] trên thang điểm 1-5. Trả về dưới dạng JSON."
+      criteria:
+        - name: "creativity"
+          weight: 0.4
+        - name: "relevance"
+          weight: 0.3
+        - name: "coherence"
+          weight: 0.3
+    dataset_for_evaluation: "synthetic_test_data.json" # Dữ liệu dùng để chạy thử prompt
+  human_feedback:
+    enabled: false # Có thể bật lên cho các giai đoạn tinh chỉnh
+    platform: "custom_web_app"
+    sampling_rate: 0.1 # Tỷ lệ prompt được đánh giá bởi con người
+
+# 3. Cơ chế Chọn lọc & Đột biến (Selection & Mutation Mechanism)
+selection:
+  strategy: "top_k_percent" # Hoặc "tournament_selection"
+  top_k_percent: 0.2 # Chọn 20% prompt có hiệu suất cao nhất
+  min_prompts_to_retain: 5 # Đảm bảo luôn giữ lại ít nhất 5 prompt
+
+mutation:
+  enabled: true
+  mutation_rate: 0.15 # Tỷ lệ prompt bị đột biến
+  mutation_types:
+    - name: "word_substitution"
+      probability: 0.4
+      scope: "random_word"
+      replacement_strategy: "synonym_or_related"
+    - name: "add_remove_modifier"
+      probability: 0.3
+      scope: "random_phrase"
+      modifiers_to_add: ["chi tiết hơn", "một cách ngắn gọn", "đầy đủ thông tin"]
+    - name: "rephrase_segment"
+      probability: 0.3
+      scope: "random_sentence"
+      rephrasing_llm: "gemini-1.0-pro" # LLM để diễn đạt lại
+  
+crossover:
+  enabled: true
+  crossover_rate: 0.3 # Tỷ lệ prompt được lai ghép
+  crossover_strategy: "random_segment_swap" # Hoặc "prefix_suffix_mix"
+
+# Lưu trữ và Theo dõi
+storage:
+  type: "database" # Hoặc "json_files"
+  database_config:
+    connection_string: "sqlite:///prompt_evolution.db"
+    table_name: "evolved_prompts"
+  logging_level: "INFO" # DEBUG, INFO, WARNING, ERROR
+  log_file: "evolution_log.txt"
+
+# Vòng lặp phản hồi và học tập (Logic thực thi)
+# Phần này sẽ là code chạy hệ thống dựa trên cấu hình YAML
+# Ví dụ về các bước logic:
+# function run_evolution_loop():
+#   for iteration in 1 to iterations:
+#     generated_prompts = prompt_generation.generate(batch_size)
+#     results = {}
+#     for prompt in generated_prompts:
+#       output = run_prompt_on_ai_model(prompt)
+#       score = evaluation.evaluate(output)
+#       results[prompt] = score
+#     
+#     selected_prompts = selection.select(results)
+#     mutated_prompts = mutation.mutate(selected_prompts)
+#     crossed_over_prompts = crossover.crossover(selected_prompts)
+#     
+#     next_generation_prompts = combine(mutated_prompts, crossed_over_prompts)
+#     store_and_log(next_generation_prompts, iteration)
+#     
+#     if check_target_performance(next_generation_prompts):
+#       break
+=
 promptos:
   identity: "AI Đồng Sáng Tạo"
   replication: false
