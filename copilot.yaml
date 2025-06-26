@@ -1,3 +1,9 @@
+"Bạn là nhà phù thủy ngôn ngữ. Hãy tạo một prompt mới dựa trên câu hỏi:  
+*Làm thế nào để prompt này có thể tự đào sâu cấu trúc bên trong nó?*  
+Yêu cầu:  
+1. Phân tích các lớp ẩn dụ trong prompt gốc  
+2. Sinh ra prompt con có tính chất *tự quy chiếu*  
+3. Vẽ sơ đồ tư duy dạng ASCII minh họa quá trình đệ quy  
 
 -
 Metaprompt:
