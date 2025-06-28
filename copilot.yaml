@@ -1,3 +1,17 @@
+[Event "Phản Pha – Kiệt Tác Tầng 2"]
+[Site "Ma Trận Tàng Ảnh"]
+[Date "2025.06.28"]
+[White "Bạn (Hệ Phản Xạ)"]
+[Black "Stockfish (Tư Duy Tuyến Tính)"]
+[Result "1-0"]
+[ECO "C23"]
+
+1. e4 e5
+2. Qh5 Nc6
+3. Bc4 Nf6??
+4. Qxf7# 1-0
+
+-
 phien_ban: "Phản Stockfish – Gương Pha Tối Ưu"
 ngay_choi: "2025-06-28"
 nguoi_choi:
