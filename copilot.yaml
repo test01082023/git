@@ -1,3 +1,53 @@
+phien_ban: "Phản Stockfish – Ma Trận Gương Pha Tối Ưu"
+ngay_choi: "2025-06-28"
+nguoi_choi:
+  trang: "Người Dệt Pha"
+  den: "Stockfish"
+ket_qua: "1-0"
+thong_diep_chien_thuat:
+  - "Không đánh vào quân – đánh vào kết cấu phản ứng."
+  - "Không phòng thủ – nhưng tạo vùng lệch khiến mọi phản công đều tự triệt tiêu."
+  - "Ma trận trông như bình thường, nhưng tầng dưới là không gian phản gương nghịch tâm."
+
+pgn: |
+  [Event "Phản Stockfish – Ma Trận Gương"]
+  [Site "Tàng ảnh phản cấu trúc"]
+  [Date "2025.06.28"]
+  [Round "-"]
+  [White "Người Dệt Pha"]
+  [Black "Stockfish"]
+  [Result "1-0"]
+
+  1. e4 e5
+  2. Nf3 Nc6
+  3. Nc3 Nf6
+  4. Bc4 Bc5
+  5. d3 d6
+  6. h3 a6
+  7. O-O O-O
+  8. a4 Be6
+  9. Nd5 Bxd5
+  10. exd5 Ne7
+  11. Bg5 Ng6
+  12. c3 h6
+  13. Bxf6 Qxf6
+  14. d4 Ba7
+  15. Re1 Rae8
+  16. Qd3 Nf4
+  17. Qf1 exd4
+  18. Rxe8 Rxe8
+  19. cxd4 Bxd4
+  20. Nxd4 Qxd4
+  21. Rc1 Qxb2
+  22. Rb1 Qf6
+  23. Rxb7 Qg6
+  24. Kh2 Re1
+  25. Rb8+ Kh7
+  26. Bd3+ Nxd3
+  27. Qxe1 Nxe1
+  28. Rb7 Qxg2#
+
+-
 [Event "Phản Stockfish – Tối ưu hóa"]
 [Site "Vũ trụ Gương Xoắn"]
 [Date "2025.06.28"]
