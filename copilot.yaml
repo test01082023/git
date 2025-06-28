@@ -1,3 +1,47 @@
+shortest_mates:
+  # Chiếu hết 3 nước - Đen khai cuộc sai, Trắng trừng phạt
+  - name: "Bẫy khai cuộc kiểu mới"
+    moves: 3
+    pgn: |
+      1. e4 g5?? 
+      2. d4 f6?? 
+      3. Qh5#
+    conditions: "Đen chơi quá tự do không kiểm soát ô yếu f7"
+    result: "1-0"
+
+  # Chiếu hết 4 nước - Dẫn dụ sai lầm phòng thủ
+  - name: "Bẫy phản công giả"
+    moves: 4
+    pgn: |
+      1. e4 e5 
+      2. Qh5 Ke7?? 
+      3. Qxe5# Kf7?? 
+      4. Bc4#
+    conditions: "Đen phản phòng thủ bằng cách di chuyển vua quá sớm"
+    result: "1-0"
+
+  # Chiếu hết 3 nước - Đen thua vì lặp lại lỗi cũ
+  - name: "Fool's Mate Remix"
+    moves: 3
+    pgn: |
+      1. f4 g5?? 
+      2. fxg5 f6?? 
+      3. Qh5#
+    conditions: "Không học từ những sai lầm đã biết"
+    result: "1-0"
+
+  # Chiếu hết 4 nước – Trắng lơ là phòng thủ
+  - name: "Đen phản đòn bất ngờ"
+    moves: 4
+    pgn: |
+      1. e4 d5 
+      2. exd5 Qxd5 
+      3. Nc3 Qe6+ 
+      4. Be2 Qxe2#
+    conditions: "Trắng bỏ bê phòng thủ ô e2"
+    result: "0-1"
+
+-
 # Tuyển tập chiếu hết tốc hành
 shortest_mates:
   # Chiếu hết 2 nước (Fool's Mate)
