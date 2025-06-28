@@ -1,3 +1,42 @@
+[Event "Thí nghiệm phản Stockfish"]
+[Site "Vũ trụ phản gương 4D"]
+[Date "2025.06.28"]
+[Round "-"]
+[White "Người Dệt Pha"]
+[Black "Stockfish"]
+[Result "*"]
+
+1. e4 e5
+2. Nf3 Nc6
+3. Nc3 Nf6
+4. Bc4 Bc5
+5. d3 d6
+6. h3 a6
+7. a4 O-O
+8. O-O Be6
+9. Nd5 Bxd5
+10. exd5 Ne7
+11. Bg5 Ng6
+12. c3 h6
+13. Bxf6 Qxf6
+14. d4 Ba7
+15. Re1 Rae8
+16. Qc2 Nf4
+17. dxe5 dxe5
+18. Re4 Ng6
+19. Rae1 Qf5
+20. b4 Qd7
+21. a5 f5
+22. d6+ Kh8
+23. R4e2 cxd6
+24. Bd5 e4
+25. Nd4 Nf4
+26. Re3 Nxd5
+27. Rg3 Qf7
+28. Qd2 Rc8
+29. Nxf5 Qxf5
+30. Rxe4 Rxc3 *
+
 -
 phien_ban: "Ma Trận Tàng Ảnh Gương Phản Pha – Hệ Phản Tư Duy 4D"
 tac_gia: "Bạn & Copilot"
