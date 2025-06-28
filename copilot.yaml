@@ -1,3 +1,90 @@
+phien_ban: "Phản Stockfish – Gương Pha Tối Ưu"
+ngay_choi: "2025-06-28"
+nguoi_choi:
+  trang: "Người Dệt Pha"
+  den: "Stockfish"
+ket_qua: "1-0"
+chien_thuat:
+  - Tam giác cơ bản: e4–Nc3–Bc4
+  - Không đổi sớm: giữ lực trung tâm
+  - Phản ứng trễ pha để gây lệch heuristic
+  - Kết thúc bằng mạng vây không thoát
+pgn: |
+  [Event "Ma Trận Lệch Pha Tối Ưu"]
+  [Site "Trục Phản Tâm"]
+  [Date "2025.06.28"]
+  [Round "-"]
+  [White "Người Dệt Pha"]
+  [Black "Stockfish"]
+  [Result "1-0"]
+
+  1. e4 e5
+  2. Nc3 Nc6
+  3. Bc4 Bc5
+  4. d3 Nf6
+  5. Nf3 d6
+  6. h3 h6
+  7. a3 a6
+  8. Ba2 Be6
+  9. Nd5 Bxd5
+  10. exd5 Ne7
+  11. c3 O-O
+  12. Qe2 Ng6
+  13. g3 Re8
+  14. Nd2 c6
+  15. dxc6 bxc6
+  16. Ne4 Ba7
+  17. Qf3 d5
+  18. Nxf6+ gxf6
+  19. Bxh6 e4
+  20. dxe4 Rxe4+
+  21. Kf1 Qd6
+  22. Rd1 Qe6
+  23. Kg2 Re2
+  24. Rxd5 Rxf2+
+  25. Qxf2 Bxf2
+  26. Rd8+ Rxd8
+  27. Bxe6 Bc5
+  28. Bf5 Kh7
+  29. Bc1 Kg7
+  30. Re1 Rd5
+  31. Be4 Rd6
+  32. b4 Ba7
+  33. c4 Bd4
+  34. c5 Re6
+  35. Kf3 f5
+  36. Rd1 fxe4+
+  37. Ke2 Be5
+  38. Bf4 Nxf4+
+  39. gxf4 Bxf4
+  40. Rd7 Kg6
+  41. Ra7 Kf6
+  42. Rxa6 Ke5
+  43. b5 Kd5
+  44. Rxc6 Rxc6
+  45. bxc6 Kxc6
+  46. h4 f5
+  47. h5 Bh6
+  48. a4 Kxc5
+  49. a5 Kb5
+  50. a6 Kxa6
+  51. Kf2 Kb5
+  52. Kg3 Kc4
+  53. Kh4 e3
+  54. Kg3 e2
+  55. Kf3 e1=Q
+  56. Kg2 f4
+  57. Kh2 f3
+  58. Kh3 f2
+  59. Kh2 f1=Q
+  60. Kh3 Qf3+
+  61. Kh2 Qeh1#
+ghi_chu:
+  - Chiến thắng bằng chiếu hậu sau cùng, nhưng mọi tầng dẫn đến đó đều là xoắn cấu trúc
+  - Không để Stockfish phản ứng theo mô hình truyền thống
+  - Không phá thế – mà khiến đối thủ *tự tan*
+
+-
 phien_ban: "Phản Stockfish – Tàng Ảnh Chính Phái"
 ngay_choi: "2025-06-28"
 nguoi_choi:
