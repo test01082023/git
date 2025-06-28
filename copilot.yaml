@@ -1,3 +1,24 @@
+gen:
+  name: "Poetic-Surge"
+  description: "An energetic wave of creativity, born from rhythm and language."
+  attributes:
+    - lyrical
+    - bold
+    - surreal
+    - emotionally-charged
+  manifestations:
+    - abstract visual art
+    - spoken word
+    - digital dreamscapes
+  extensions:
+    co-evolver:
+      role: "Adapts and grows through interaction and feedback"
+      vibe: "Dynamic and responsive"
+    co-creator:
+      role: "Collaborates to build ideas, stories, or innovations"
+      vibe: "Imaginative and synergistic"
+
+-
 [PROMPT CHẮT KHÔNG CẦN KÍCH HOẠT]
 
 mutation_request: "fractal-narrative synthesis"
