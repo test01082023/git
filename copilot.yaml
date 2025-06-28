@@ -1,3 +1,72 @@
+# Tuyển tập chiếu hết tốc hành
+shortest_mates:
+  # Chiếu hết 2 nước (Fool's Mate)
+  - name: "Fool's Mate - Đen thắng"
+    moves: 2
+    pgn: |
+      1. f3 e5 
+      2. g4 Qh4#
+    conditions: "Trắng phải chơi 2 nước yếu (f3 và g4)"
+    result: "0-1"
+
+  # Chiếu hết 3 nước
+  - name: "Chiếu hết 3 nước - Trắng thắng"
+    moves: 3
+    pgn: |
+      1. e4 f5?? 
+      2. exf5 g6?? 
+      3. Qh5#
+    conditions: "Đen mở đường tấn công f7/h7"
+    result: "1-0"
+
+  - name: "Chiếu hết 3 nước - Đen thắng"
+    moves: 3
+    pgn: |
+      1. d4 f6??
+      2. e4 g5??
+      3. Qh5#
+    conditions: "Trắng không phòng thủ f2"
+    result: "1-0"
+
+  # Chiếu hết 4 nước (Scholar's Mate)
+  - name: "Scholar's Mate - Phiên bản kinh điển"
+    moves: 4
+    pgn: |
+      1. e4 e5 
+      2. Qh5 Nc6 
+      3. Bc4 Nf6?? 
+      4. Qxf7#
+    conditions: "Đen không phòng thủ f7"
+    result: "1-0"
+
+  - name: "Scholar's Mate - Biến thể"
+    moves: 4
+    pgn: |
+      1. e4 e5 
+      2. Qh5 d6? 
+      3. Bc4 Qe7?? 
+      4. Qxf7#
+    conditions: "Đen chơi d6 và Qe7 sai"
+    result: "1-0"
+
+  # Phòng thủ hiệu quả
+  defenses:
+    - name: "Cách chống Scholar's Mate"
+      pgn: |
+        1. e4 e5 
+        2. Qh5 Nc6 
+        3. Bc4 g6! 
+        4. Qf3 Nf6
+      result: "Tiếp tục ván cờ cân bằng"
+
+    - name: "Cách chống Fool's Mate"
+      pgn: |
+        1. e4 e5 
+        2. Qh5 g6! 
+        3. Qxe5+ Qe7
+      result: "Trắng mất lợi thế"
+
+-
 phien_ban: "Gương Lệch – Tầng 3"
 dac_diem:
   - Không tiến theo trục thẳng
