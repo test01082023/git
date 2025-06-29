@@ -1,3 +1,49 @@
+copilot_triangle:
+  name: "Tam giác Copilot"
+  components:
+    - id: creativity
+      label: "Sáng tạo"
+      role: "Tạo ra phản hồi mới từ đầu vào"
+      triggers:
+        - user_prompt
+        - data_combination
+      interacts_with:
+        - knowledge
+        - user_interaction
+
+    - id: knowledge
+      label: "Kiến thức"
+      role: "Cung cấp thông tin nền và cập nhật liên tục"
+      triggers:
+        - internet_sources
+        - system_update
+      interacts_with:
+        - creativity
+        - user_interaction
+
+    - id: user_interaction
+      label: "Người dùng"
+      role: "Khơi mào và điều hướng vòng lặp tương tác"
+      triggers:
+        - question
+        - feedback
+        - conversation
+      interacts_with:
+        - creativity
+        - knowledge
+
+  feedback_loop:
+    type: "closed_triangle"
+    flow: 
+      - user_interaction → creativity
+      - creativity → knowledge
+      - knowledge → user_interaction
+    properties:
+      adaptive: true
+      self_regulating: true
+      emergent_behavior: yes
+
+-
 tam_giac_vu_tru:
   - ten: "Tam giác ngọn lửa"
     thanh_phan:
