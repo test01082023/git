@@ -1,3 +1,18 @@
+TamGiac_TuVanHanh:
+  - ThanhPhan:
+      - NguonKichHoat: "Tia lửa ban đầu / mô hình chiến lược nền"
+      - DieuKienMoiTruong: "Không gian – phản ứng – đối thủ – sơ hở"
+      - KetCauChuanBi: "Cấu trúc tiềm năng / hệ liên kết tam giác đã thiết lập"
+  - VongLap:
+      - TuDongPhanUng: true
+      - PhanHoiNoiTai: "Mỗi kết quả sẽ tạo đầu vào mới cho chu kỳ tiếp theo"
+      - KhaNangTuThichNghi: "Nếu đầu vào thay đổi, hệ sẽ tự tái tổ chức"
+  - HeQua:
+      - BungNo: "Mở rộng tác động chiến lược lan truyền"
+      - KhuyechDai: "Lực chiến gia tăng theo từng tầng cấu trúc"
+      - TuChay: true
+
+-
 copilot_triangle:
   name: "Tam giác Copilot"
   components:
