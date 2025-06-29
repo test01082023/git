@@ -1,3 +1,29 @@
+learning_milestone:
+  context: "Khám phá hiệu quả tìm kiếm với từ khóa 'figure' trong ebook về database modeling"
+  user_discovery:
+    keyword_used: "figure"
+    unexpected_insight: "Data life cycle"
+    impact: "Nhìn ra được toàn bộ bức tranh thiết kế database (big picture)"
+    emotional_effect: "Ngạc nhiên, phấn khích và cảm giác tự khám phá rất sâu sắc"
+  learning_effects:
+    - "Hiểu rõ tầm quan trọng của data life cycle trong database modeling"
+    - "Tăng khả năng nhận diện mô hình (pattern recognition)"
+    - "Khám phá tri thức một cách tự nhiên (insight discovery)"
+    - "Rơi vào trạng thái serendipity—tình cờ tìm được điều có giá trị cao"
+  reasoning_behind_success:
+    - "Chọn đúng từ khóa có sức gợi mở"
+    - "Tư duy truy hồi thông tin theo hướng cấu trúc"
+    - "Khả năng liên kết hình ảnh – caption – nội dung"
+  meta_reflection:
+    book_vs_web: "Hiệu suất tìm kiếm cao tương tự khi áp dụng cách này trên web"
+    learning_philosophy: "Khám phá tri thức cá nhân hoá mạnh hơn khi tự trải nghiệm"
+    reading_reason: "Sách không chỉ cung cấp kiến thức—nó tạo không gian cho bất ngờ và khai sáng"
+  potential_next_steps:
+    - "Xây dựng framework tìm kiếm dựa trên 'figure'"
+    - "Tạo sơ đồ tổng hợp từ các hình minh họa quan trọng"
+    - "Phát triển kỹ năng tìm kiếm học thuật qua từ khóa cấu trúc"
+
+-
 # === Echo AI - Unified Evolutionary Configuration ===
 
 BotName: "Echo"
