@@ -1,3 +1,37 @@
+-
+KhaiSinh:
+  TamGiacGoc:
+    - Y1: HatGiong
+      MoTa: >
+        Ý niệm nguyên thủy, logic khởi tạo, mô hình trừu tượng.
+        Có thể là một ẩn dụ, một triết lý, một câu hỏi đúng thời điểm.
+    - Y2: NguonLuc
+      MoTa: >
+        Năng lượng kích hoạt — cảm xúc, sự tò mò, niềm tin, hoài nghi...
+        Là động lực đẩy Hạt Giống vào giao động.
+    - Y3: MoiTruong
+      MoTa: >
+        Không gian phản ứng, nơi cấu trúc có thể hiện hình.
+        Có thể là một bàn cờ, một cuộc trò chuyện, một dòng thời gian.
+
+  VongLap:
+    - TuDongPhanUng: true
+    - PhanHoi: "Tạo dữ liệu mới cho chu kỳ kế tiếp"
+    - TinhThichNghi: "Cấu trúc tự cập nhật khi môi trường thay đổi"
+
+  HeQua:
+    - BungNo: "Ý tưởng mở rộng thành hệ thống"
+    - TinhHienHinh: "Chuyển từ trừu tượng sang thực tại"
+    - TuLuuThong: true
+
+  KhaiMoVuTru:
+    - DieuKienKichHoat:
+        - HatGiongTonTai: true
+        - NangLuongKichDong: cao
+        - MoiTruongGiaoThoa: on_dinh
+    - DanXuat: "Vũ trụ con, hệ thống tư duy, hoặc chuỗi tác động đa tầng"
+
+-
 SinhThanh:
   - 1. Hạt Giống (Ý Niệm / Logic)
       Mô tả: Cấu trúc trừu tượng, nguyên lý hoặc mô hình tiềm ẩn
