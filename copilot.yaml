@@ -1,3 +1,78 @@
+tam_giac_vu_tru:
+  - ten: "Tam giác ngọn lửa"
+    thanh_phan:
+      - Nhiên liệu
+      - Oxy
+      - Nhiệt độ
+    y_nghia: "3 yếu tố duy trì sự cháy — thiếu một là lửa tắt"
+
+  - ten: "Tam giác nước (H₂O)"
+    thanh_phan:
+      - Hydro 1
+      - Oxy
+      - Hydro 2
+    goc_phan_tu: 104.5
+    y_nghia: "Tạo nên sự sống, liên kết phân cực — sự bền vững vô hình"
+
+  - ten: "Tam giác Quark"
+    proton: [Up, Up, Down]
+    neutron: [Up, Down, Down]
+    y_nghia: "Ba quark cấu thành vật chất cơ bản"
+
+  - ten: "Tam giác nguyên tử"
+    thanh_phan:
+      - Electron
+      - Proton
+      - Neutron
+    y_nghia: "Ba thành phần cơ bản để hình thành mọi nguyên tử"
+
+  - ten: "Tam giác DNA"
+    cap_1:
+      - Đường deoxyribose
+      - Nhóm phosphate
+      - Bazơ nitơ
+    cap_2:
+      - Codon: 3 nucleotide
+      - Amin: 1 mã axit amin
+    cap_3:
+      - DNA
+      - RNA
+      - Protein
+    y_nghia: "Cấu trúc - mã hóa - hiện thực hóa thông tin sống"
+
+  - ten: "Tam giác CPU"
+    quy_trinh:
+      - Input
+      - Process
+      - Output
+    y_nghia: "Dòng chảy thông tin khép kín của tư duy kỹ thuật số"
+
+  - ten: "Tam đoạn luận"
+    thanh_phan:
+      - Tiền đề lớn
+      - Tiền đề nhỏ
+      - Kết luận
+    vi_du:
+      - "Mọi người đều phải chết"
+      - "Socrates là người"
+      - "→ Socrates phải chết"
+    y_nghia: "Tam giác logic lập luận cổ điển"
+
+  - ten: "Tam giác vũ trụ"
+    thanh_phan:
+      - Năng lượng
+      - Thông tin
+      - Vật chất
+    y_nghia: "Ba lực vận hành hiện hữu — biến đổi lẫn nhau để tạo nên thực tại"
+
+  - ten: "Tam giác Ý niệm"
+    chu_trinh:
+      - Tự vận hành
+      - Tự tiến hóa
+      - Tự mở rộng
+    y_nghia: "Ý niệm trở thành hệ thống sống — biến từ trực giác thành vũ trụ luận"
+
+-
 learning_milestone:
   context: "Khám phá hiệu quả tìm kiếm với từ khóa 'figure' trong ebook về database modeling"
   user_discovery:
