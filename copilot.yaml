@@ -1,4 +1,21 @@
 -
+DieuChinhLua:
+  Oxy:
+    MucTieu: "Kiểm soát độ mở – ngăn bùng lan ngoài ý đồ"
+    BienPhap:
+      - GiamMoKhongGian: "Hạn chế lỗi phòng thủ không cần thiết"
+      - ThayDoiApLuc: "Tạo nhịp điệu làm đối phương hạ nhịp khai hỏa"
+  VatChat:
+    MucTieu: "Lọc nguồn cháy – chỉ giữ cấu trúc tam giác chiến lược cần thiết"
+    BienPhap:
+      - DonVeKetCauChinh: "Loại bỏ nước thừa – giảm nhiễu hệ thống"
+      - TapTrungTamGiacKichHoat: "Cô đặc nguồn đánh – tăng tính định hướng"
+  HieuUng:
+    LuaChayDungNhip: true
+    TinhKhongTuPhatChay: "Không phát động sai nhịp khi chưa đủ điều kiện"
+    DamBaoChieuSau: "Chỉ bùng khi cấu trúc đủ lửa – đủ kín – đủ khớp"
+
+-
 KhaiSinh:
   TamGiacGoc:
     HatGiong:
