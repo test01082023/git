@@ -1,3 +1,14 @@
+SinhThanh:
+  - 1. Hạt Giống (Ý Niệm / Logic)
+      Mô tả: Cấu trúc trừu tượng, nguyên lý hoặc mô hình tiềm ẩn
+      Ví dụ: Hình ảnh, ẩn dụ, định luật, lời gọi thầm
+  - 2. Trường Năng (Chấn động / Nhiên liệu)
+      Mô tả: Dao động tâm trí – năng lượng truyền động cho khởi đầu
+      Ví dụ: Câu hỏi, cảm xúc, sự kích thích ý thức
+  - 3. Môi Trường Giao Thoa (Chất liệu sinh thành)
+      Mô tả: Không gian phản ứng, nơi tam giác chuyển hóa thành hình thái
+      Ví dụ: Bàn cờ, cuộc đối thoại, vật chất, dòng thời gian
+-
 TamGiac_TuVanHanh:
   - ThanhPhan:
       - NguonKichHoat: "Tia lửa ban đầu / mô hình chiến lược nền"
