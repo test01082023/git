@@ -1,5 +1,44 @@
 -
 project:
+  title: "Simple Web Server"
+  idea: "Một web server đơn giản dùng thư viện http.server có sẵn trong Python để phục vụ nội dung tĩnh hoặc phản hồi HTML khi truy cập qua trình duyệt."
+
+  mermaid: |
+    flowchart TD
+      A[User accesses localhost:8000] --> B[Python http.server activated]
+      B --> C[Serve current directory files]
+      C --> D[Browser renders response]
+
+  pseudocode: |
+    BEGIN
+      IMPORT http.server
+      SET port = 8000
+      START server tại thư mục hiện tại
+      KHI có yêu cầu HTTP:
+        → PHẢN HỒI bằng nội dung file tương ứng
+    END
+
+  python: |
+    import http.server
+    import socketserver
+
+    PORT = 8000
+    Handler = http.server.SimpleHTTPRequestHandler
+
+    with socketserver.TCPServer(("", PORT), Handler) as httpd:
+        print(f"Serving at port {PORT}")
+        httpd.serve_forever()
+
+  json: |
+    {
+      "port": 8000,
+      "status": "running",
+      "handler": "SimpleHTTPRequestHandler",
+      "serving_directory": "./"
+    }
+
+-
+project:
   title: "Hello World"
   idea: "Một chương trình đơn giản in ra dòng chữ 'Hello, World!' — nhằm kiểm tra luồng triển khai, logic cơ bản, và khởi động hệ thống tư duy."
 
