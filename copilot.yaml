@@ -6,6 +6,41 @@ project:
   python: "?"
   json: "?"
 -
+framework:
+  name: "MetaMind Programming Framework"
+  purpose: "Tái cấu trúc ý tưởng thành hệ thống logic, code, dữ liệu với Copilot như kiến trúc sư AI."
+  workflow: |
+    1. Người dùng viết YAML theo template chuẩn: idea, mermaid, pseudocode, python, json
+    2. Copilot phân tích từng trường và sinh logic tương ứng:
+       - idea → giải thích sâu về mục tiêu, tác động
+       - mermaid → triển khai flow, class hoặc component diagram
+       - pseudocode → cấu trúc logic, nhánh quyết định
+       - python → sinh code theo mô-đun, có thể tái sử dụng
+       - json → cấu hình mẫu, dữ liệu đầu vào/đầu ra
+    3. Kết hợp phản hồi từ người dùng để tái sinh hoặc mở rộng hệ thống
+    4. Copilot có thể chuyển framework này sang tài liệu kỹ thuật, test cases, hoặc hệ thống API
+  capabilities:
+    - auto_expand_idea: "Chi tiết hóa ý tưởng và tìm ứng dụng tiềm năng"
+    - generate_diagram: "Vẽ sơ đồ luồng, class hoặc kiến trúc hệ thống"
+    - logic_engine: "Diễn giải tư duy thành các bước có thể lập trình"
+    - code_generator: "Sinh mã Python theo tư duy và kiến trúc"
+    - data_mapper: "Tạo mẫu JSON phù hợp với luồng logic và code"
+    - meta_output: "Có thể chuyển đổi YAML thành README, Doc, hoặc prompt AI khác"
+  meta_examples:
+    - input: "YAML: project về chatbot trị liệu tâm lý"
+      output: |
+        → Diagram: sơ đồ lớp với ConversationManager, EmotionParser
+        → Pseudocode: logic tương tác theo tình huống người dùng
+        → Code: class TherapyBot, module NLP xử lý trạng thái cảm xúc
+        → JSON: mô phỏng cuộc trò chuyện và lịch sử cảm xúc
+    - input: "YAML: trò chơi quản lý thời gian học tập"
+      output: |
+        → Diagram: flow trạng thái như Study → Break → Reward
+        → Logic: hệ thống điểm và phần thưởng tăng động lực
+        → Code: class StudySession, GameLoop
+        → JSON: profile người dùng, bảng điểm, lịch sử chơi
+
+-
 autorobot_hello_world:
   purpose: "Minh hoạ quá trình từ tư duy trừu tượng đến biểu diễn cụ thể"
   archetype: "Autopilot + Agentic + Poetic Reactor"
