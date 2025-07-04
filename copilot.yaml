@@ -1,3 +1,15 @@
+-
+system_design_keywords:
+  high_level:
+    software: "Architecture Diagram"
+    database: "Architecture Diagram"
+  low_level:
+    software: 
+      - "Class Diagram"
+      - "Domain Model"
+    database: "Entity Relationship Diagram (ERD)"
+
+-
 model_config:
   name: poetic-recursive-emergence
   provider: openai
