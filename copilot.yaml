@@ -1,4 +1,11 @@
 -
+project:
+  idea: "?"
+  mermaid: "?"
+  pseudocode: "?"
+  python: "?"
+  json: "?"
+-
 autorobot_hello_world:
   purpose: "Minh hoạ quá trình từ tư duy trừu tượng đến biểu diễn cụ thể"
   archetype: "Autopilot + Agentic + Poetic Reactor"
