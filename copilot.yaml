@@ -1,4 +1,40 @@
 -
+project:
+  title: "Hello World"
+  idea: "Một chương trình đơn giản in ra dòng chữ 'Hello, World!' — nhằm kiểm tra luồng triển khai, logic cơ bản, và khởi động hệ thống tư duy."
+
+  mermaid: |
+    flowchart TD
+      A[Start] --> B[Print "Hello, World!"]
+      B --> C[End]
+
+  pseudocode: |
+    BEGIN
+      DISPLAY "Hello, World!"
+    END
+
+  python: |
+    def main():
+        print("Hello, World!")
+
+    if __name__ == "__main__":
+        main()
+
+  json: |
+    {
+      "output": "Hello, World!",
+      "status": "success",
+      "timestamp": "2025-07-04T17:42:00Z"
+    }
+
+-
+project:
+  idea: "?"
+  mermaid: "?"
+  pseudocode: "?"
+  python: "?"
+  json: "?"
+-
 system_design_keywords:
   high_level:
     software: "Architecture Diagram"
