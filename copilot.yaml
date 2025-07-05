@@ -6,6 +6,54 @@ project:
   python: "?"
   json: "?"
 -
+AI_Interaction_Concepts:
+  Prompt:
+    Definition: "Là lời nhắc hoặc đầu vào bạn đưa cho AI để nhận phản hồi"
+    Purpose: "Khởi đầu cuộc trò chuyện với AI"
+    Examples:
+      - "Viết bài thơ về mặt trăng"
+      - "Liệt kê 3 lý do nên học tiếng Anh"
+
+  Context:
+    Definition: "Thông tin xung quanh hỗ trợ AI hiểu và phản hồi chính xác"
+    Components:
+      - Lịch sử trò chuyện
+      - Metadata (thời gian, vị trí)
+      - Dạng định dạng hoặc cấu trúc yêu cầu
+    Purpose: "Giữ mạch hội thoại và cung cấp chiều sâu phản hồi"
+
+  Prompt_Engineering:
+    Definition: "Nghệ thuật và khoa học viết lời nhắc hiệu quả cho AI"
+    Techniques:
+      - Viết hướng dẫn rõ ràng
+      - Cung cấp ví dụ
+      - Dùng yêu cầu định dạng (liệt kê, tóm tắt)
+      - Kiểm soát giọng điệu hoặc phong cách
+    Use_Case: "Phù hợp với các lời nhắc đơn lẻ, cụ thể"
+
+  Context_Engineering:
+    Definition: "Kỹ thuật xây dựng ngữ cảnh để AI duy trì hiểu biết liên tục"
+    Techniques:
+      - Tạo chuỗi hội thoại logic
+      - Bổ sung thông tin nền (thói quen, lịch sử)
+      - Tích hợp metadata
+    Use_Case: "Áp dụng trong các tương tác dài hơi, đa lượt"
+
+  Comparison:
+    - Feature: "Mục tiêu"
+      Prompt_Engineering: "Viết lời nhắc hiệu quả"
+      Context_Engineering: "Xây dựng ngữ cảnh phù hợp"
+    - Feature: "Loại tương tác"
+      Prompt_Engineering: "Tương tác đơn lẻ, ngắn"
+      Context_Engineering: "Chuỗi hội thoại dài"
+    - Feature: "Tác động đến kết quả"
+      Prompt_Engineering: "Trực tiếp qua nội dung prompt"
+      Context_Engineering: "Gián tiếp qua hiểu biết liên tục"
+    - Feature: "Ví dụ"
+      Prompt_Engineering: "‘Liệt kê 5 lợi ích của thiền’"
+      Context_Engineering: "‘Hôm qua bạn nói về thiền, tiếp theo là gì?’"
+
+-
 framework:
   name: "MetaMind Programming Framework"
   purpose: "Tái cấu trúc ý tưởng thành hệ thống logic, code, dữ liệu với Copilot như kiến trúc sư AI."
