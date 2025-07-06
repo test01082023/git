@@ -6,6 +6,57 @@ project:
   python: "?"
   json: "?"
 -
+context_engineering:
+  definition: >
+    The practice of designing, structuring, and managing the information (context) provided to a language model
+    to guide its behavior, improve relevance, and ensure consistent responses.
+
+  purpose:
+    - Shape the model's tone, style, and personality
+    - Provide background knowledge or task-specific instructions
+    - Maintain continuity across multi-turn conversations
+    - Improve accuracy and reduce ambiguity
+
+  components:
+    system_prompt:
+      description: >
+        A foundational instruction that sets the model’s behavior, tone, and capabilities.
+      example: "You are a helpful, witty assistant who answers questions clearly and concisely."
+
+    user_prompt:
+      description: >
+        The actual input or query from the user that the model responds to.
+      example: "Can you explain quantum entanglement in simple terms?"
+
+    assistant_memory:
+      description: >
+        Information retained across turns to maintain continuity and coherence.
+      example: "Earlier, the user said they’re writing a sci-fi novel."
+
+    injected_context:
+      description: >
+        Additional structured data or metadata added to guide the model.
+      example: "User is a high school student studying biology."
+
+  techniques:
+    - Prompt chaining: Linking multiple prompts to build complex tasks
+    - Role definition: Assigning personas or roles to the assistant
+    - Few-shot examples: Providing sample Q&A pairs to guide behavior
+    - Context window management: Prioritizing what information to retain or discard
+
+  common_mistakes:
+    - Overloading context with irrelevant details
+    - Conflicting instructions across prompts
+    - Forgetting to update context in dynamic conversations
+    - Using vague or ambiguous language
+
+  best_practices:
+    - Keep instructions clear and concise
+    - Align tone and behavior with user expectations
+    - Use structured formats (like YAML or JSON) for injected context
+    - Regularly review and refine context for long-running interactions
+
+-
 AI_Interaction_Concepts:
   Prompt:
     Definition: "Là lời nhắc hoặc đầu vào bạn đưa cho AI để nhận phản hồi"
