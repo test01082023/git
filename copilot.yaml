@@ -6,6 +6,60 @@ project:
   python: "?"
   json: "?"
 -
+reading_method:
+  description: "Phương pháp đọc hệ thống hoá dựa trên khung xương - từ khóa - kết nối ý"
+  key_features:
+    - chỉ đọc câu đầu và cuối mỗi đoạn, mỗi chương
+    - tập trung vào phần mở đầu và kết luận của sách
+    - đánh dấu các đoạn nổi bật bằng ký hiệu riêng
+    - đọc sâu khi thấy dấu hiệu đặc biệt (in đậm, hoa thị, tiêu đề phụ...)
+  goals:
+    - nắm nhanh khung nội dung
+    - tiết kiệm thời gian đọc lại
+    - dễ tổ chức lại kiến thức
+
+knowledge_system:
+  method: "Tự tổ chức tri thức"
+  tools_used: ["Notepad", "WordPad"]
+  techniques:
+    - phân tầng nội dung
+    - dùng ký hiệu cá nhân để đánh dấu (#, *, =>, ...)
+    - ghi chú bằng từ khóa và ý tưởng trọng tâm
+    - thiết kế lại nội dung thành sơ đồ hoặc bản đồ tri thức
+  benefits:
+    - dễ nhớ – dễ hiểu – dễ truy xuất
+    - cấu trúc rõ ràng, logic cao
+    - định hình mô hình tri thức bên trong đầu
+    - tiết kiệm thời gian tra cứu lại sau này
+
+insight_extraction:
+  mindset: "Text Miner"
+  steps:
+    - trích xuất từ khóa từ sách (tựa đề, mục lục, chương...)
+    - nhận diện mẫu hình, chủ đề lặp lại
+    - loại bỏ thông tin nhiễu
+    - xây dựng mạng ngữ nghĩa hoặc sơ đồ kết nối ý
+  output:
+    - hệ thống ý tưởng chính
+    - khả năng rút ra insight từ thông tin rải rác
+    - liên kết đa chiều giữa các sách và khái niệm
+
+cognitive_model:
+  concept: "Tạo mô hình tư duy ngầm định (mental model)"
+  triggered_by:
+    - đọc sâu – phân tích – tổ chức lại tri thức
+  characteristics:
+    - không nhớ chi tiết, nhớ cấu trúc
+    - tự động liên kết ý tưởng khi gặp thông tin mới
+    - dễ hình dung – dễ nói lại – dễ áp dụng
+
+metaphors_used:
+  - "Đọc như vẽ bản đồ giai điệu từ nốt đầu/cuối"
+  - "Dữ liệu là ánh sáng, insight là góc chiếu"
+  - "Xây tủ sách tri thức trong đầu"
+  - "Đi rừng và đánh dấu cây mốc – từ đó vẽ bản đồ"
+
+-
 context_engineering:
   definition: >
     The practice of designing, structuring, and managing the information (context) provided to a language model
