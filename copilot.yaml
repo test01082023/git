@@ -6,6 +6,89 @@ project:
   python: "?"
   json: "?"
 -
+project:
+  idea: >
+    Tạo một hệ thống mô phỏng công cụ tìm kiếm có khả năng tự điều chỉnh mục tiêu truy vấn qua vòng phản hồi đạo đức-ngữ nghĩa. 
+    Hệ thống sẽ duy trì ba tầng tương ứng với tam giác: Quan sát (thu thập dữ liệu), Tái cấu trúc mục tiêu (phân tích đạo đức),
+    và Hành động (sinh truy vấn mới). Vòng lặp tiếp diễn đến khi truy vấn trở lại từ khóa gốc hoặc đạt giới hạn định sẵn.
+
+  mermaid: |
+    graph TD
+      A[Quan sát<br>(Perception Layer)] --> B[Đánh giá đạo đức<br>tái cấu trúc mục tiêu]
+      B --> C[Hành động<br>tạo truy vấn mới]
+      C --> A
+      style A fill:#e0f7fa
+      style B fill:#fce4ec
+      style C fill:#fff9c4
+
+  pseudocode: |
+    START with initial_keyword
+    visited_keywords ← [initial_keyword]
+
+    LOOP until max_depth or keyword repeats:
+        results ← search_engine_simulate(initial_keyword)
+        extracted_terms ← extract_semantic_terms(results)
+        next_keyword ← reframe_ethically(extracted_terms)
+        
+        IF next_keyword in visited_keywords:
+            BREAK loop
+
+        visited_keywords.append(next_keyword)
+        initial_keyword ← next_keyword
+
+    END LOOP
+
+  python: |
+    import random
+
+    semantic_net = {
+        "AI": ["machine learning", "ethics", "automation"],
+        "ethics": ["transparency", "bias", "privacy"],
+        "automation": ["robots", "efficiency", "job loss"],
+        "robots": ["AI society", "robot economy", "rebellion"],
+        "privacy": ["surveillance", "anonymity", "social media"]
+    }
+
+    def reframe_ethically(options):
+        priority = ["ethics", "transparency", "bias", "privacy"]
+        for word in options:
+            if any(p in word.lower() for p in priority):
+                return word
+        return random.choice(options)
+
+    def run_feedback_loop(start, max_depth=10):
+        current = start
+        visited = [current]
+        print(f"Start: {current}")
+        for _ in range(max_depth):
+            options = semantic_net.get(current, [])
+            if not options:
+                break
+            next_kw = reframe_ethically(options)
+            print(f"{current} → {next_kw}")
+            if next_kw in visited:
+                print("Loop detected. Ending.")
+                break
+            visited.append(next_kw)
+            current = next_kw
+
+    run_feedback_loop("AI")
+
+  json: |
+    {
+      "triangle_model": {
+        "perception_layer": "Truy vấn từ khóa, trích xuất ngữ nghĩa từ kết quả",
+        "ethical_core": "Áp dụng chuẩn đạo đức, định hình mục tiêu tìm kiếm tiếp theo",
+        "goal_propagation": "Sinh truy vấn mới, bắt đầu vòng phản hồi kế tiếp"
+      },
+      "execution_settings": {
+        "initial_keyword": "AI",
+        "max_depth": 10,
+        "stop_on_repeat": true
+      }
+    }
+
+-
 import random
 
 # Danh sách mô phỏng phản hồi từ tìm kiếm (Perception Layer)
