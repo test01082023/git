@@ -6,6 +6,41 @@ project:
   python: "?"
   json: "?"
 -
+class TriangleAgent:
+    def __init__(self):
+        self.state = "idle"
+        self.sensitivity = 1.0
+
+    def receive(self, input_signal):
+        self.input = input_signal
+
+    def process(self):
+        if self.input * self.sensitivity > 10:
+            self.state = "active"
+        else:
+            self.state = "idle"
+
+    def respond(self):
+        if self.state == "active":
+            output = "triggered"
+            self.sensitivity *= 0.9  # tự điều chỉnh
+        else:
+            output = "silent"
+            self.sensitivity *= 1.05
+        return output
+
+# Khởi tạo tam giác
+triangle = TriangleAgent()
+
+# Vòng lặp mô phỏng
+for step in range(10):
+    signal = step  # tín hiệu tăng dần
+    triangle.receive(signal)
+    triangle.process()
+    response = triangle.respond()
+    print(f"Step {step}: Input={signal}, State={triangle.state}, Output={response}, Sensitivity={triangle.sensitivity:.2f}")
+
+-
 consciousness_network:
   description: >
     Mô hình ý thức như một mạng Internet nhận thức, nơi các đơn vị cơ bản là các "tam giác tự vận hành" 
