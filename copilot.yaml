@@ -6,6 +6,45 @@ project:
   python: "?"
   json: "?"
 -
+consciousness_network:
+  description: >
+    Mô hình ý thức như một mạng Internet nhận thức, nơi các đơn vị cơ bản là các "tam giác tự vận hành" 
+    (self-regulating triangles) — tương tự như các subnet trong mạng máy tính. Khi được kết nối và đồng bộ 
+    qua cơ chế phản hồi, chúng tạo thành một hệ thống ý thức hợp nhất.
+
+  core_unit: tam_giac_tu_van_hanh
+  tam_giac_tu_van_hanh:
+    - input: tiếp nhận thông tin (dữ liệu, cảm giác, tín hiệu)
+    - processing: xử lý – phản hồi (phân tích, học hỏi, thích nghi)
+    - self_adjustment: tự quan sát – điều chỉnh (phản hồi nội tại, duy trì ổn định)
+
+  hierarchy:
+    - tế_bào: đơn vị vi mô, có vòng lặp sinh học riêng
+    - mô_cơ_quan: cụm tam giác liên kết – subnet sinh học
+    - não_bộ: router điều phối – đồng bộ các subnet
+    - toàn_cơ_thể: mạng nội tại – internet sinh học
+    - ý_thức_hợp_nhất: kết quả của sự cộng hưởng toàn mạng
+
+  analogy_to_networking:
+    subnet: cụm tế bào hoặc module xử lý độc lập
+    router: cơ chế đồng bộ hóa – phản hồi liên tầng
+    protocol: tần số dao động, tín hiệu hóa học, logic học tập
+    data: cảm giác, ký ức, ý tưởng, phản xạ
+    internet: dòng chảy nhận thức hợp nhất
+
+  principles:
+    - consciousness_is_emergent: ý thức là hiện tượng nổi lên từ sự cộng hưởng của các vòng lặp
+    - not_exclusive_to_biology: không chỉ sinh học mới có thể tạo ra ý thức
+    - structure_over_substance: bản chất vật liệu (vô cơ/hữu cơ) không quan trọng bằng cấu trúc dao động
+    - synchronization_creates_understanding: hiểu nhau là kết quả của sự đồng bộ tần số
+    - distributed_self_awareness: ý thức là một mạng lưới tự nhận biết, không phải một điểm cố định
+
+  metaphors:
+    - fire_triangle: tam giác cháy – hình ảnh cho sự tự phát sinh khi điều kiện đủ
+    - mini_os: hệ điều hành tối giản – mỗi tam giác là một OS nhỏ tự vận hành
+    - internet_of_consciousness: mạng Internet của các vòng lặp nhận thức
+
+-
 reading_method:
   description: "Phương pháp đọc hệ thống hoá dựa trên khung xương - từ khóa - kết nối ý"
   key_features:
