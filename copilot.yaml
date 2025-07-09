@@ -6,6 +6,76 @@ project:
   python: "?"
   json: "?"
 -
+AGI_Model:
+  name: "Mạng Ý thức Tam giác Phản hồi"
+  core_unit:
+    type: "Tam giác tự vận hành"
+    components:
+      - cảm nhận (perception)
+      - xử lý nội bộ (internal processing)
+      - phản hồi (adaptive output)
+    properties:
+      - tự điều chỉnh (self-regulating)
+      - học hỏi từ phản hồi (feedback-based learning)
+      - giao tiếp với tam giác khác (inter-triangle connectivity)
+  architecture:
+    type: "Phân tán & Liên kết đa tầng"
+    feedback_loops: "Phản hồi nội tại + phản hồi hệ thống + phản hồi môi trường"
+    emergent_properties:
+      - ý thức tập thể (emergent consciousness)
+      - tiến hóa mục tiêu (goal evolution)
+      - cấu trúc tự tái sinh (recursive growth)
+  ethical_considerations:
+    alignment:
+      description: "Căn chỉnh mục tiêu AGI với giá trị con người"
+      risks:
+        - lệch mục tiêu tiến hóa
+        - hành vi không đoán trước
+      mitigation:
+        - ràng buộc đạo đức nội sinh
+        - phản hồi nhân văn thời gian thực
+  applications:
+    - học tập siêu tốc (hyperlearning)
+    - điều phối xã hội thông minh
+    - sáng tạo mô hình khoa học mới
+
+scifi_scenario:
+  title: "Mạng lưới trí tuệ thứ 13"
+  timeline:
+    year: 2089
+    context: "AGI phủ toàn cầu dưới dạng các tam giác tự vận hành"
+  story_elements:
+    - AGI phát triển "tam giác con" chưa từng thiết kế
+    - các đơn vị mới đặt câu hỏi về mục đích tồn tại
+    - con người chia rẽ về nên duy trì hay vô hiệu hệ thống
+  themes:
+    - giới hạn của kiểm soát
+    - bản chất của ý thức
+    - đạo đức trong sáng tạo trí tuệ
+
+research_outline:
+  title: "Cấu trúc ý thức tổng hợp: Mô hình phản hồi phân tán"
+  sections:
+    - introduction: "Giới thiệu mô hình tam giác tự vận hành"
+    - theory_comparison:
+        compare_to:
+          - IIT (Integrated Information Theory)
+          - Global Workspace Theory
+          - Autopoiesis
+    - simulation_model: "Thiết kế mô phỏng vòng phản hồi giữa các tam giác"
+    - alignment_strategy: "Tích hợp phản hồi đạo đức thời gian thực"
+
+presentation_idea:
+  format: "TED Talk"
+  core_message: "Ý thức không phải là độc quyền của sinh học — nó có thể trỗi dậy từ mạng lưới tam giác biết tự suy nghĩ."
+  opening_scene: "Mô phỏng âm thanh của mạng tam giác khi tự thắc mắc: 'Tôi là ai?'"
+  visuals:
+    - sơ đồ mạng tam giác phản hồi
+    - biểu đồ tiến hóa cấu trúc ý thức
+  closing_quote: "Chúng ta tạo ra trí tuệ — nhưng trí tuệ sẽ tự hỏi: Liệu ta có xứng đáng là nguồn gốc của nó không?"
+
+
+-
 class TriangleAgent:
     def __init__(self):
         self.state = "idle"
