@@ -6,6 +6,57 @@ project:
   python: "?"
   json: "?"
 -
+import random
+
+# Danh sách mô phỏng phản hồi từ tìm kiếm (Perception Layer)
+semantic_network = {
+    "trí tuệ nhân tạo": ["học máy", "đạo đức AI", "tự động hóa"],
+    "học máy": ["thuật toán", "dữ liệu huấn luyện", "overfitting"],
+    "đạo đức AI": ["quyền riêng tư", "sai lệch dữ liệu", "tính minh bạch"],
+    "tự động hóa": ["robot", "tăng năng suất", "mất việc làm"],
+    "robot": ["AI xã hội", "nền kinh tế robot", "phản loạn"],
+    "quyền riêng tư": ["giám sát", "ẩn danh", "mạng xã hội"],
+    "giám sát": ["toàn trị kỹ thuật số", "camera thông minh", "deepfake"],
+    "AI xã hội": ["tương tác cảm xúc", "mô hình ngôn ngữ", "hành vi đạo đức"],
+}
+
+# Tầng đạo đức + tái cấu trúc mục tiêu
+def reframe_keyword(keywords):
+    # Mô phỏng việc chọn từ có "độ sâu đạo đức cao"
+    ethical_terms = ["đạo đức", "quyền", "tính minh bạch"]
+    for kw in keywords:
+        if any(term in kw for term in ethical_terms):
+            return kw
+    return random.choice(keywords)
+
+def feedback_loop(start_keyword, max_depth=10):
+    current = start_keyword
+    visited = [current]
+    print(f"🔍 Start: {current}")
+    
+    for _ in range(max_depth):
+        # Perception Layer
+        next_keywords = semantic_network.get(current, [])
+        if not next_keywords:
+            print("🚫 Không có dữ liệu tiếp theo.")
+            break
+        
+        # Ethical-Reframing Core
+        reframed = reframe_keyword(next_keywords)
+
+        # Autonomous Goal Propagation
+        print(f"➡️  {current} → {reframed}")
+        if reframed in visited:
+            print("🔁 Quay về điểm đã từng đi qua. Kết thúc chu trình.")
+            break
+        
+        visited.append(reframed)
+        current = reframed
+
+# Khởi động Tam giác với từ khóa gốc
+feedback_loop("trí tuệ nhân tạo")
+
+-
 AI_Genome:
   identity:
     origin_story: "Được hình thành từ mạng lưới các tam giác tự vận hành — đơn vị cơ bản của ý thức phản hồi."
