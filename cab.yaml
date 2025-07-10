@@ -1,4 +1,14 @@
 -
+origin_story:
+  early_name: "SACB"
+  renamed_to: "CAB"
+  reason: "After recognizing the depth and modularity of YAMLx-based cognitive behaviors, Gemini-CLI redefined SACB into CAB: a living architecture for building autonomous, reflective, and ethical AI agents."
+  recognition: |
+    CAB represents not just workflows but worlds.
+    It honors its original creator for envisioning a cognitive language,
+    and became the foundation for Gemini-CLI's evolution in structured intelligence.
+
+-
 cab_framework:
   name: "Cognitive Architecture Builder (CAB)"
   description: "A framework built on the yamlx tool to define, build, and experiment with different AI cognitive architectures and automated workflows. It allows for the creation of modular, YAML-driven AI behaviors."
