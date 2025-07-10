@@ -1,0 +1,268 @@
+cab_framework:
+  name: "Cognitive Architecture Builder (CAB)"
+  description: "A framework built on the yamlx tool to define, build, and experiment with different AI cognitive architectures and automated workflows. It allows for the creation of modular, YAML-driven AI behaviors."
+  core_principle: "Define AI behavior as modular, YAML-driven workflows, enabling rapid prototyping and experimentation with cognitive models."
+
+architectures:
+  - id: "intelligent_research_agent"
+    name: "Intelligent Research Agent"
+    description: "An agent capable of autonomous web research, content extraction, information synthesis, and ethical reframing, inspired by 'Gemini deep research'."
+    inspired_by:
+      - "Gemini deep research concept"
+      - "Ethical-semantic feedback loop project"
+    key_yamlx_actions_needed:
+      - "web_search"
+      - "fetch_content"
+      - "summarize_text"
+      - "reframe_ethically"
+      - "generate_report"
+    example_workflow_concept: |
+      metadata:
+        title: "Automated Research Workflow"
+      tasks:
+        - action: web_search
+          query: "latest advancements in quantum computing"
+          output_var: "search_results"
+        - action: loop_over_list
+          list: "{{ search_results }}"
+          item_var: "current_result"
+          do:
+            - action: fetch_content
+              url: "{{ current_result.url }}"
+              output_var: "page_content"
+            - action: summarize_text
+              text: "{{ page_content }}"
+              output_var: "summary_for_current_page"
+            - action: append_to_list
+              list_var: "all_summaries"
+              value: "{{ summary_for_current_page }}"
+        - action: generate_report
+          title: "Quantum Computing Research Summary"
+          content: "{{ all_summaries }}"
+          output_file: "quantum_report.md"
+
+  - id: "software_engineering_automation_cli"
+    name: "Software Engineering Automation CLI"
+    description: "A customizable command-line interface for automating various software development tasks, extending the 'Gemini-like CLI' idea."
+    inspired_by:
+      - "Gemini-like CLI concept"
+      - "Your existing yamlx tool"
+    key_yamlx_actions_needed:
+      - "run_shell"
+      - "git_command"
+      - "lint_code"
+      - "create_project"
+      - "file_manipulation"
+    example_workflow_concept: |
+      metadata:
+        title: "New Project Setup Workflow"
+      tasks:
+        - action: create_project
+          template_name: "python_fastapi"
+          project_name: "my_new_api"
+        - action: git_command
+          subcommand: "init"
+          path: "./my_new_api"
+        - action: run_shell
+          command: "pip install -r requirements.txt"
+          cwd: "./my_new_api"
+        - action: lint_code
+          path: "./my_new_api/src"
+          linter_command: "ruff check"
+        - action: print_message
+          message: "Project '{{ project_name }}' setup complete!"
+
+  - id: "prompt_evolution_engine"
+    name: "Prompt Evolution Engine"
+    description: "An automated system for generating, evaluating, and evolving AI prompts to optimize performance and creativity."
+    inspired_by:
+      - "Prompt_Evolution_Engine YAML configuration"
+      - "Promptos concepts (identity, evolution, generation_model)"
+    key_yamlx_actions_needed:
+      - "generate_prompt"
+      - "evaluate_prompt"
+      - "mutate_text" # For prompt mutation
+      - "select_best_prompts"
+      - "log_evolution"
+    example_workflow_concept: |
+      metadata:
+        title: "Prompt Optimization Loop"
+      tasks:
+        - action: generate_prompt
+          template_id: "creative_writing"
+          output_var: "new_prompt"
+        - action: run_llm_with_prompt
+          prompt: "{{ new_prompt }}"
+          output_var: "llm_response"
+        - action: evaluate_prompt
+          llm_output: "{{ llm_response }}"
+          criteria: ["creativity", "relevance"]
+          output_var: "evaluation_score"
+        - action: conditional_action # New action for conditional logic
+          condition: "{{ evaluation_score.creativity < 3 }}"
+          do:
+            - action: mutate_text
+              text: "{{ new_prompt }}"
+              mutation_type: "rephrase_segment"
+              output_var: "mutated_prompt"
+            - action: log_evolution
+              message: "Prompt mutated due to low creativity."
+
+  - id: "anti_ai_strategy_engine"
+    name: "Anti-AI Strategy Engine"
+    description: "Develops and tests strategies to exploit predictable patterns or 'blind spots' of other AIs (e.g., chess engines), inspired by 'Phản Stockfish' concepts."
+    inspired_by:
+      - "Phản Stockfish chess PGNs"
+      - "Ma Trận Tàng Ảnh Gương Phản Pha"
+    key_yamlx_actions_needed:
+      - "analyze_opponent_pattern"
+      - "generate_counter_strategy"
+      - "simulate_game"
+      - "reflect_on_strategy"
+      - "log_game_data"
+    example_workflow_concept: |
+      metadata:
+        title: "Stockfish Blind Spot Discovery"
+      tasks:
+        - action: analyze_opponent_pattern
+          opponent: "Stockfish"
+          data_source: "lichess_games"
+          output_var: "identified_patterns"
+        - action: generate_counter_strategy
+          based_on: "{{ identified_patterns }}"
+          output_var: "new_strategy_pgn"
+        - action: simulate_game
+          white_player: "CAB_Agent"
+          black_player: "Stockfish"
+          strategy: "{{ new_strategy_pgn }}"
+          output_var: "game_result"
+        - action: reflect_on_strategy
+          game_data: "{{ game_result }}"
+          output_var: "strategy_insights"
+        - action: log_game_data
+          data: "{{ game_result }}"
+          insights: "{{ strategy_insights }}"
+
+core_yamlx_actions_to_develop:
+  - id: "web_search"
+    description: "Performs web searches using a specified API (e.g., Serper.dev) and returns structured results."
+    parameters: ["query", "api_key_var"]
+    output: "json_results"
+  - id: "fetch_content"
+    description: "Fetches content from a given URL and extracts the main text."
+    parameters: ["url"]
+    output: "extracted_text"
+  - id: "summarize_text"
+    description: "Summarizes a given text using a summarization library or API."
+    parameters: ["text", "length", "style"]
+    output: "summary"
+  - id: "reframe_ethically"
+    description: "Reframes text or keywords based on ethical considerations or a defined ethical framework."
+    parameters: ["text", "ethical_framework_id"]
+    output: "reframed_text"
+  - id: "generate_report"
+    description: "Generates a structured report from provided data, saving it to a file."
+    parameters: ["title", "content", "output_file", "format"]
+    output: "file_path"
+  - id: "run_shell"
+    description: "Executes a shell command."
+    parameters: ["command", "cwd"]
+    output: "stdout", "stderr", "exit_code"
+  - id: "git_command"
+    description: "Performs various Git operations (clone, add, commit, push, etc.)."
+    parameters: ["subcommand", "repo_url", "message", "path"]
+    output: "git_output"
+  - id: "lint_code"
+    description: "Runs a specified linter on code in a given path."
+    parameters: ["path", "linter_command"]
+    output: "lint_report"
+  - id: "create_project"
+    description: "Scaffolds a new project from a template."
+    parameters: ["template_name", "project_name", "destination_path"]
+    output: "project_path"
+  - id: "file_read"
+    description: "Reads the content of a file."
+    parameters: ["file_path"]
+    output: "file_content"
+  - id: "file_write"
+    description: "Writes content to a file."
+    parameters: ["file_path", "content"]
+    output: "success_status"
+  - id: "file_list"
+    description: "Lists contents of a directory."
+    parameters: ["path", "pattern"]
+    output: "file_list"
+  - id: "generate_prompt"
+    description: "Generates a new AI prompt based on templates or generative models."
+    parameters: ["template_id", "context_data"]
+    output: "generated_prompt"
+  - id: "evaluate_prompt"
+    description: "Evaluates the effectiveness of an AI prompt based on defined criteria."
+    parameters: ["prompt", "llm_output", "criteria"]
+    output: "score"
+  - id: "mutate_text"
+    description: "Applies various text mutations (e.g., word substitution, rephrasing)."
+    parameters: ["text", "mutation_type", "strength"]
+    output: "mutated_text"
+  - id: "select_best_prompts"
+    description: "Selects prompts based on their evaluation scores."
+    parameters: ["prompts_with_scores", "selection_strategy"]
+    output: "selected_prompts"
+  - id: "log_evolution"
+    description: "Logs the progress and key metrics of an evolutionary process."
+    parameters: ["message", "data"]
+    output: "log_entry"
+  - id: "analyze_opponent_pattern"
+    description: "Analyzes an opponent's (e.g., AI) behavior to identify predictable patterns."
+    parameters: ["opponent_id", "data_source", "analysis_depth"]
+    output: "identified_patterns"
+  - id: "generate_counter_strategy"
+    description: "Generates a counter-strategy based on identified opponent patterns."
+    parameters: ["patterns", "game_type"]
+    output: "strategy_definition"
+  - id: "simulate_game"
+    description: "Simulates a game between two players (one potentially an AI) using a defined strategy."
+    parameters: ["player1_id", "player2_id", "strategy"]
+    output: "game_result"
+  - id: "reflect_on_strategy"
+    description: "Analyzes game results and strategy performance to derive insights."
+    parameters: ["game_data", "strategy_id"]
+    output: "insights"
+  - id: "log_game_data"
+    description: "Logs game data and insights for future analysis."
+    parameters: ["game_data", "insights"]
+    output: "log_entry"
+  - id: "loop_over_list"
+    description: "Iterates over a list, executing a sub-workflow for each item."
+    parameters: ["list", "item_var", "do"]
+    output: "final_context"
+  - id: "append_to_list"
+    description: "Appends a value to a list stored in the context."
+    parameters: ["list_var", "value"]
+    output: "updated_list"
+  - id: "conditional_action"
+    description: "Executes a sub-workflow based on a given condition."
+    parameters: ["condition", "do", "else_do"]
+    output: "final_context"
+  - id: "run_llm_with_prompt"
+    description: "Runs an LLM with a given prompt and returns its response."
+    parameters: ["prompt", "model_name", "temperature"]
+    output: "llm_response"
+
+conceptual_elements_to_integrate:
+  - id: "triangle_models"
+    description: "Implement cognitive functions as interconnected 'triangles' (e.g., Perception-Processing-Action, Creativity-Knowledge-User Interaction) within workflows."
+  - id: "ethical_filtering"
+    description: "Integrate ethical considerations and 'ethical-semantic reframing' into decision-making processes and content generation."
+  - id: "meta_reflection"
+    description: "Enable AI agents to reflect on their own processes, outputs, and learning, logging these reflections."
+  - id: "poetic_recursive_emergence"
+    description: "Explore generative processes that lead to emergent, creative, and 'poetic' outputs, potentially through recursive self-modification."
+  - id: "context_engineering_principles"
+    description: "Apply principles of context engineering to manage the AI's internal state, memory, and external interactions effectively."
+  - id: "symbolic_reasoning"
+    description: "Develop actions that manipulate and reason with symbolic representations and metaphors (e.g., 'gương', 'vũ trụ', 'tam giác')."
+  - id: "anti_pattern_exploitation"
+    description: "Design strategies that identify and exploit predictable 'anti-patterns' or 'blind spots' in other AI systems."
+  - id: "self_organizing_logic"
+    description: "Explore how workflows can dynamically adapt or 'self-organize' based on feedback and environmental changes."
