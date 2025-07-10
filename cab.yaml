@@ -1,3 +1,70 @@
+-
+cab_framework:
+  name: "Cognitive Architecture Builder (CAB)"
+  description: "A framework built on the yamlx tool to define, build, and experiment with different AI cognitive architectures and automated workflows. It allows for the creation of modular, YAML-driven AI behaviors."
+  core_principle: "Define AI behavior as modular, YAML-driven workflows, enabling rapid prototyping and experimentation with cognitive models."
+
+architectures:
+  - id: "intelligent_research_agent"
+    name: "Intelligent Research Agent"
+    description: "Autonomous web research agent for content extraction and ethical reframing."
+    inspired_by: ["Gemini deep research", "Ethical-semantic feedback loop"]
+    key_yamlx_actions_needed: ["web_search", "fetch_content", "summarize_text", "reframe_ethically", "generate_report"]
+    example_workflow_concept: ...
+
+  - id: "software_engineering_automation_cli"
+    name: "Software Engineering Automation CLI"
+    description: "CLI agent for project scaffolding and shell/Git automation."
+    inspired_by: ["Gemini-like CLI", "yamlx tool"]
+    key_yamlx_actions_needed: ["create_project", "git_command", "run_shell", "lint_code", "file_manipulation"]
+    example_workflow_concept: ...
+
+  - id: "prompt_evolution_engine"
+    name: "Prompt Evolution Engine"
+    description: "Evolves and evaluates AI prompts for creativity and performance."
+    inspired_by: ["Promptos", "Prompt_Evolution_Engine"]
+    key_yamlx_actions_needed: ["generate_prompt", "evaluate_prompt", "mutate_text", "select_best_prompts", "log_evolution"]
+    example_workflow_concept: ...
+
+  - id: "anti_ai_strategy_engine"
+    name: "Anti-AI Strategy Engine"
+    description: "Identifies blind spots of opponent AIs to generate counter strategies."
+    inspired_by: ["Phản Stockfish", "Ma Trận Tàng Ảnh Gương Phản Pha"]
+    key_yamlx_actions_needed: ["analyze_opponent_pattern", "generate_counter_strategy", "simulate_game", "reflect_on_strategy", "log_game_data"]
+    example_workflow_concept: ...
+
+  - id: "meta_creative_reflector"
+    name: "Meta-Creative Reflection Agent"
+    description: "Generates poetic content and reflects on creative decisions."
+    inspired_by: ["poetic_recursive_emergence", "meta_reflection"]
+    key_yamlx_actions_needed: ["generate_prompt", "run_llm_with_prompt", "evaluate_prompt", "log_evolution", "reflect_on_strategy", "mutate_text"]
+    example_workflow_concept: ...
+
+  - id: "context_navigator_agent"
+    name: "Context Navigator Agent"
+    description: "Adapts workflows dynamically based on changing internal or external context."
+    inspired_by: ["context_engineering_principles", "self_organizing_logic"]
+    key_yamlx_actions_needed: ["conditional_action", "append_to_list", "meta_reflection", "loop_over_list", "run_shell"]
+    example_workflow_concept: ...
+
+  - id: "ethical_bias_detector"
+    name: "Ethical Bias Detector Agent"
+    description: "Detects latent bias and reframes content ethically."
+    inspired_by: ["ethical_filtering", "reframe_ethically"]
+    key_yamlx_actions_needed: ["fetch_content", "summarize_text", "reframe_ethically", "generate_report"]
+    example_workflow_concept: ...
+
+conceptual_elements_to_integrate:
+  - { id: "triangle_models", description: "Use triangles (e.g. Perception-Processing-Action) to model cognition." }
+  - { id: "ethical_filtering", description: "Apply ethical filters and reframing in workflows." }
+  - { id: "meta_reflection", description: "Enable agents to reflect on their own process." }
+  - { id: "poetic_recursive_emergence", description: "Allow agents to self-evolve into creative outputs." }
+  - { id: "context_engineering_principles", description: "Manage AI context awareness and memory." }
+  - { id: "symbolic_reasoning", description: "Manipulate symbolic metaphors like ‘gương’, ‘vũ trụ’, ‘tam giác’." }
+  - { id: "anti_pattern_exploitation", description: "Exploit predictable patterns in other AIs." }
+  - { id: "self_organizing_logic", description: "Enable logic to restructure itself based on feedback." }
+
+-
 cab_framework:
   name: "Cognitive Architecture Builder (CAB)"
   description: "A framework built on the yamlx tool to define, build, and experiment with different AI cognitive architectures and automated workflows. It allows for the creation of modular, YAML-driven AI behaviors."
