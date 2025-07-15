@@ -1,4 +1,5 @@
-FROM python:3.11-slim-buster
+#FROM python:3.11-slim-buster
+FROM python:3.14.0b3-alpine3.21
 
 LABEL maintainer="you@example.com"
 LABEL description="Unified LogicMap + YAMLX Runtime"
