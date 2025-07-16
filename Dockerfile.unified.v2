@@ -271,10 +271,6 @@ process:
       IyEvYmluL3NoCmVjaG8gIlxu4peEIFVuaWZpZWQgQmluYXJ5IFJ1biBUaW1lISIK
 EOF
 
-# --- Copy source code của ứng dụng chính (nếu có) ---
-# Dòng này vẫn hữu ích để copy các file khác trong context vào image
-COPY . /app
-
 # -----------------------------------------------------------------------------
 # STAGE 3: Final
 # - Image cuối cùng, siêu nhẹ và an toàn.
@@ -283,7 +279,7 @@ COPY . /app
 FROM base as final
 
 # Copy các Python packages đã cài đặt từ builder
-COPY --from=builder /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
+COPY --from=builder /usr/local/lib/python3.14/site-packages /usr/local/lib/python3.14/site-packages
 
 # Copy toàn bộ ứng dụng (bao gồm logic_engine.py và programs) từ builder
 COPY --from=builder /app /app
@@ -295,8 +291,7 @@ RUN chown -R appuser:app /app
 USER appuser
 
 # Entrypoint để chạy logicmap
-#ENTRYPOINT ["python", "logic_engine.py"]
-#CMD ["main"]
-CMD [""]
+ENTRYPOINT ["python", "logic_engine.py"]
+CMD ["main"]
 LABEL maintainer="gemini@google.com"
 LABEL description="[V2-Final] Self-Contained, Secure, Multi-Stage Unified Runtime"
