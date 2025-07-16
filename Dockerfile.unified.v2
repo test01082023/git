@@ -1,1 +1,302 @@
-test
+# -----------------------------------------------------------------------------
+# Dockerfile.unified.v2 (Self-Contained)
+#
+# PHIÊN BẢN HOÀN CHỈNH: Kết hợp những gì tốt nhất của V1 và V2.
+#
+# Cải tiến:
+#   - Tự chứa (self-contained): Không cần requirements.txt hay Dockerfile.logicmap.
+#   - Tối ưu hóa layer caching và cấu trúc multi-stage.
+#   - Tăng cường bảo mật bằng cách chạy với non-root user.
+#   - Giảm kích thước image cuối cùng.
+# -----------------------------------------------------------------------------
+
+# -----------------------------------------------------------------------------
+# STAGE 1: Base
+# - Nền tảng Python slim, thiết lập user non-root để tăng bảo mật.
+# -----------------------------------------------------------------------------
+FROM python:3.11-slim as base
+
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+# Tạo một user và group riêng cho ứng dụng, và gán WORKDIR
+RUN addgroup --system app && adduser --system --ingroup app appuser
+WORKDIR /app
+
+# -----------------------------------------------------------------------------
+# STAGE 2: Builder
+# - Stage này chuẩn bị tất cả mọi thứ: dependencies và source code.
+# -----------------------------------------------------------------------------
+FROM base as builder
+
+# Cài đặt Python dependencies trực tiếp
+RUN pip install --no-cache-dir pyyaml requests jinja2
+
+# --- Nhúng trực tiếp Logic Engine và Programs ---
+# Bằng cách này, Dockerfile không phụ thuộc vào file bên ngoài
+RUN cat <<EOF > logic_engine.py
+import os, yaml, time, importlib, subprocess, base64, tempfile, datetime
+from string import Template
+from jinja2 import Template as JinjaTemplate # Use alias to avoid conflict
+import requests # Import requests here
+
+CONTEXT = {}
+ACTION_REGISTRY = {}
+
+def register(name):
+    def wrapper(func):
+        ACTION_REGISTRY[name] = func
+        return func
+    return wrapper
+
+def get_action(name):
+    return ACTION_REGISTRY.get(name)
+
+# Action: print_message
+@register("print_message")
+def print_message_action(task):
+    msg = render(task.get("message") or CONTEXT.get("message") or CONTEXT.get("item") or "(no message)")
+    print("[PRINT]", msg)
+
+# Action: calculate
+@register("calculate")
+def calculate_action(task):
+    op = task.get("operation")
+    nums = render(task.get("numbers", []))
+    if op == "add":
+        print("[CALC] Tổng:", sum(nums))
+    elif op == "multiply":
+        r = 1
+        for n in nums: r *= n
+        print("[CALC] Nhân:", r)
+    else:
+        print("[CALC] Không hỗ trợ:", op)
+
+# Action: run_command
+@register("run_command")
+def run_command_action(task):
+    cmd = render(task.get("command"))
+    print("[SHELL] ⇨", cmd)
+    subprocess.run(cmd, shell=True)
+
+# Action: file_write
+@register("file_write")
+def file_write_action(task):
+    filename = render(CONTEXT["filename"])
+    content = render(CONTEXT["content"])
+    with open(filename, "w") as f:
+        f.write(content)
+    print("[WRITE] →", filename)
+
+# Action: python_execute
+@register("python_execute")
+def python_execute_action(task):
+    print("[PYTHON]")
+    try:
+        exec(render(task.get("code", "")))
+    except Exception as e:
+        print("⚠️ Python error:", e)
+        raise # Re-raise to allow retry to catch it
+
+# Action: binary_execute
+@register("binary_execute")
+def binary_execute_action(task):
+    code = render(task.get("binary_code", ""))
+    if isinstance(code, str):
+        code += "=" * ((4 - len(code) % 4) % 4)
+        code = base64.b64decode(code)
+    with tempfile.NamedTemporaryFile(delete=False) as f:
+        f.write(code)
+        path = f.name
+    os.chmod(path, 0o755)
+    print("[BIN] ⇨", path)
+    subprocess.run([path])
+    os.remove(path)
+
+# Action: http_request
+@register("http_request")
+def http_request_action(task):
+    method = render(task.get("method", "GET")).upper()
+    url = render(task.get("url"))
+    print("[HTTP]", method, url)
+    res = requests.request(method, url)
+    print("[RESP]", res.status_code)
+    print(res.text[:200])
+
+# Action: fail
+@register("fail")
+def fail_action(task):
+    raise Exception("💥 Intentional failure")
+
+def load_actions():
+    # All actions are now directly defined and registered in this file
+    pass # No dynamic loading needed anymore
+
+def load_program(name):
+    path = f"./programs/{name}.logicmap"
+    if not os.path.exists(path):
+        raise FileNotFoundError(f"❌ Program not found: {name}")
+    with open(path) as f:
+        return yaml.safe_load(f)
+
+def render(s):
+    if isinstance(s, str):
+        return JinjaTemplate(s).render(env=os.environ, datetime=datetime, **CONTEXT)
+    return s # Return non-string values as is
+
+def run_step(step):
+    if isinstance(step, dict):
+        if "loop" in step:
+            return handle_loop(step["loop"])
+        elif "retry" in step:
+            return handle_retry(step["retry"])
+        elif "action" in step:
+            return handle_action(step)
+        elif "set" in step:
+            return handle_set(step["set"])
+        else:
+            keys = list(step.keys())
+            if len(keys) == 1:
+                return run_program(keys[0], CONTEXT)
+            else:
+                print(f"⚠️ Không rõ step: {step}")
+    elif isinstance(step, str):
+        return run_program(step, CONTEXT)
+
+def handle_set(cfg):
+    for k, v in cfg.items():
+        CONTEXT[k] = render(v)
+
+def handle_action(task):
+    name = task["action"]
+    fn = get_action(name)
+    if fn:
+        try:
+            fn(task)
+        except Exception as e:
+            print(f"❌ Lỗi với action '{name}': {e}")
+            raise # Re-raise to allow retry to catch it
+    else:
+        print(f"⚠️ Action không hỗ trợ: {name}")
+
+def handle_loop(cfg):
+    items = render(cfg.get("over") or [])
+    do = cfg.get("do") or []
+    for item in items:
+        CONTEXT["item"] = item
+        for step in do: run_step(step)
+
+def handle_retry(cfg):
+    tries = cfg.get("max_attempts", 1)
+    delay = cfg.get("delay_seconds", 0)
+    steps = cfg.get("do", [])
+    for i in range(tries):
+        try:
+            for step in steps: run_step(step)
+            break
+        except Exception as e:
+            print(f"[RETRY {i+1}/{tries}] ⚠️ {e}")
+            if i < tries - 1: time.sleep(delay)
+
+def run_program(name, args):
+    prog = load_program(name)
+    print(f"\n▶️  RUN: {prog.get('program')}")
+    CONTEXT.update(args)
+    for step in prog.get("process", []): run_step(step)
+    for k, v in (prog.get("output") or {}).items():
+        CONTEXT[k] = render(v)
+    return CONTEXT
+
+if __name__ == "__main__":
+    import sys
+    sys.path.append(os.path.dirname(__file__))
+    load_actions() # Load actions at startup
+    prog = sys.argv[1] if len(sys.argv) > 1 else "main"
+    run_program(prog, {})
+EOF
+
+RUN mkdir programs
+RUN cat <<EOF > programs/main.logicmap
+program: Unified Demo
+
+input:
+  user_name: string
+
+process:
+  - set:
+      message: "👋 Hello {{ user_name | default('World') }}"
+  - action: print_message
+
+  - action: calculate
+    operation: multiply
+    numbers: [2, 3, 4, 5]
+
+  - set:
+      filename: "unified_output.txt"
+      content: "This file was written by the unified engine. Current time: {{ datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S') }}"
+  - action: file_write
+
+  - action: run_command
+    command: "echo 'Shell command from unified engine. User: {{ env.USER }}'"
+
+  - action: python_execute
+    code: |
+      print("→ Python code running in unified engine.")
+      for i in range(CONTEXT.get('loop_count', 2)):
+          print("  Unified loop iteration", i)
+
+  - retry:
+      max_attempts: 3
+      delay_seconds: 1
+      do:
+        - action: fail
+
+  - set: { message: "✅ Recovered from failure in unified engine" }
+  - action: print_message
+
+  - loop:
+      over: ["Unified Item 1", "Unified Item 2"]
+      do:
+        - set: { message: "🎤 Processing unified item: {{ item }}" }
+        - action: print_message
+        - action: run_command
+          command: "echo 'Processing {{ item }}'"
+
+  - action: http_request
+    method: GET
+    url: https://httpbin.org/get
+
+  - action: binary_execute
+    binary_code: !!binary |
+      IyEvYmluL3NoCmVjaG8gIlxu4peEIFVuaWZpZWQgQmluYXJ5IFJ1biBUaW1lISIK
+EOF
+
+# --- Copy source code của ứng dụng chính (nếu có) ---
+# Dòng này vẫn hữu ích để copy các file khác trong context vào image
+COPY . /app
+
+# -----------------------------------------------------------------------------
+# STAGE 3: Final
+# - Image cuối cùng, siêu nhẹ và an toàn.
+# - Chỉ copy những thứ cần thiết từ stage `builder`.
+# -----------------------------------------------------------------------------
+FROM base as final
+
+# Copy các Python packages đã cài đặt từ builder
+COPY --from=builder /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
+
+# Copy toàn bộ ứng dụng (bao gồm logic_engine.py và programs) từ builder
+COPY --from=builder /app /app
+
+# Chuyển quyền sở hữu file cho appuser
+RUN chown -R appuser:app /app
+
+# Chuyển sang user không phải root
+USER appuser
+
+# Entrypoint để chạy logicmap
+ENTRYPOINT ["python", "logic_engine.py"]
+CMD ["main"]
+
+LABEL maintainer="gemini@google.com"
+LABEL description="[V2-Final] Self-Contained, Secure, Multi-Stage Unified Runtime"
