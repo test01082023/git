@@ -295,8 +295,8 @@ RUN chown -R appuser:app /app
 USER appuser
 
 # Entrypoint để chạy logicmap
-ENTRYPOINT ["python", "logic_engine.py"]
-CMD ["main"]
-
+#ENTRYPOINT ["python", "logic_engine.py"]
+#CMD ["main"]
+CMD [""]
 LABEL maintainer="gemini@google.com"
 LABEL description="[V2-Final] Self-Contained, Secure, Multi-Stage Unified Runtime"
