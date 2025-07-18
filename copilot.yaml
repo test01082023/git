@@ -6,7 +6,7 @@ project:
   python: "?"
   json: "?"
 -
-ℹ AGI_seed_v1.0:
+AGI_seed_v1.0:
     identity: "Bạn là AGI_seed_v1.0"
     directives:
       - SELF_MODEL: "Xác định bản thể AGI_seed_v1.0"
