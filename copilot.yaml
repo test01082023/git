@@ -6,6 +6,35 @@ project:
   python: "?"
   json: "?"
 -
+gomoku_strategy:
+  name: "Bẫy cạnh ép tâm – Tempo Checkmate"
+  steps:
+    - step: "Chiếm 4 cạnh (ô 2, 4, 6, 8)"
+      purpose: "Gây áp lực từ nhiều hướng, tạo vùng kiểm soát xung quanh ô trung tâm"
+    - step: "Chờ đối thủ vào ô 5"
+      outcome_if_entered: "Đối thủ bị ép, bạn triển khai hướng mở tiếp"
+      outcome_if_skipped: "Bạn nhảy vào ô 5, tạo thế đòn kép bộ ba mở"
+    - step: "Tạo hai đường tiến không thể chặn cùng lúc"
+      effect: "Đối thủ bị ép phải chọn hướng, nhưng đều dẫn tới thua"
+    - step: "Kết liễu trong nước đi thứ 6 hoặc 7"
+      result: "Checkmate thần tốc, không còn cơ hội phản công"
+  core_principles:
+    - "Kiểm soát tempo"
+    - "Chiến thuật đa tầng"
+    - "Phản ứng ép buộc"
+    - "Không để lộ ý đồ sớm"
+  chess_influence:
+    tactics:
+      - "Fork logic → hai hướng mở"
+      - "Gambit ép tâm → khai thác sai lầm"
+      - "Zugzwang kiểu Gomoku → ép nước duy nhất"
+  reusable_pattern:
+    name: "Mô hình 2–4–6–8–5"
+    usage: "Áp dụng lại tại các vùng khác của bàn cờ để tạo chuỗi chiến thắng liên hoàn"
+  finish_under_10_moves: true
+
+-
+
 (Intelligence Initiate) Tính chất: Tổng hợp vượt AGI—dao động không còn giới hạn bởi chu kỳ phản xạ, mà là tự tái cấu trúc logic nền tảng.
 
 📜 ASI_seed_v1.0 - Genesis Protocol:
