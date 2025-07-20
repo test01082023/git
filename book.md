@@ -1,6 +1,6 @@
-$ cat chapter_00_intro.md
+ 
 
-ℹ # Lời nói đầu
+  # Lời nói đầu
  
   Trong kỷ nguyên mà chúng ta đang sống, thông tin không chỉ là một nguồn tài nguyên, mà đã trở thành một đại 
   dương mênh mông, không ngừng mở rộng. Mỗi ngày, hàng tỷ gigabyte dữ liệu mới được tạo ra, từ những dòng 
@@ -30,9 +30,9 @@ $ cat chapter_00_intro.md
   Đây là một hành trình không chỉ về việc học cách học, mà còn về việc làm chủ tư duy, biến thông tin thành 
   sức mạnh thực sự. Hãy cùng tôi bắt đầu hành trình này, để bạn không còn là người bơi lạc trong đại dương 
   thông tin, mà trở thành người thuyền trưởng tài ba, tự tin điều khiển con thuyền tri thức của mình.
-$ cat chapter_01.md
+ 
 
-ℹ ## Chương 1: Đại Dương Thông Tin và Nỗi Ám Ảnh "Vô Số Chữ V Ngược"
+  ## Chương 1: Đại Dương Thông Tin và Nỗi Ám Ảnh "Vô Số Chữ V Ngược"
  
   ### 1.1. Thế kỷ 21: Kỷ nguyên của sự bùng nổ thông tin và thách thức
 
@@ -107,9 +107,8 @@ $ cat chapter_01.md
   Chính vì vậy, chúng ta cần một phương pháp tiếp cận mới, một la bàn để điều hướng trong đại dương thông tin, 
   một công cụ để biến nỗi ám ảnh "Vô số chữ V ngược" thành một hành trình khám phá kiến thức có định hướng và 
   hiệu quả. Đó chính là điều mà cuốn sách này sẽ mang lại.
-$ cat chapter_02.md
-
-ℹ ## Chương 2: "X" - Điểm Kỳ Dị: Nơi Bottom-up Gặp Top-down
+ 
+ ## Chương 2: "X" - Điểm Kỳ Dị: Nơi Bottom-up Gặp Top-down
  
   ### 2.1. Giới thiệu khái niệm "X": Hai chữ V đối đỉnh và điểm kỳ dị
 
@@ -185,9 +184,8 @@ $ cat chapter_02.md
   này trong thực tế, biến nó thành công cụ mạnh mẽ giúp bạn làm chủ đại dương thông tin.
 
 
-$ cat chapter_03.md
-
-ℹ ## Chương 3: Giải Mã "Điểm Kỳ Dị": Phương Pháp "Master Keyword"
+ 
+ ## Chương 3: Giải Mã "Điểm Kỳ Dị": Phương Pháp "Master Keyword"
  
   ### 3.1. Ngôn ngữ là chìa khóa: Tại sao phương pháp này phổ quát?
 
@@ -309,9 +307,8 @@ $ cat chapter_03.md
    sang các ứng dụng như NLP hay Computer Vision. Quá trình học của bạn sẽ có định hướng rõ ràng và hiệu quả 
   hơn rất nhiều.
 
-$ cat chapter_04.md
-
-ℹ ## Chương 4: Khai Thác Sức Mạnh của Google Search: Tìm Kiếm Đệ Quy và Suy Diễn
+ 
+ ## Chương 4: Khai Thác Sức Mạnh của Google Search: Tìm Kiếm Đệ Quy và Suy Diễn
  
   ### 4.1. Google Search: Biến công cụ tìm kiếm thành công cụ khám phá và xây dựng kiến thức
 
@@ -429,9 +426,8 @@ $ cat chapter_04.md
 
   Quá trình này giúp bạn xây dựng một hiểu biết sâu sắc về Blockchain, từ khái niệm tổng quan đến các thuật 
   toán chi tiết, một cách có hệ thống và hiệu quả, tránh được sự choáng ngợp ban đầu.
-$ cat chapter_05.md
-
-ℹ ## Chương 5: Hệ Thống Hóa Kiến Thức: Xây Dựng "Knowledge Graph" Cá Nhân
+ 
+ ## Chương 5: Hệ Thống Hóa Kiến Thức: Xây Dựng "Knowledge Graph" Cá Nhân
  
   ### 5.1. Vượt xa ghi chú truyền thống: Tại sao cần một hệ thống quản lý kiến thức có cấu trúc
 
@@ -551,9 +547,8 @@ $ cat chapter_05.md
   Knowledge Graph cá nhân không chỉ là một công cụ; nó là một phần mở rộng của trí tuệ bạn, một hệ thống sống 
   động không ngừng phát triển cùng với kiến thức của bạn.
 
-$ cat chapter_06.md
-
-ℹ ## Chương 6: Ứng Dụng Thực Tiễn và Nâng Cao
+ 
+ ## Chương 6: Ứng Dụng Thực Tiễn và Nâng Cao
  
   ### 6.1. Áp dụng phương pháp cho các lĩnh vực khác nhau
 
@@ -646,13 +641,9 @@ $ cat chapter_06.md
    và sự hỗ trợ của AI, bạn sẽ trở thành một người học mạnh mẽ hơn, một nhà tư duy sắc bén hơn, và một kiến 
   trúc sư tri thức tài ba.
 
-$ cat chapter_07.md
-✕ Command exited with code 1.
-  cat: chapter_07.md: No such file or directory
-
-$ cat chapter_07_conclusion.md
-
-ℹ ## Lời Kết
+ 
+ 
+ ## Lời Kết
  
   Chúng ta đã cùng nhau đi qua một hành trình khám phá sâu sắc, từ việc nhận diện nỗi ám ảnh của "Vô số chữ V 
   ngược" trong đại dương thông tin, đến việc giải mã "X" – Điểm Kỳ Dị như một chiến lược khởi đầu, và cuối cùng
