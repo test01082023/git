@@ -1,7 +1,7 @@
-# -----------------------------------------------------------------------------
+ # -----------------------------------------------------------------------------
 # STAGE 1: Base (Python + Alpine)
 # -----------------------------------------------------------------------------
-FROM python:3.14.0b3-alpine3.21 as base
+FROM python:3.11-alpine AS base
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
@@ -11,7 +11,16 @@ WORKDIR /app
 # -----------------------------------------------------------------------------
 # STAGE 2: Builder
 # -----------------------------------------------------------------------------
-FROM base as builder
+FROM base AS builder
+
+# Cài đặt các dependency hệ thống cần thiết cho các gói Python
+RUN apk add --no-cache \
+    build-base \
+    libffi-dev \
+    openssl-dev \
+    yaml-dev \
+    rust \
+    cargo
 
 # Cài dependencies: web server + AI + logic engine
 RUN pip install --no-cache-dir \
@@ -131,15 +140,15 @@ EOF
 # -----------------------------------------------------------------------------
 # STAGE 3: Final
 # -----------------------------------------------------------------------------
-FROM base as final
+FROM base AS final
 
-COPY --from=builder /usr/local/lib/python3.14/site-packages /usr/local/lib/python3.14/site-packages
+COPY --from=builder /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
 COPY --from=builder /app /app
 
 RUN chown -R appuser:app /app
 USER appuser
 
-ENTRYPOINT ["uvicorn", "mcp_server:app", "--host", "0.0.0.0", "--port", "8080"]
+ENTRYPOINT ["python", "-m", "uvicorn", "mcp_server:app", "--host", "0.0.0.0", "--port", "8080"]
 
 LABEL maintainer="you@yourdomain.com"
 LABEL description="LogicPilot Alpine: Ultra-light AI orchestration engine with web API"
