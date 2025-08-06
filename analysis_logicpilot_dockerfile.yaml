@@ -1,0 +1,35 @@
+analysis:
+  dockerfile_name: Dockerfile.logicpilot.alpine.v1
+  purpose:
+    name: LogicPilot Alpine
+    description: Một công cụ điều phối AI siêu nhẹ với API web. Nó được thiết kế để chạy các chương trình "logicmap" (các quy trình làm việc được định nghĩa bằng YAML) và hiển thị chúng thông qua một máy chủ FastAPI. Nó tích hợp với OpenAI cho các khả năng AI.
+    key_components:
+      - FastAPI: Framework web cho API.
+      - Uvicorn: Máy chủ ASGI để chạy ứng dụng FastAPI.
+      - logic_engine.py: Logic cốt lõi để phân tích và thực thi các chương trình "logicmap".
+      - mcp_server.py: Wrapper FastAPI hiển thị các điểm cuối API để nhắc AI và chạy các chương trình logicmap.
+      - OpenAI: Để tương tác với các mô hình AI.
+      - Alpine Linux: Được chọn vì kích thước nhỏ, giúp image "siêu nhẹ".
+  errors_encountered:
+    - type: Thiếu các Dependency hệ thống
+      description: Lỗi build ban đầu do các gói Python như `pyyaml` và `pydantic-core` yêu cầu các thư viện hệ thống và công cụ build (ví dụ: `build-base`, `libffi-dev`, `openssl-dev`, `yaml-dev`, `rust`, `cargo`) mà không được cài đặt trong image Alpine cơ sở trong giai đoạn `builder`.
+      resolution: Đã thêm `apk add --no-cache build-base libffi-dev openssl-dev yaml-dev rust cargo` vào giai đoạn `builder`.
+    - type: Không tương thích phiên bản Python Beta
+      description: Gói `pydantic-core` không build được vì phiên bản Python 3.14 beta quá mới so với `PyO3` (một thư viện Rust mà nó phụ thuộc), vốn chỉ hỗ trợ tối đa Python 3.13.
+      resolution: Đã thay đổi image Python cơ sở từ `python:3.14.0b3-alpine3.21` sang `python:3.11-alpine`, một phiên bản ổn định và tương thích.
+    - type: Sai đường dẫn Python Site-Packages trong COPY
+      description: Sau khi thay đổi phiên bản Python, lệnh `COPY` trong giai đoạn `final` vẫn tham chiếu đến đường dẫn `site-packages` của Python 3.14 cũ, dẫn đến lỗi "not found".
+      resolution: Đã cập nhật đường dẫn lệnh `COPY` từ `/usr/local/lib/python3.14/site-packages` thành `/usr/local/lib/python3.11/site-packages`.
+    - type: Không tìm thấy Uvicorn Executable
+      description: Container Docker không khởi động được với thông báo "exec: 'uvicorn': executable file not found in $PATH". Điều này cho thấy lệnh `uvicorn` không trực tiếp có sẵn trong đường dẫn thực thi của container. Các nỗ lực ban đầu để định vị nó qua `which` hoặc đường dẫn trực tiếp đều thất bại.
+      resolution: Phát hiện ra rằng `uvicorn` thường được chạy dưới dạng một module Python (`python -m uvicorn`) thay vì một executable độc lập trong ngữ cảnh này. Đã sửa đổi `ENTRYPOINT` thành `["python", "-m", "uvicorn", ...]`.
+    - type: Cảnh báo cú pháp Dockerfile (Nhỏ)
+      description: Một số cảnh báo liên quan đến các dòng trống trong lệnh `RUN` và việc viết hoa không nhất quán cho các câu lệnh `FROM ... as ...`.
+      resolution: Đã xóa dòng trống trong `pip install` và thay đổi `as` thành `AS` trong tất cả các câu lệnh `FROM`.
+  run_and_test_commands:
+    - command: docker build -t logicpilot-alpine-v1 -f /home/guest/git/Dockerfile.logicpilot.alpine.v1 /home/guest/git
+      description: Lệnh để build Docker image từ Dockerfile đã sửa đổi.
+    - command: docker run -d -p 8080:8080 logicpilot-alpine-v1
+      description: Lệnh để chạy Docker container ở chế độ nền, ánh xạ cổng 8080 của container ra cổng 8080 của host.
+    - command: curl -X POST http://localhost:8080/run/main -H "Content-Type: application/json" -d "{}"
+      description: Lệnh cURL để gửi yêu cầu POST đến endpoint /run/main của ứng dụng đang chạy trong container, nhằm kiểm tra xem ứng dụng có hoạt động đúng không.
