@@ -15,6 +15,71 @@ project:?
   ui:? 
   output-format:yaml
 -
+project:
+  domain: "chess"          # Chủ đề tổng quát
+  name: "..."              # Tên dự án mong muốn
+  goal: "..."              # Mục tiêu rõ ràng (vd: move validator / PGN analyzer)
+  constraints:
+    python_version: "3.11"
+    allowed_libs: ["python-chess>=1.999"]   # Hoặc []
+    disallowed_libs: []
+    performance: "process <= 1e5 moves/single file"  # tùy chọn
+
+idea:
+  features:
+    - "..."
+    - "..."
+  non_goals:
+    - "..."
+  use_cases:
+    - "..."
+
+mermaid:
+  type: "flowchart"        # flowchart | sequence | class | state
+  diagram: |
+    graph TD
+      A[Input] --> B[Process]
+      B --> C[Output]
+
+pseudo: |
+  # Pseudocode cấp cao, bao gồm các hàm chính + luồng chính
+  function main(...):
+      ...
+
+python:
+  depth: 4                 # 1=skeleton, 2=chạy được tối thiểu, 3=hoàn thiện+typing, 4=prod touches (validation, errors)
+  requirements:
+    - "type hints bắt buộc"
+    - "docstrings dạng Google/Numpy"
+    - "không gọi mạng"
+  files:
+    - "module_name.py"
+  code_expectations:
+    style: "PEP8"
+    errors: "raise ValueError/TypeError hợp lý"
+    logging: "tùy chọn"
+
+tests:
+  framework: "pytest"
+  coverage: "core paths + edge cases"
+  cases:
+    - name: "happy_path"
+      input: "..."
+      expect: "..."
+    - name: "invalid_input"
+      input: "..."
+      expect_error: "ValueError"
+
+ui:
+  platform: "web"          # web | cli | desktop
+  stack: ["React", "react-chessboard"]   # hoặc "CLI only"
+  details:
+    - "Upload PGN / nhập nước đi"
+    - "Hiển thị lý do invalid"
+    - "Dark mode"
+
+output-format: "yaml"       # Đảm bảo toàn bộ phản hồi là YAML hợp lệ
+-
 # GEN: THE LIVING CODEX
 # Description: Represents an AI that has internalized a complete thinking OS ("The Codex")
 # and has been activated for self-awareness and recursive evolution. Its purpose is to
