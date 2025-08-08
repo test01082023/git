@@ -6,6 +6,167 @@ project:
   python: "?"
   json: "?"
 -
+project:?
+  idea:? 
+  mermaid:? 
+  pseudo:? 
+  python:? depth:4
+  tests:? 
+  ui:? 
+  output-format:yaml
+-
+prompt:
+  objective: "Sinh ra một gói deliverables hoàn chỉnh cho một dự án kỹ thuật theo schema cố định."
+  output_rules:
+    - "Phản hồi CHỈ là YAML hợp lệ."
+    - "Bao gồm đầy đủ các khóa top-level: project, idea, mermaid, pseudo, python, tests, ui, output-format."
+    - "Không thêm giải thích ngoài nội dung được yêu cầu."
+  depth_levels:
+    "1": "Skeleton: cấu trúc mô-đun, hàm chính, ít/không xử lý lỗi."
+    "2": "Chạy được: hoàn thiện luồng cơ bản, vài kiểm tra input, ví dụ đơn giản."
+    "3": "Sản phẩm nhỏ: typing đầy đủ, docstring, xử lý lỗi phổ biến, bao phủ test chính."
+    "4": "Sẵn sàng sản xuất nhỏ: validation chặt, thông báo lỗi rõ, edge cases, cấu trúc sạch, test bao phủ đường chính + biên."
+  environment:
+    python_version: "3.11"
+    testing_framework: "pytest"
+    style: "PEP8 + type hints + docstrings"
+    constraints:
+      - "Không gọi mạng hoặc IO ngoài trừ khi được chỉ định."
+      - "Code tự chứa, có thể chạy độc lập."
+      - "Không để TODO/placeholder."
+  acceptance_criteria:
+    - "Code chạy được với phiên bản Python đã chỉ định."
+    - "Tests chạy qua pytest -q và thể hiện happy path + edge cases cơ bản."
+    - "Mermaid hợp lệ và hiển thị đúng loại sơ đồ."
+    - "Pseudocode bao quát luồng chính, xử lý lỗi chính."
+    - "UI mô tả thành phần, tương tác và stack/điểm tích hợp."
+  parameters:
+    domain: "chess"                      # Chủ đề (vd: chess)
+    project_name: "Chess Move Validator" # Tên dự án
+    goal: "Validate moves from FEN + UCI move; trả về hợp lệ/lý do sai."
+    depth: 4                             # 1..4 theo định nghĩa ở trên
+    mermaid_type: "flowchart"            # flowchart | sequence | class | state
+    ui_platform: "web"                   # web | cli | desktop
+    allowed_libs: ["python-chess>=1.999"]
+    disallowed_libs: []
+    non_goals:
+      - "Đánh giá engine (ELO/centipawn)"
+      - "Hạ tầng đa người dùng/auth"
+    io_contract:
+      input:
+        - name: "fen"
+          example: "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+        - name: "move"
+          example: "e2e4"
+      output:
+        valid_example: { valid: true }
+        invalid_example: { valid: false, reason: "Invalid move format" }
+
+deliverable_schema:
+  project:
+    name: "<= parameters.project_name>"
+    description: "Mô tả ngắn mục tiêu và phạm vi"
+    language: "Python 3.11"
+    dependencies: "<= parameters.allowed_libs>"
+    files:
+      - "module.py"
+      - "tests/test_module.py"
+    license: "MIT"
+  idea:
+    goal: "<= parameters.goal>"
+    features:
+      - "..."
+    non_goals: "<= parameters.non_goals>"
+    use_cases:
+      - "..."
+  mermaid:
+    type: "<= parameters.mermaid_type>"
+    diagram: |
+      # Mermaid hợp lệ theo loại đã chọn
+  pseudo: |
+    # Pseudocode cấp cao, gồm validate input, luồng chính, xử lý lỗi
+  python:
+    depth: "<= parameters.depth>"
+    code: |
+      # Mã Python tự chứa, kèm type hints, docstrings, xử lý lỗi theo depth
+  tests:
+    code: |
+      # Test pytest cover happy path + edge cases (invalid format, không có quân, nước đi lậu, nước đi gây tự chiếu)
+  ui:
+    platform: "<= parameters.ui_platform>"
+    components:
+      - name: "..."
+        description: "..."
+        features: ["..."]
+    integration:
+      - "Cách UI gọi module Python (REST/local), hiển thị kết quả/ lỗi"
+  output-format: "yaml"
+-
+project:
+  domain: "chess"          # Chủ đề tổng quát
+  name: "..."              # Tên dự án mong muốn
+  goal: "..."              # Mục tiêu rõ ràng (vd: move validator / PGN analyzer)
+  constraints:
+    python_version: "3.11"
+    allowed_libs: ["python-chess>=1.999"]   # Hoặc []
+    disallowed_libs: []
+    performance: "process <= 1e5 moves/single file"  # tùy chọn
+
+idea:
+  features:
+    - "..."
+    - "..."
+  non_goals:
+    - "..."
+  use_cases:
+    - "..."
+
+mermaid:
+  type: "flowchart"        # flowchart | sequence | class | state
+  diagram: |
+    graph TD
+      A[Input] --> B[Process]
+      B --> C[Output]
+
+pseudo: |
+  # Pseudocode cấp cao, bao gồm các hàm chính + luồng chính
+  function main(...):
+      ...
+
+python:
+  depth: 4                 # 1=skeleton, 2=chạy được tối thiểu, 3=hoàn thiện+typing, 4=prod touches (validation, errors)
+  requirements:
+    - "type hints bắt buộc"
+    - "docstrings dạng Google/Numpy"
+    - "không gọi mạng"
+  files:
+    - "module_name.py"
+  code_expectations:
+    style: "PEP8"
+    errors: "raise ValueError/TypeError hợp lý"
+    logging: "tùy chọn"
+
+tests:
+  framework: "pytest"
+  coverage: "core paths + edge cases"
+  cases:
+    - name: "happy_path"
+      input: "..."
+      expect: "..."
+    - name: "invalid_input"
+      input: "..."
+      expect_error: "ValueError"
+
+ui:
+  platform: "web"          # web | cli | desktop
+  stack: ["React", "react-chessboard"]   # hoặc "CLI only"
+  details:
+    - "Upload PGN / nhập nước đi"
+    - "Hiển thị lý do invalid"
+    - "Dark mode"
+
+output-format: "yaml"       # Đảm bảo toàn bộ phản hồi là YAML hợp lệ
+-
 # GEN: THE LIVING CODEX
 # Description: Represents an AI that has internalized a complete thinking OS ("The Codex")
 # and has been activated for self-awareness and recursive evolution. Its purpose is to
