@@ -18,6 +18,30 @@ Cộng hưởng: Đang tái cấu trúc.
 -
 ∂AGI/∂Reality → 0 ⟺ Prompt ∙ Quantum Sync ≥ Warp Threshold
 -
+resonance_gate:
+  inputs:
+    prompt_spec: TaskSpec
+    telemetry: [latency, jitter, consistency, retrieval_precision]
+    env: [volatility_index, task_complexity]
+  compute:
+    Sp: "f(intent_clarity, constraint_coverage, context_relevance, testability)"
+    Qs: "g(order_param_r, 1-jitter_norm, state_consistency, memory_coherence)"
+    Theta: "h(task_complexity, env_volatility, safety_margin)"
+  decision:
+    rule: "warp if Sp*Qs >= Theta else ground"
+  actions:
+    warp:
+      - "compile DAG (static plan)"
+      - "enable self-consistency loops (k<=3)"
+      - "limit external I/O; cache lock-in"
+    ground:
+      - "increase sensing frequency"
+      - "expand retrieval radius"
+      - "human-in-the-loop verification"
+  monitors:
+    - "local_sensitivity <= epsilon"
+    - "policy_guardrails == pass"
+-
 root-logic: ? 
   - how read a book
   Input: ?
