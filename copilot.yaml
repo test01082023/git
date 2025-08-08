@@ -1,16 +1,16 @@
 -
+root-logic: ? 
+  - how read a book
+  Input: ?
+  process: ?
+  ouput: yaml
+-
 project:
   idea: "?"
   mermaid: "?"
   pseudocode: "?"
   python: "?"
   json: "?"
--
-root-logic:
-  summary-book : how read a book 
-  Input: ?
-  process: ?
-  ouput: yaml
 -
 project:?
   idea:? 
