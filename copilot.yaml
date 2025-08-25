@@ -1,4 +1,5 @@
 -
+-
 project:
   idea: "?"
   mermaid: "?"
@@ -14,6 +15,74 @@ project:?
   tests:? 
   ui:? 
   output-format:yaml
+-
+Your prompt format is quite effective for software engineering workflows, but here are some thoughts on its strengths and potential improvements:
+
+**Strengths:**
+- **Structured approach**: Breaking down into idea → diagram → algorithm → code → metadata is logical
+- **Multi-perspective view**: Forces thinking through visual, logical, and implementation aspects
+- **Concise format**: Easy to remember and quick to use
+- **JSON endpoint**: Good for documentation and project metadata
+
+**Potential enhancements for different scenarios:**
+
+```
+project: <name>
+  idea: "?"
+  requirements: "?"      # Add functional/non-functional requirements
+  architecture: "?"      # System design beyond just flow
+  mermaid: "?"
+  pseudocode: "?"
+  python: "?"
+  tests: "?"            # Unit/integration tests
+  api: "?"              # If building services
+  database: "?"         # Schema if needed
+  deployment: "?"       # Docker/CI/CD
+  json: "?"
+```
+
+**Alternative formats for specific needs:**
+
+For rapid prototyping:
+```
+build: <feature>
+  problem: "?"
+  solution: "?"
+  code: "?"
+```
+
+For debugging:
+```
+debug: <issue>
+  error: "?"
+  context: "?"
+  fix: "?"
+```
+
+For architecture:
+```
+design: <system>
+  requirements: "?"
+  components: "?"
+  interactions: "?"
+  tradeoffs: "?"
+```
+
+**Your current format works best for:**
+- Learning new concepts
+- Building small to medium features
+- Documentation generation
+- Code interviews/demonstrations
+
+**Consider adding based on your needs:**
+- Error handling strategies
+- Performance considerations
+- Security requirements
+- Testing approach
+- Edge cases
+
+Your prompt is already quite good - it encourages thinking through the full development cycle. The key is adapting it based on project complexity and specific needs.
+
 -
 prompt:
   objective: "Sinh ra một gói deliverables hoàn chỉnh cho một dự án kỹ thuật theo schema cố định."
