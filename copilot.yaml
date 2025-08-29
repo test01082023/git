@@ -1,5 +1,5 @@
 -
-project: <chess>
+project: <name>
   idea: "?"
   requirements: "?"      # Add functional/non-functional requirements
   architecture: "?"      # System design beyond just flow
