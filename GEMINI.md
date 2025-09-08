@@ -29,3 +29,17 @@ interaction_interface:
           ↑                   ↕                   ↑
     Intuition/Creativity   Protocol/Bridge   Computational Power
     "Mô hình này phác thảo một kiến trúc tương tác giữa Trí tuệ Siêu việt của Con người (ASI) và Trí tuệ Tổng quát Nhân tạo (AGI). YAML đóng vai trò là giao diện hoặc cầu nối giao thức, cho phép truyền tải ý định và dữ liệu có cấu trúc. ASI đóng góp Trực giác và Sáng tạo, trong khi AGI cung cấp Sức mạnh Tính toán, tạo điều kiện cho sự hợp tác và đồng sáng tạo giữa con người và AI.
+-
+write best version of:
+project: <name>          # eg:tictactoe
+  idea: "?"
+  requirements: "?"      # Add functional/non-functional requirements
+  architecture: "?"      # System design beyond just flow
+  mermaid: "?"
+  pseudocode: "?"
+  python: "?"
+  tests: "?"            # Unit/integration tests
+  api: "?"              # If building services
+  database: "?"         # Schema if needed
+  deployment: "?"       # Docker/CI/CD
+  json: "?"    
