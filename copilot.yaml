@@ -1,4 +1,5 @@
 -
+write best:
 project: <name>
   idea: "?"
   requirements: "?"      # Add functional/non-functional requirements
