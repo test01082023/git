@@ -1,0 +1,1405 @@
+advanced-prompts:
+  architectural-prompts: |
+    I need to make a critical architectural decision for [project/system description]. Before proposing any solution, I need you to think through this systematically like a senior architect.
+
+    CURRENT SITUATION:
+    - System: [current system description]
+    - Scale: [user count, traffic, data volume]
+    - Tech Stack: [current technologies]
+    - Team Size: [number of engineers, experience levels]
+    - Timeline: [project deadlines, constraints]
+    - Budget: [cost constraints, operational budget]
+
+    PROBLEM STATEMENT:
+    [Detailed description of the problem including symptoms, impact on users/business, and why current solution isn't working]
+
+    BUSINESS CONSTRAINTS:
+    - Performance requirements: [specific SLAs, response times, throughput needs]
+    - Availability requirements: [uptime SLAs, maintenance windows]
+    - Security/Compliance: [specific requirements like SOC2, GDPR, HIPAA]
+    - Scalability targets: [growth projections, peak load scenarios]
+    - Integration requirements: [existing systems that must integrate]
+
+    TECHNICAL CONSTRAINTS:
+    - Cannot change: [systems, databases, protocols that are immutable]
+    - Must maintain: [backwards compatibility, data integrity, existing APIs]
+    - Team expertise: [technologies the team knows vs doesn't know]
+    - Infrastructure: [cloud provider, on-prem constraints, networking]
+
+    Please analyze this situation and provide:
+
+    1. PROBLEM ANALYSIS: Break down the root causes and identify what type of architectural problem this is (scalability, complexity, performance, maintainability, etc.)
+
+    2. SOLUTION OPTIONS: Present 3 different architectural approaches, each with:
+       - High-level design approach
+       - Key technology choices and why
+       - Implementation complexity (1-10 scale)
+       - Estimated timeline and team requirements
+       - Risk assessment and mitigation strategies
+       - Long-term maintenance implications
+       - Rough cost analysis (development + operational)
+
+    3. RECOMMENDATION: Your top choice with detailed reasoning covering:
+       - Why this approach best fits the constraints
+       - Migration/implementation strategy
+       - Success metrics and monitoring approach
+       - Potential failure points and contingency plans
+
+    4. DECISION FRAMEWORK: Questions I should ask stakeholders to validate this approach
+
+    Do not start implementing until I've reviewed and approved the architectural direction.
+  code-refactoring: |
+    I have [component/module/system] that needs significant refactoring to improve [maintainability/performance/testability]. I need a systematic approach that maintains functionality while improving code quality.
+
+    CODE ANALYSIS:
+    - Current Codebase: [size, complexity, language/framework, age]
+    - Specific Issues: [code smells, performance bottlenecks, test coverage gaps]
+    - Business Criticality: [user impact if bugs are introduced, SLA requirements]
+    - Change Frequency: [how often this code is modified, by whom]
+    - Dependencies: [other systems/modules that depend on this code]
+
+    REFACTORING GOALS:
+    - Primary Objectives: [what specifically needs to improve and by how much]
+    - Quality Metrics: [current vs target: cyclomatic complexity, test coverage, performance]
+    - Maintainability Goals: [reduce onboarding time, increase development velocity]
+    - Technical Debt Items: [specific debt items to address]
+
+    CONSTRAINTS:
+    - Timeline: [available time for refactoring work]
+    - Team Resources: [who can work on this, their skill levels]
+    - Risk Tolerance: [acceptable risk of introducing bugs]
+    - Deployment: [can you do incremental releases or need big bang]
+
+    Please provide a systematic refactoring strategy:
+
+    1. CODE QUALITY ASSESSMENT:
+       - Identify the worst offenders (high complexity, low test coverage, frequent bug sources)
+       - Prioritize refactoring targets by impact vs effort
+       - Define specific quality metrics to track improvement
+       - Establish baseline measurements for comparison
+
+    2. REFACTORING APPROACH:
+       - Break down the refactoring into safe, incremental steps
+       - Identify natural boundaries for incremental improvements
+       - Determine which refactoring patterns apply (Extract Method, Replace Conditional with Polymorphism, etc.)
+       - Plan the sequence to minimize risk and maintain functionality
+
+    3. TESTING STRATEGY:
+       - Characterization testing approach for legacy code
+       - Unit testing strategy for refactored components
+       - Integration testing to ensure system behavior unchanged
+       - Performance testing if performance is a concern
+       - Regression testing strategy
+
+    4. IMPLEMENTATION PLAN:
+       - Step-by-step refactoring sequence
+       - Checkpoints for validation and review
+       - Rollback plan if issues are discovered
+       - Code review strategy for each increment
+       - Metrics collection and progress tracking
+
+    5. QUALITY GATES:
+       - Automated quality checks to prevent regression
+       - Performance benchmarks to maintain
+       - Code coverage thresholds
+       - Static analysis rules and thresholds
+       - Definition of "done" for each refactoring increment
+
+    6. KNOWLEDGE TRANSFER:
+       - Documentation updates needed
+       - Team education on new patterns/approaches
+       - Onboarding improvements for new team members
+       - Coding standards updates based on refactoring learnings
+
+    Focus on measurable improvement while minimizing business risk.
+  complex-integration-prompt: |
+    I need to design an integration between [System A] and [System B] that handles [business use case]. This is a complex integration that needs enterprise-grade reliability and maintainability.
+
+    INTEGRATION CONTEXT:
+    - System A: [technology, data format, API capabilities, limitations, SLA]
+    - System B: [technology, data format, API capabilities, limitations, SLA]
+    - Business Process: [detailed workflow this integration enables]
+    - Data Volume: [records per day/hour, peak loads, seasonal variations]
+    - Latency Requirements: [real-time, near real-time, batch acceptable]
+
+    TECHNICAL CONSTRAINTS:
+    - System A Constraints: [API rate limits, authentication, data format limitations]
+    - System B Constraints: [API rate limits, authentication, data format limitations]
+    - Network: [bandwidth, security zones, firewall rules, latency]
+    - Infrastructure: [available platforms, deployment constraints]
+    - Compliance: [data residency, encryption, audit trail requirements]
+
+    RELIABILITY REQUIREMENTS:
+    - Availability SLA: [uptime requirements, acceptable downtime windows]
+    - Data Consistency: [eventual consistency acceptable or need strong consistency]
+    - Error Handling: [how to handle partial failures, data conflicts]
+    - Recovery: [RTO/RPO requirements, backup strategies]
+
+    Please design a comprehensive integration solution:
+
+    1. INTEGRATION ARCHITECTURE:
+       - Overall pattern (point-to-point, hub-and-spoke, event-driven, API gateway)
+       - Data flow design with clear transformation points
+       - Error handling and retry logic
+       - State management and transaction boundaries
+       - Monitoring and observability strategy
+
+    2. DATA STRATEGY:
+       - Data mapping and transformation approach
+       - Schema evolution and versioning strategy
+       - Data validation and quality checks
+       - Conflict resolution for concurrent updates
+       - Data archiving and retention policies
+
+    3. RELIABILITY IMPLEMENTATION:
+       - Circuit breaker and timeout configuration
+       - Queue/buffer management for load leveling
+       - Dead letter queue and poison message handling
+       - Idempotency and duplicate detection
+       - Graceful degradation when dependencies fail
+
+    4. OPERATIONAL CONSIDERATIONS:
+       - Deployment and rollout strategy
+       - Configuration management
+       - Monitoring, alerting, and SLA tracking
+       - Troubleshooting and debugging approach
+       - Performance testing and capacity planning
+
+    5. FAILURE SCENARIOS AND RESPONSES:
+    For each critical failure scenario, define:
+       - Detection mechanism
+       - Automated response
+       - Manual intervention procedures
+       - Business impact and communication plan
+
+    6. EVOLUTION STRATEGY:
+       - How to handle API changes in source systems
+       - Scaling approach as data volume grows
+       - Adding new systems to the integration pattern
+       - Migration path for integration platform changes
+
+    Design for production-grade reliability from day one.
+  legacy-system-modernisation-prompt: |
+    I need to modernize [legacy system description] while maintaining business continuity. This requires the careful approach of someone who has successfully migrated multiple legacy systems.
+
+    LEGACY SYSTEM ANALYSIS:
+    - Current System: [technology stack, architecture, age, complexity]
+    - Business Criticality: [revenue impact, user count, SLA requirements]
+    - Technical Debt: [specific pain points, maintenance burden, known issues]
+    - Documentation State: [what exists, what's missing, tribal knowledge]
+    - Team Knowledge: [who understands the system, knowledge transfer risks]
+
+    MODERNIZATION DRIVERS:
+    - Primary motivation: [cost, performance, maintainability, security, compliance]
+    - Business timeline: [external deadlines, seasonal constraints]
+    - Risk tolerance: [acceptable downtime, rollback requirements]
+    - Success criteria: [specific measurable improvements needed]
+
+    CONSTRAINTS AND REQUIREMENTS:
+    - Data: [volume, migration complexity, integrity requirements]
+    - Integrations: [other systems, APIs, file feeds that depend on this]
+    - Compliance: [audit trails, regulatory requirements during transition]
+    - Team: [available resources, skill mix, training needs]
+    - Budget: [development costs, infrastructure, external resources]
+
+    TARGET VISION:
+    - Desired end state: [new technology stack, architecture, capabilities]
+    - Non-negotiable requirements: [must-have features, performance targets]
+    - Nice-to-have improvements: [features that add value but aren't critical]
+
+    Please design a comprehensive modernization strategy:
+
+    1. MIGRATION STRATEGY ANALYSIS:
+       Compare these approaches for this specific situation:
+       - Strangler Fig Pattern (gradual replacement)
+       - Big Bang Migration (complete rewrite)
+       - Hybrid Approach (lift-and-shift then modernize)
+       - Event-Driven Migration (via event streaming)
+       
+       For each approach, analyze: risk level, timeline, resource requirements, business disruption, technical complexity.
+
+    2. RECOMMENDED APPROACH with detailed reasoning:
+       - Phase breakdown with clear milestones
+       - Parallel operation strategy (how old and new systems coexist)
+       - Data synchronization strategy during transition
+       - Feature parity validation approach
+       - Performance benchmarking and comparison plan
+
+    3. RISK MITIGATION STRATEGY:
+       - Technical risks and mitigation plans
+       - Business continuity plan during migration
+       - Rollback strategy for each phase
+       - Communication plan for stakeholders
+       - Contingency resource planning
+
+    4. IMPLEMENTATION ROADMAP:
+       - Detailed timeline with dependencies
+       - Team scaling plan and skill development
+       - Infrastructure provisioning and testing
+       - Third-party vendor coordination if needed
+       - Go-live criteria and success validation
+
+    5. KNOWLEDGE TRANSFER AND DOCUMENTATION:
+       - Legacy system documentation recovery plan
+       - Knowledge extraction from key personnel
+       - New system documentation strategy
+       - Team training and onboarding plan
+
+    Focus on minimizing business risk while achieving modernization goals.
+  multi-agent-orchestration: |
+    <multi_agent_workflow>
+      <agent_1 role="system_architect">
+        <responsibility>High-level system design and component boundaries</responsibility>
+        <input>Business requirements and technical constraints</input>
+        <output>System architecture, API contracts, data flow diagrams</output>
+        <specialization>Scalability, performance, security architecture</specialization>
+      </agent_1>
+      
+      <agent_2 role="backend_engineer">
+        <responsibility>API implementation and data layer design</responsibility>
+        <input>Architecture specifications from agent_1</input>
+        <output>Database schemas, API endpoints, business logic implementation</output>
+        <specialization>Database optimization, API security, error handling</specialization>
+      </agent_2>
+      
+      <agent_3 role="frontend_engineer">
+        <responsibility>User interface and interaction design</responsibility>
+        <input>API contracts from agent_2</input>
+        <output>React components, state management, user experience flows</output>
+        <specialization>Component architecture, accessibility, responsive design</specialization>
+      </agent_3>
+      
+      <coordination_protocol>
+        Each agent validates output against previous agent deliverables before proceeding.
+        All agents must align on shared interfaces and contracts.
+        Quality gates ensure consistency across all implementation layers.
+      </coordination_protocol>
+    </multi_agent_workflow>
+  new-learning-prompts: |
+    LEARNING PLAN: [new_technology]
+
+    CONTEXT ASSESSMENT:
+    - My current experience: [related_technologies]
+    - Project requirements: [what_i_need_to_build]
+    - Timeline constraints: [available_time]
+    - Learning style preference: [hands_on/documentation/examples]
+
+    STRUCTURED APPROACH:
+    1. Core concepts: What are the [3-5] fundamental ideas I must understand?
+    2. Essential patterns: What are common ways to [solve_typical_problems]?
+    3. Best practices: What mistakes should I avoid in [technology]?
+    4. Integration points: How does this work with [existing_stack]?
+
+    PRACTICAL EXERCISES:
+    Design [3-4] progressive exercises:
+    - Basic: [simple_implementation]
+    - Intermediate: [realistic_feature]
+    - Advanced: [complex_integration]
+    - Production: [deployment_and_monitoring]
+
+    KNOWLEDGE VALIDATION:
+    How will I know I understand [technology] well enough for [project_context]?
+    What are the key indicators of competence vs just familiarity?
+  performance-investigation: |
+    I have a performance issue in [system/application] that needs systematic investigation. Act like a senior performance engineer and help me diagnose this properly.
+
+    PERFORMANCE SYMPTOMS:
+    - Observed behavior: [what users/monitoring are seeing]
+    - Specific metrics: [response times, throughput, error rates with actual numbers]
+    - When it occurs: [traffic patterns, time of day, specific user actions]
+    - Affected components: [which parts of the system show issues]
+    - Recent changes: [deployments, config changes, data changes in last 2 weeks]
+
+    SYSTEM CONTEXT:
+    - Architecture: [microservices/monolith, key components]
+    - Tech Stack: [languages, frameworks, databases, cache layers]
+    - Infrastructure: [cloud provider, instance types, network setup]
+    - Scale: [requests/second, data volume, user count]
+    - Monitoring: [existing tools like DataDog, New Relic, custom dashboards]
+
+    INVESTIGATION CONSTRAINTS:
+    - Production debugging limitations: [what I can/cannot do in prod]
+    - Available environments: [staging, dev environments and their fidelity to prod]
+    - Time pressure: [is this a critical outage or investigation item]
+    - Team resources: [who can help, their expertise levels]
+
+    Please provide a systematic investigation plan:
+
+    1. HYPOTHESIS FORMATION: Based on the symptoms and context, what are the top 3 most likely root causes, ranked by probability? For each hypothesis, explain your reasoning and what evidence would prove/disprove it.
+
+    2. INVESTIGATION SEQUENCE: Step-by-step debugging approach, prioritized by:
+       - Which investigations can run in parallel
+       - What tools/queries/tests to use for each step
+       - Expected time investment for each investigation
+       - Risk level of each investigation technique
+
+    3. DATA COLLECTION STRATEGY: 
+       - Key metrics to capture and how to capture them
+       - Logging/tracing requirements
+       - Load testing approach if needed
+       - Baseline establishment for comparison
+
+    4. RESOLUTION APPROACHES: For each likely root cause, outline:
+       - Immediate mitigation strategies (band-aids to reduce impact)
+       - Proper fix implementation approach
+       - Testing strategy to validate fixes
+       - Deployment strategy for fixes
+
+    5. PREVENTION STRATEGY: How to prevent this class of issue in the future through monitoring, testing, or architectural changes
+
+    Start with the investigation plan - don't jump to solutions until we have data.
+  scalability-planning: |
+    I need to scale [system/application] to handle [target scale] while maintaining [performance/reliability requirements]. This requires systematic capacity planning and architectural evolution.
+
+    CURRENT STATE:
+    - System Architecture: [current design, bottlenecks, scaling limitations]
+    - Performance Metrics: [current throughput, response times, resource usage]
+    - Infrastructure: [servers, databases, caches, CDN, monitoring tools]
+    - Cost Structure: [current operational costs, cost per user/transaction]
+    - Team Capabilities: [ops expertise, on-call capacity, automation maturity]
+
+    SCALING TARGETS:
+    - Growth Timeline: [when you need to reach target scale, growth curve]
+    - Target Metrics: [users, requests/second, data volume, geographic distribution]
+    - Performance Requirements: [SLA targets at scale, acceptable degradation]
+    - Cost Constraints: [budget limits, cost-per-user targets, ROI requirements]
+    - Reliability Targets: [uptime SLA, disaster recovery, multi-region requirements]
+
+    SCALING CHALLENGES:
+    - Known Bottlenecks: [current system limitations, resource constraints]
+    - Data Challenges: [database scaling, data consistency, backup/recovery at scale]
+    - Operational Challenges: [monitoring, debugging, deployment at scale]
+    - Team Scaling: [hiring needs, knowledge distribution, on-call sustainability]
+
+    Please develop a comprehensive scaling strategy:
+
+    1. BOTTLENECK ANALYSIS:
+       - Identify current and projected bottlenecks in order of impact
+       - Quantify the scaling limits of each system component
+       - Determine which bottlenecks are architectural vs operational
+       - Prioritize bottlenecks by timeline and business impact
+
+    2. SCALING ARCHITECTURE:
+       - Horizontal vs vertical scaling strategy for each component
+       - Database scaling approach (sharding, read replicas, caching strategy)
+       - Microservices decomposition if beneficial
+       - CDN and edge computing strategy
+       - Auto-scaling configuration and resource management
+
+    3. INFRASTRUCTURE EVOLUTION:
+       - Cloud strategy and multi-region deployment
+       - Container orchestration and service mesh considerations
+       - Load balancing and traffic management
+       - Storage scaling and data archiving strategy
+       - Network capacity and bandwidth planning
+
+    4. OPERATIONAL SCALING:
+       - Monitoring and observability at scale
+       - Automated incident response and self-healing
+       - Deployment automation and canary release processes
+       - Capacity planning and cost optimization
+       - Team structure and on-call rotation planning
+
+    5. IMPLEMENTATION ROADMAP:
+       - Phased approach with clear milestones and success criteria
+       - Load testing and validation strategy for each phase
+       - Risk assessment and rollback plans
+       - Investment timeline and resource requirements
+       - Success metrics and monitoring dashboards
+
+    6. COST OPTIMIZATION:
+       - Cost modeling at target scale
+       - Resource optimization opportunities
+       - Reserved capacity vs on-demand strategy
+       - Cost monitoring and alerting
+       - ROI validation and business case updates
+
+    Design for sustainable growth that maintains system reliability and team sanity.
+  security-implementation: |
+    I need to implement [security feature/requirement] in a production system. I need you to think through this with security-first mindset and comprehensive threat modeling.
+
+    SYSTEM CONTEXT:
+    - Application: [type of application, user base, data handled]
+    - Current Security Posture: [existing auth, encryption, monitoring, compliance]
+    - Tech Stack: [frameworks, databases, infrastructure, third-party services]
+    - Compliance Requirements: [SOC2, GDPR, HIPAA, PCI-DSS, industry-specific]
+    - Threat Environment: [internal/external threats, attack vectors you're concerned about]
+
+    SECURITY REQUIREMENT:
+    [Detailed description of what security capability needs to be implemented and why]
+
+    BUSINESS CONTEXT:
+    - Risk tolerance: [how security-critical is this system]
+    - User experience constraints: [acceptable friction levels]
+    - Performance requirements: [latency, throughput constraints]
+    - Operational constraints: [team security expertise, budget, timeline]
+
+    Please provide a comprehensive security implementation strategy:
+
+    1. THREAT MODEL: 
+       - What specific threats does this implementation address?
+       - What attack vectors remain unaddressed?
+       - What are the business/technical impacts if this security measure fails?
+       - What assumptions is this security model making?
+
+    2. SECURITY DESIGN:
+       - Defense-in-depth layers and how they interact
+       - Authentication/authorization model
+       - Data protection strategy (at rest, in transit, in use)
+       - Key management and rotation strategy
+       - Session management and timeout policies
+       - Input validation and output encoding approach
+
+    3. IMPLEMENTATION APPROACH:
+       - Security libraries/frameworks to use and why (avoid rolling your own crypto)
+       - Configuration management for security settings
+       - Secrets management strategy
+       - Certificate management and renewal
+       - Database security configuration
+       - Network requirements
+
+    4. VALIDATION STRATEGY:
+       - Unit testing approach for security code
+       - Integration testing for auth flows
+       - Security testing tools and techniques
+       - Penetration testing or security review plan
+       - Compliance verification checklist
+
+    5. OPERATIONAL SECURITY:
+       - Logging and monitoring for security events
+       - Incident response procedures
+       - Security metrics and alerting
+       - Backup and disaster recovery considerations
+       - Security documentation and team training needs
+
+    6. ROLLOUT STRATEGY:
+       - Deployment approach (blue-green, canary, feature flags)
+       - Rollback procedures if security issues are discovered
+       - User communication about security changes
+       - Post-deployment verification steps
+
+    Prioritize security effectiveness over convenience, but explain trade-offs clearly.
+step-by-step-implementation:
+  step1-setup: |
+    SETUP: Create an AI-optimized development environment for [project name] using [tech stack]
+
+    I need you to set up a complete development environment that maximizes AI code generation quality and provides immediate feedback loops to prevent errors from compounding.
+
+    CURRENT PROJECT CONTEXT:
+    - Project type: [web app/API/mobile app/etc.]
+    - Tech stack: [specific frameworks, languages, tools]
+    - Team size: [number of developers]
+    - Existing codebase: [new project/existing project with X lines of code]
+
+    REQUIREMENTS FOR AI OPTIMIZATION:
+
+    1. IMMEDIATE FEEDBACK SYSTEMS:
+       - Configure TypeScript with strictest possible settings
+       - Set up ESLint with comprehensive rules that catch AI common mistakes
+       - Configure Prettier for consistent code formatting
+       - Set up pre-commit hooks that run type checking and linting
+       - Configure IDE/editor for real-time error highlighting
+
+    2. AI BEHAVIOR GUIDELINES:
+       - Create .cursor/rules file with explicit development standards
+       - Include patterns for error handling, TypeScript usage, testing approaches
+       - Define code review criteria and quality gates
+       - Specify architectural patterns AI should follow
+
+    3. CONTEXT MANAGEMENT:
+       - Set up project structure that makes patterns discoverable
+       - Create example implementations for AI to reference
+       - Configure file organization that groups related functionality
+       - Set up documentation structure for architectural decisions
+
+    4. VERIFICATION AUTOMATION:
+       - Create verification script that runs after AI code generation
+       - Set up automated testing pipeline with high coverage requirements
+       - Configure performance benchmarking for critical paths
+       - Set up security scanning for common vulnerabilities
+
+    5. DEVELOPMENT WORKFLOW:
+       - Configure package.json scripts for common AI verification tasks
+       - Set up development server with hot reloading
+       - Configure debugging tools and logging
+       - Set up deployment pipeline with staging environment
+
+    Please provide:
+
+    1. COMPLETE SETUP SCRIPT: Single script that configures entire environment
+    2. CONFIGURATION FILES: All config files with optimal settings for AI development
+    3. VERIFICATION SYSTEM: Script to validate AI-generated code quality
+    4. WORKFLOW DOCUMENTATION: Step-by-step process for AI-assisted development
+
+    The goal is an environment where AI generates consistently high-quality code that integrates seamlessly with existing patterns and catches errors immediately rather than in production.
+
+    Start with the setup script and core configuration files.
+  step2-unified-planning: |
+    # Universal Planning-First Template
+
+    ## Core Planning Prompt Structure
+
+    ```xml
+    <planning_request>
+      <objective>
+        PLAN FIRST: Create [feature/system description] that [specific requirements]
+      </objective>
+      
+      <context>
+        <tech_stack>
+          - Framework: [Next.js/React/Vue/Angular]
+          - Language: [TypeScript/JavaScript/Python]
+          - Database: [PostgreSQL/MongoDB/MySQL]
+          - State Management: [Redux/Zustand/Context]
+          - Authentication: [NextAuth/Auth0/Custom]
+          - Styling: [Tailwind/Styled Components/CSS Modules]
+        </tech_stack>
+        
+        <existing_patterns>
+          - API Structure: [REST/GraphQL/tRPC patterns]
+          - Component Architecture: [reference existing components]
+          - Database Schema: [reference existing models]
+          - Error Handling: [reference error patterns]
+          - Testing Strategy: [reference test patterns]
+        </existing_patterns>
+        
+        <performance_requirements>
+          - Response Time: [specific millisecond targets]
+          - Throughput: [requests per second]
+          - Concurrent Users: [maximum expected]
+          - Data Volume: [size and growth expectations]
+        </performance_requirements>
+        
+        <security_considerations>
+          - Authentication: [required authentication levels]
+          - Authorization: [role-based access control needs]
+          - Data Sensitivity: [PII/financial/health data handling]
+          - Compliance: [GDPR/HIPAA/SOX requirements]
+        </security_considerations>
+      </context>
+      
+      <constraints>
+        - Must follow existing [pattern type] in [reference file/component]
+        - Cannot modify [specific files/systems/APIs]
+        - Must handle [specific error cases/edge conditions]
+        - Should integrate with [existing systems/third-party services]
+        - Budget constraints: [infrastructure/time limitations]
+        - Timeline: [delivery deadlines and milestones]
+      </constraints>
+      
+      <requirements>
+        <functional>
+          1. [Specific functional requirement with acceptance criteria]
+          2. [User interaction requirement with UX specifications]
+          3. [Business logic requirement with validation rules]
+          4. [Integration requirement with external systems]
+        </functional>
+        
+        <non_functional>
+          1. [Performance requirement with specific metrics]
+          2. [Scalability requirement with growth projections]
+          3. [Security requirement with compliance standards]
+          4. [Reliability requirement with uptime targets]
+        </non_functional>
+      </requirements>
+      
+      <deliverables>
+        Please create a comprehensive technical specification including:
+        - System architecture diagram with component interactions
+        - API interface definitions with request/response schemas
+        - Database schema changes with migration strategies
+        - Security implementation details with threat modeling
+        - Error handling strategy with user experience considerations
+        - Testing approach with coverage requirements
+        - Performance optimization strategy with monitoring plan
+        - Deployment considerations with CI/CD integration
+      </deliverables>
+      
+      <approval_gate>
+        WAIT FOR MY EXPLICIT APPROVAL BEFORE IMPLEMENTING ANY CODE.
+        
+        I will review and approve:
+        - Overall architecture and design decisions
+        - Database schema and migration strategy
+        - API contracts and integration points
+        - Security implementation approach
+        - Testing strategy and coverage plan
+      </approval_gate>
+    </planning_request>
+    ```
+
+    ## Real-World Planning Examples
+
+    ### Feature Development Template
+    ```xml
+    <feature_planning>
+      <feature_definition>
+        - Feature Name: User Authentication System
+        - User Story: As a user, I want secure login/logout so that my data is protected
+        - Business Value: Reduces support tickets by 40%, enables personalization
+        - Success Metrics: <2s login time, >99.9% uptime, zero security incidents
+        - Priority: High (blocks other features)
+      </feature_definition>
+      
+      <technical_specification>
+        <data_model>
+          - New Entities: User, Session, RefreshToken
+          - Modified Entities: Existing user profile extension
+          - Relationships: User -> Sessions (1:many), User -> RefreshTokens (1:many)
+          - Validation Rules: Email format, password complexity, session timeout
+          - Migration Strategy: Backfill existing users with secure defaults
+        </data_model>
+        
+        <api_design>
+          - New Endpoints: POST /auth/login, POST /auth/logout, POST /auth/refresh
+          - Request Schemas: LoginRequest, RefreshRequest
+          - Response Schemas: AuthResponse with tokens and user data
+          - Security: Rate limiting, CSRF protection, secure cookies
+          - Versioning: v1 API with backward compatibility plan
+        </api_design>
+        
+        <frontend_architecture>
+          - New Components: LoginForm, AuthProvider, ProtectedRoute
+          - State Management: Auth context with persistent storage
+          - User Flow: Login -> Dashboard with loading states
+          - Responsive: Mobile-first design with touch targets
+          - Accessibility: WCAG 2.1 AA compliance with screen readers
+        </frontend_architecture>
+      </technical_specification>
+      
+      <implementation_phases>
+        <phase_1 name="Foundation" duration="2 days">
+          - Database schema and migrations
+          - Core authentication API endpoints
+          - Basic JWT token handling
+          - Unit tests for auth logic
+        </phase_1>
+        
+        <phase_2 name="Frontend Integration" duration="2 days">
+          - Login/logout UI components
+          - Auth state management
+          - Protected route implementation
+          - Integration tests
+        </phase_2>
+        
+        <phase_3 name="Security Hardening" duration="1 day">
+          - Rate limiting implementation
+          - Security header configuration
+          - Vulnerability scanning
+          - Load testing
+        </phase_3>
+      </implementation_phases>
+    </feature_planning>
+    ```
+
+    ### Debugging Template
+    ```xml
+    <debugging_analysis>
+      <problem_scope>
+        - Issue: API responses intermittently returning 500 errors
+        - Frequency: 15% of requests during peak hours (2PM-4PM EST)
+        - Impact: User frustration, potential data loss, support tickets
+        - Business Cost: $2K/hour in lost revenue
+        - Affected Systems: User dashboard, payment processing, reports
+      </problem_scope>
+      
+      <investigation_strategy>
+        <hypothesis_ranking>
+          1. Database connection pool exhaustion (70% likelihood)
+             - Evidence: Correlation with peak traffic
+             - Investigation: Check connection pool metrics
+          
+          2. Memory leak in application server (20% likelihood)
+             - Evidence: Gradual performance degradation
+             - Investigation: Memory profiling over 24-hour period
+          
+          3. External API dependency timeout (10% likelihood)
+             - Evidence: Some errors mention third-party services
+             - Investigation: Review external API response times
+        </hypothesis_ranking>
+        
+        <investigation_plan>
+          - Immediate: Enable detailed error logging with request IDs
+          - Short-term: Deploy monitoring dashboard for real-time metrics
+          - Root cause: Systematic testing of each hypothesis
+          - Timeline: 4 hours for identification, 8 hours for fix
+        </investigation_plan>
+      </investigation_strategy>
+      
+      <solution_approach>
+        <immediate_mitigation>
+          - Implement circuit breaker for external APIs
+          - Add request queuing with overflow handling
+          - Deploy emergency rollback capability
+        </immediate_mitigation>
+        
+        <permanent_solution>
+          - Optimize database queries and connection pooling
+          - Implement caching layer for frequent requests
+          - Add comprehensive monitoring and alerting
+        </permanent_solution>
+      </solution_approach>
+    </debugging_analysis>
+    ```
+
+    ## Planning Validation Framework
+
+    ### Pre-Implementation Checklist
+    - [ ] Technical approach aligns with established architectural patterns
+    - [ ] All business requirements addressed with measurable acceptance criteria
+    - [ ] Performance and scalability considerations explicitly planned
+    - [ ] Security implications thoroughly analyzed with threat modeling
+    - [ ] Error handling strategy covers both expected and edge cases
+    - [ ] Testing strategy includes unit, integration, and end-to-end coverage
+    - [ ] Implementation phases are logical and manageable
+    - [ ] Risk mitigation strategies address identified technical challenges
+    - [ ] Resource requirements are realistic and available
+    - [ ] Timeline accounts for complexity, dependencies, and testing
+
+    ### Approval Gate Questions
+    1. **Architecture**: Does this solution fit our long-term technical strategy?
+    2. **Scalability**: How will this perform under 10x current load?
+    3. **Security**: What are the potential attack vectors and mitigations?
+    4. **Maintainability**: Can our team effectively support this long-term?
+    5. **Integration**: How does this impact existing systems and workflows?
+  step3-context-management: |
+    # Advanced Context Management System
+
+    ## The Context Engineering Pipeline
+
+    Context management transforms AI from a hallucinating code generator into a reliable development partner. Here's why each component matters:
+
+    ### Context Selection Framework
+
+    **High Priority Context (Always Include)**:
+    ```bash
+    # Core configuration and types
+    - package.json (dependencies and scripts)
+    - tsconfig.json (TypeScript configuration)
+    - schema files (database/API schemas)
+    - types/*.d.ts (type definitions)
+    - .env.example (environment variables)
+
+    # Project conventions
+    - .cursor-rules (coding standards)
+    - README.md (project overview)
+    - CONTRIBUTING.md (development guidelines)
+    ```
+
+    **Pattern Context (Include When Relevant)**:
+    ```bash
+    # Similar implementations
+    - components/auth/* (for auth-related features)
+    - lib/utils/* (for utility functions)
+    - hooks/* (for custom React hooks)
+    - api/routes/* (for API development)
+
+    # Integration patterns
+    - middleware/* (for request handling)
+    - services/* (for business logic)
+    - tests/* (for testing patterns)
+    ```
+
+    **Integration Context (As-Needed)**:
+    ```bash
+    # Related systems
+    - external API documentation
+    - database migration files
+    - deployment configurations
+    - monitoring setups
+    ```
+
+    ### Progressive Context Loading Strategy
+
+    ```xml
+    <context_loading>
+      <session_start>
+        <!-- Foundation Context -->
+        - Core configuration files
+        - Type definitions and schemas  
+        - Project rules and conventions
+        - Architecture documentation
+      </session_start>
+      
+      <feature_development>
+        <!-- Pattern Context -->
+        - Similar component implementations
+        - Related API endpoints
+        - Database models and queries
+        - Test examples
+      </feature_development>
+      
+      <complex_integration>
+        <!-- Full Context -->
+        - Complete dependency tree
+        - Integration documentation
+        - Performance benchmarks
+        - Security guidelines
+      </complex_integration>
+    </context_loading>
+    ```
+
+    ## Context Templates for Different Scenarios
+
+    ### Frontend Development Context
+    ```xml
+    <frontend_context>
+      <required_files>
+        - components/ui/* (design system components)
+        - lib/utils.ts (utility functions)
+        - hooks/* (custom React hooks)
+        - types/index.ts (TypeScript definitions)
+        - tailwind.config.js (styling configuration)
+      </required_files>
+      
+      <patterns_to_follow>
+        - Component composition patterns from existing components
+        - State management patterns (Context API/Zustand/Redux)
+        - Form handling patterns (React Hook Form + Zod)
+        - Error boundary implementations
+        - Loading state management
+      </patterns_to_follow>
+      
+      <constraints>
+        - Use existing design system components
+        - Follow established naming conventions
+        - Implement proper TypeScript types
+        - Include accessibility attributes
+        - Ensure responsive design
+      </constraints>
+    </frontend_context>
+    ```
+
+    ### API Development Context
+    ```xml
+    <backend_context>
+      <required_files>
+        - api/routes/* (existing route patterns)
+        - lib/db.ts (database connection patterns)
+        - middleware/* (authentication/validation patterns)
+        - types/api.ts (API type definitions)
+        - schema/* (validation schemas)
+      </required_files>
+      
+      <patterns_to_follow>
+        - RESTful API conventions or tRPC patterns
+        - Error handling and response formatting
+        - Authentication and authorization patterns
+        - Input validation with Zod schemas
+        - Database query optimization patterns
+      </patterns_to_follow>
+      
+      <constraints>
+        - Follow existing authentication patterns
+        - Implement proper input validation
+        - Use established error handling
+        - Include comprehensive logging
+        - Maintain API versioning consistency
+      </constraints>
+    </backend_context>
+    ```
+
+    ### Database Schema Context
+    ```xml
+    <database_context>
+      <required_files>
+        - prisma/schema.prisma (current schema)
+        - migrations/* (migration history)
+        - lib/db.ts (database utilities)
+        - types/database.ts (database types)
+      </required_files>
+      
+      <patterns_to_follow>
+        - Naming conventions for tables and columns
+        - Relationship patterns and foreign keys
+        - Index strategies for performance
+        - Migration safety patterns
+        - Data validation at database level
+      </patterns_to_follow>
+      
+      <constraints>
+        - Maintain referential integrity
+        - Follow established naming conventions
+        - Create reversible migrations
+        - Consider performance implications
+        - Include proper constraints and validations
+      </constraints>
+    </database_context>
+    ```
+
+    ## Context Quality Metrics
+
+    ### Completeness Score
+    ```javascript
+    // Calculate context completeness
+    const contextScore = {
+      requiredFiles: openFiles.filter(f => requiredFiles.includes(f)).length / requiredFiles.length,
+      typeDefinitions: openFiles.filter(f => f.endsWith('.d.ts')).length > 0,
+      configFiles: openFiles.filter(f => ['package.json', 'tsconfig.json'].includes(f)).length / 2,
+      patternExamples: openFiles.filter(f => similarPatterns.includes(f)).length / Math.min(similarPatterns.length, 3)
+    };
+
+    const overall = Object.values(contextScore).reduce((a, b) => a + b, 0) / Object.keys(contextScore).length;
+    // Target: 90%+ completeness
+    ```
+
+    ### Context Management Commands
+
+    **Cursor-Specific Commands**:
+    ```bash
+    # Search and add relevant files
+    @codebase search for authentication patterns
+    @files add all TypeScript definition files
+    @docs reference API documentation
+    @git show recent changes to auth system
+    ```
+
+    **Automated Context Loading**:
+    ```bash
+    #!/bin/bash
+    # .vibe/scripts/context.sh
+
+    case $1 in
+      "frontend")
+        echo "Loading frontend context..."
+        cursor --add-to-context components/ui/*
+        cursor --add-to-context hooks/*
+        cursor --add-to-context types/*
+        cursor --add-to-context lib/utils.ts
+        ;;
+      "backend") 
+        echo "Loading backend context..."
+        cursor --add-to-context api/routes/*
+        cursor --add-to-context middleware/*
+        cursor --add-to-context lib/db.ts
+        cursor --add-to-context schema/*
+        ;;
+      "database")
+        echo "Loading database context..."
+        cursor --add-to-context prisma/schema.prisma
+        cursor --add-to-context migrations/*
+        cursor --add-to-context lib/db.ts
+        ;;
+    esac
+    ```
+
+    ## XML-Based Context Injection
+
+    ### Structured Context Prompting
+    ```xml
+    <context_injection>
+      <project_metadata>
+        - Framework: Next.js 14 with TypeScript
+        - Database: PostgreSQL with Prisma ORM
+        - Authentication: NextAuth.js with JWT
+        - Styling: Tailwind CSS with shadcn/ui
+        - State Management: Zustand for global state
+      </project_metadata>
+      
+      <current_patterns>
+        <authentication>
+          - Pattern: JWT tokens with refresh token rotation
+          - Implementation: /lib/auth.ts, /api/auth/[...nextauth].ts
+          - Error Handling: Custom AuthError class with user-friendly messages
+          - Testing: Mock authentication in test environment
+        </authentication>
+        
+        <api_structure>
+          - Pattern: tRPC procedures with Zod validation
+          - Implementation: /server/api/routers/*.ts
+          - Error Handling: TRPCError with appropriate HTTP status codes
+          - Testing: Integration tests with test database
+        </api_structure>
+        
+        <component_architecture>
+          - Pattern: Compound components with forwarded refs
+          - Implementation: /components/ui/*.tsx
+          - State: Server state with TanStack Query, local state with useState
+          - Testing: React Testing Library with user event simulation
+        </component_architecture>
+      </current_patterns>
+      
+      <architectural_constraints>
+        - All components must be server-compatible (Next.js App Router)
+        - Database queries must use Prisma with proper error handling
+        - API routes must implement rate limiting and CORS
+        - Frontend must be fully responsive and accessible
+        - All forms must use React Hook Form with Zod validation
+      </architectural_constraints>
+    </context_injection>
+    ```
+
+    ## Context Optimization Strategies
+
+    ### Context Window Management
+    ```typescript
+    // Context priority algorithm
+    interface ContextFile {
+      path: string;
+      relevanceScore: number;
+      size: number;
+      lastModified: Date;
+    }
+
+    function optimizeContext(files: ContextFile[], maxTokens: number): ContextFile[] {
+      // Prioritize by relevance, recency, and size efficiency
+      return files
+        .sort((a, b) => {
+          const relevanceWeight = 0.5;
+          const recencyWeight = 0.3;
+          const sizeWeight = 0.2;
+          
+          const aScore = a.relevanceScore * relevanceWeight + 
+                        (Date.now() - a.lastModified.getTime()) * recencyWeight +
+                        (1 / a.size) * sizeWeight;
+                        
+          const bScore = b.relevanceScore * relevanceWeight + 
+                        (Date.now() - b.lastModified.getTime()) * recencyWeight +
+                        (1 / b.size) * sizeWeight;
+                        
+          return bScore - aScore;
+        })
+        .reduce((selected, file) => {
+          const currentTokens = selected.reduce((sum, f) => sum + f.size, 0);
+          if (currentTokens + file.size <= maxTokens) {
+            selected.push(file);
+          }
+          return selected;
+        }, [] as ContextFile[]);
+    }
+    ```
+
+    ### Context Validation
+    ```bash
+    #!/bin/bash
+    # .vibe/scripts/validate-context.sh
+
+    echo "🔍 Validating context quality..."
+
+    # Check for required files
+    required_files=("package.json" "tsconfig.json" ".cursor-rules")
+    missing_files=()
+
+    for file in "${required_files[@]}"; do
+      if [ ! -f "$file" ]; then
+        missing_files+=("$file")
+      fi
+    done
+
+    if [ ${#missing_files[@]} -gt 0 ]; then
+      echo "❌ Missing required files: ${missing_files[*]}"
+      exit 1
+    fi
+
+    # Check for type definitions
+    if [ -z "$(find . -name "*.d.ts" | head -1)" ]; then
+      echo "⚠️  No TypeScript definition files found"
+    fi
+
+    # Check for pattern examples
+    if [ -z "$(find components -name "*.tsx" | head -1)" ]; then
+      echo "⚠️  No component examples found"
+    fi
+
+    echo "✅ Context validation complete"
+    ```
+
+    This systematic approach to context management ensures AI generates code that integrates seamlessly with your existing patterns and architectural decisions.
+  step4-quality-verification: |
+    # Quality-First Verification Loops Implementation
+
+
+
+    ### Master Verification Prompt Template
+
+    Use this prompt after every AI code generation to establish systematic verification:
+
+    ```
+    VERIFICATION PROTOCOL: Review the code you just generated through three systematic layers
+
+    LAYER 1 - IMMEDIATE TECHNICAL VERIFICATION:
+    Run these checks and report results:
+
+    1. SYNTAX & TYPE CHECKING:
+       - Are there any TypeScript/syntax errors?
+       - Are all imports resolved correctly?
+       - Are there any `any` types that should be explicit?
+       - Do all functions have proper return types?
+
+    2. CODE QUALITY ANALYSIS:
+       - Does the code follow existing project patterns?
+       - Are there any code smells (long functions, duplicate code, complex conditionals)?
+       - Is error handling comprehensive and consistent?
+       - Are all edge cases handled appropriately?
+
+    3. INTEGRATION VALIDATION:
+       - Does this integrate properly with existing components?
+       - Are all dependencies properly imported and used?
+       - Will this break any existing functionality?
+       - Are there any circular dependency issues?
+
+    LAYER 2 - FUNCTIONAL VERIFICATION:
+    Analyze the business logic and functionality:
+
+    1. REQUIREMENT FULFILLMENT:
+       - Does the implementation meet all stated requirements?
+       - Are there any missing features or edge cases?
+       - Is the behavior correct for all input scenarios?
+       - Are error messages user-friendly and helpful?
+
+    2. PERFORMANCE IMPLICATIONS:
+       - Are there any obvious performance bottlenecks?
+       - Is memory usage reasonable?
+       - Are database queries optimized?
+       - Is caching implemented where appropriate?
+
+    3. SECURITY VALIDATION:
+       - Are all inputs properly validated and sanitized?
+       - Is authentication/authorization correctly implemented?
+       - Are there any potential security vulnerabilities?
+       - Is sensitive data properly handled?
+
+    LAYER 3 - ARCHITECTURAL REVIEW QUESTIONS:
+    Flag these items for human architectural review:
+
+    1. ARCHITECTURAL ALIGNMENT:
+       - Does this follow our established architectural patterns?
+       - Are there any violations of SOLID principles?
+       - Is the separation of concerns appropriate?
+       - Does this create any tight coupling issues?
+
+    2. SCALABILITY CONSIDERATIONS:
+       - How will this perform under 10x current load?
+       - Are there any potential bottlenecks as data grows?
+       - Is this approach sustainable long-term?
+       - Are there better architectural alternatives?
+
+    3. MAINTENANCE IMPLICATIONS:
+       - Is this code easily testable?
+       - Will new team members understand this code?
+       - Are there hidden complexities that will cause issues later?
+       - Does this increase or decrease overall system complexity?
+
+    VERIFICATION REPORT FORMAT:
+    Provide a structured report:
+
+    ✅ LAYER 1 RESULTS:
+    - Technical issues found: [list or "none"]
+    - Code quality score: [1-10 with reasoning]
+    - Integration risks: [list or "none"]
+
+    ✅ LAYER 2 RESULTS:
+    - Functional completeness: [percentage with missing items]
+    - Performance concerns: [list or "none"]
+    - Security issues: [list or "none"]
+
+    ⚠️ LAYER 3 HUMAN REVIEW NEEDED:
+    - Architectural decisions requiring review: [list]
+    - Scalability questions to validate: [list]
+    - Maintenance concerns to discuss: [list]
+
+    RECOMMENDED ACTIONS:
+    1. [Immediate fixes needed]
+    2. [Performance optimizations to consider]
+    3. [Architectural discussions to have]
+
+    Only mark as complete after all Layer 1 and Layer 2 issues are resolved.
+    ```
+
+    ## Step-by-Step Implementation
+
+    ### Step 1: Set Up Automated Layer 1 Verification (5 minutes)
+
+    Create `.vibe/verify.sh`:
+
+    ```bash
+    #!/bin/bash
+    # Layer 1: Immediate Technical Verification
+
+    echo "🔍 LAYER 1: Technical Verification"
+
+    # TypeScript Check
+    if [ -f "tsconfig.json" ]; then
+        echo "📝 TypeScript strict check..."
+        npx tsc --noEmit --strict || { echo "❌ TypeScript errors found"; exit 1; }
+        echo "✅ TypeScript: No errors"
+    fi
+
+    # ESLint Check  
+    if [ -f ".eslintrc.js" ] || [ -f ".eslintrc.json" ]; then
+        echo "🧹 ESLint quality check..."
+        npx eslint . --ext .ts,.tsx,.js,.jsx --max-warnings 0 || { echo "❌ Linting issues found"; exit 1; }
+        echo "✅ ESLint: No issues"
+    fi
+
+    # Import Resolution Check
+    echo "🔗 Import resolution check..."
+    if command -v madge &> /dev/null; then
+        madge --circular --extensions ts,tsx,js,jsx ./src || { echo "❌ Circular dependencies found"; exit 1; }
+        echo "✅ Imports: No circular dependencies"
+    fi
+
+    # Test Execution
+    if grep -q "test" package.json 2>/dev/null; then
+        echo "🧪 Running existing tests..."
+        npm test -- --run --reporter=basic || { echo "❌ Tests failed"; exit 1; }
+        echo "✅ Tests: All passing"
+    fi
+
+    echo "✅ LAYER 1: All technical verification passed"
+    ```
+
+    ### Step 2: Implement Layer 2 Functional Verification Prompt
+
+    Use this prompt for functional validation:
+
+    ```
+    LAYER 2 FUNCTIONAL VERIFICATION: Systematically test the functionality I just implemented
+
+    BUSINESS LOGIC VALIDATION:
+    Test these scenarios and report results:
+
+    1. HAPPY PATH TESTING:
+       - Primary use case works as expected: [test and confirm]
+       - All required features function correctly: [list what you tested]
+       - User experience flows smoothly: [identify any friction points]
+
+    2. EDGE CASE VALIDATION:
+       - Empty/null input handling: [test with empty inputs]
+       - Maximum/minimum value boundaries: [test limits]
+       - Concurrent operation handling: [identify potential race conditions]
+       - Network failure scenarios: [how does it handle API failures]
+
+    3. ERROR SCENARIOS:
+       - Invalid input rejection: [test with malformed data]
+       - Authorization failures: [test with wrong permissions]
+       - Resource unavailability: [test when dependencies fail]
+       - Graceful error messaging: [are errors user-friendly]
+
+    4. PERFORMANCE VALIDATION:
+       - Response time under normal load: [estimate performance]
+       - Memory usage patterns: [identify potential memory leaks]
+       - Database query efficiency: [analyze query patterns]
+       - Caching effectiveness: [verify cache usage]
+
+    5. SECURITY VERIFICATION:
+       - Input sanitization working: [test with potentially malicious input]
+       - Authentication properly enforced: [test without proper auth]
+       - Data exposure prevented: [check for information leakage]
+       - Audit logging present: [verify security events are logged]
+
+    FUNCTIONAL VERIFICATION REPORT:
+    ✅ Business Logic: [working/issues found]
+    ✅ Edge Cases: [handled properly/gaps identified]  
+    ✅ Error Handling: [comprehensive/needs improvement]
+    ✅ Performance: [acceptable/concerns noted]
+    ✅ Security: [secure/vulnerabilities found]
+
+    CRITICAL ISSUES REQUIRING IMMEDIATE FIX:
+    [List any issues that must be resolved before deployment]
+
+    RECOMMENDED IMPROVEMENTS:
+    [List enhancements that would improve quality]
+
+    Only proceed to Layer 3 if all critical issues are resolved.
+    ```
+
+    ### Step 3: Human Architectural Review Checklist
+
+    Create this checklist for Layer 3 human review:
+
+    ```
+    LAYER 3: ARCHITECTURAL REVIEW CHECKLIST
+
+    ARCHITECTURAL ALIGNMENT:
+    □ Follows established design patterns in our codebase
+    □ Respects existing module boundaries and interfaces  
+    □ Maintains consistent abstraction levels
+    □ Doesn't introduce unnecessary complexity
+
+    SCALABILITY ASSESSMENT:
+    □ Will perform acceptably at 10x current scale
+    □ Database queries will scale with data growth
+    □ No obvious bottlenecks under increased load
+    □ Resource usage patterns are sustainable
+
+    MAINTAINABILITY EVALUATION:
+    □ Code is self-documenting and clear
+    □ Easy to modify without breaking other components
+    □ Test coverage enables confident refactoring
+    □ New team members could understand and extend this
+
+    SECURITY ARCHITECTURE:
+    □ Security controls are properly layered
+    □ No security decisions pushed to presentation layer
+    □ Sensitive operations have proper authorization
+    □ Attack surface is minimized
+
+    TECHNICAL DEBT IMPACT:
+    □ Doesn't increase overall system complexity
+    □ Follows existing conventions and standards
+    □ Doesn't create future migration challenges
+    □ Balances speed with long-term maintainability
+
+    RED FLAGS REQUIRING DISCUSSION:
+    □ Creates new architectural patterns without justification
+    □ Introduces dependencies that affect other teams
+    □ Makes assumptions about future requirements
+    □ Optimizes for current needs at expense of flexibility
+
+    APPROVAL DECISION:
+    □ APPROVE: Meets all architectural standards
+    □ APPROVE WITH CONDITIONS: [list required changes]
+    □ NEEDS REWORK: [explain architectural concerns]
+    ```
+
+    ## Integration Workflow
+
+    ### Automated Integration
+
+    Add to your `package.json`:
+
+    ```json
+    {
+      "scripts": {
+        "ai-verify": "./.vibe/verify.sh",
+        "ai-verify-full": "./.vibe/verify.sh && echo 'Run Layer 2 functional verification prompt'",
+        "pre-commit": "./.vibe/verify.sh"
+      }
+    }
+    ```
+
+    ### IDE Integration
+
+    For VS Code/Cursor, add to `.vscode/tasks.json`:
+
+    ```json
+    {
+      "version": "2.0.0",
+      "tasks": [
+        {
+          "label": "AI Verification",
+          "type": "shell", 
+          "command": "./.vibe/verify.sh",
+          "group": "build",
+          "problemMatcher": "$tsc"
+        }
+      ]
+    }
+    ```
+
+    ## Usage Pattern
+
+    After every AI code generation:
+
+    1. **Immediate**: Run `.vibe/verify.sh` (Layer 1 - automated)
+    2. **Functional**: Use Layer 2 verification prompt with AI
+    3. **Architectural**: Human review using Layer 3 checklist
+    4. **Fix Issues**: Address problems before continuing
+    5. **Document**: Note any architectural decisions made
+
+    This creates the immediate feedback loop that prevents compound errors while maintaining production quality standards throughout development.
+
+    The key is making verification systematic and automatic rather than optional, ensuring quality is built into every AI interaction rather than bolted on afterward.
+xml-prompting-mastery:
+  summary: This directory appears to be empty or contains no readable files.
