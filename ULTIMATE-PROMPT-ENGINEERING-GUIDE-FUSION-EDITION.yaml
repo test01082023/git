@@ -1,0 +1,735 @@
+# ================================================================================
+# ULTIMATE PROMPT ENGINEERING GUIDE - FUSION EDITION
+# Version: 3.0.0 - Combined Mastery
+# Contributors: AI Assistant + Power User
+# Last Updated: 2024-01-15
+# ================================================================================
+
+metadata:
+  title: "Ultimate Prompt Engineering Guide - Fusion Edition"
+  version: "3.0.0"
+  description: "The most comprehensive prompt engineering guide combining foundational templates with advanced architectural patterns"
+  features:
+    - "Basic to Advanced progression path"
+    - "Production-ready architectural prompts"
+    - "Security-first development patterns"
+    - "Multi-agent orchestration"
+    - "Step-by-step implementation workflows"
+    - "Quality verification loops"
+
+# ================================================================================
+# PART 1: FOUNDATIONAL FRAMEWORK (From My Collection)
+# ================================================================================
+
+foundational:
+  basic_template:
+    structure:
+      project: "[Tên dự án]"
+      idea: "[Mô tả ngắn gọn - tech stack + features]"
+      scope: "[Phạm vi - CLI/Web/API, scale nhỏ/vừa/lớn]"
+      data: "[Format dữ liệu + ví dụ]"
+      pseudo: "[Thuật toán/logic chính]"
+      code: "[Ngôn ngữ + yêu cầu cụ thể]"
+      diagram: "[Loại diagram cần - flowchart/sequence/class]"
+      test: "[Loại test + coverage mong muốn]"
+      deploy: "[Platform + packaging method]"
+      extras: "[Docs/CI-CD/Docker/etc.]"
+    
+    benefits:
+      - "Clear structure for any project type"
+      - "Scalable from simple to complex"
+      - "Language agnostic"
+      - "Easy to understand and follow"
+
+  progression_levels:
+    basic:
+      target: "Learning, POCs, demos"
+      complexity: "Single file, local storage"
+      timeline: "1-3 days"
+      
+    intermediate:
+      target: "Production applications"
+      complexity: "Proper architecture, database, auth"
+      timeline: "2-4 weeks"
+      
+    advanced:
+      target: "Enterprise systems"
+      complexity: "Microservices, distributed systems"
+      timeline: "3-6 months"
+
+# ================================================================================
+# PART 2: ADVANCED ARCHITECTURAL PATTERNS (From Your Collection)
+# ================================================================================
+
+advanced_patterns:
+  architectural_decision_making:
+    template: |
+      I need to make a critical architectural decision for [project/system].
+      
+      CURRENT SITUATION:
+      - System: [current system description]
+      - Scale: [user count, traffic, data volume]
+      - Tech Stack: [current technologies]
+      - Team Size: [number of engineers, experience levels]
+      - Timeline: [project deadlines, constraints]
+      - Budget: [cost constraints, operational budget]
+
+      PROBLEM STATEMENT:
+      [Detailed description including symptoms, impact, why current solution fails]
+
+      BUSINESS CONSTRAINTS:
+      - Performance: [SLAs, response times, throughput]
+      - Availability: [uptime SLAs, maintenance windows]
+      - Security/Compliance: [SOC2, GDPR, HIPAA]
+      - Scalability: [growth projections, peak loads]
+      - Integration: [existing systems to integrate]
+
+      TECHNICAL CONSTRAINTS:
+      - Cannot change: [immutable systems/databases/protocols]
+      - Must maintain: [backwards compatibility, data integrity, APIs]
+      - Team expertise: [known vs unknown technologies]
+      - Infrastructure: [cloud/on-prem, networking constraints]
+
+      Please analyze and provide:
+      1. PROBLEM ANALYSIS: Root causes and architectural problem type
+      2. SOLUTION OPTIONS: 3 approaches with complexity, timeline, costs
+      3. RECOMMENDATION: Top choice with detailed reasoning
+      4. DECISION FRAMEWORK: Stakeholder validation questions
+    
+    use_cases:
+      - "Monolith to microservices migration"
+      - "Database technology selection"
+      - "API gateway implementation"
+      - "Event-driven architecture adoption"
+      - "Multi-region deployment strategy"
+
+  refactoring_mastery:
+    systematic_approach: |
+      CODE ANALYSIS:
+      - Current Codebase: [size, complexity, language/framework, age]
+      - Specific Issues: [code smells, bottlenecks, test coverage gaps]
+      - Business Criticality: [user impact, SLA requirements]
+      - Change Frequency: [modification rate, team involvement]
+
+      REFACTORING GOALS:
+      - Primary Objectives: [specific improvements with metrics]
+      - Quality Metrics: [current vs target complexity, coverage, performance]
+      - Maintainability Goals: [reduce onboarding time, increase velocity]
+      - Technical Debt: [specific items to address]
+
+      Provide:
+      1. CODE QUALITY ASSESSMENT: Worst offenders, prioritization
+      2. REFACTORING APPROACH: Safe incremental steps, patterns
+      3. TESTING STRATEGY: Characterization, unit, integration tests
+      4. IMPLEMENTATION PLAN: Step-by-step with checkpoints
+      5. QUALITY GATES: Automated checks, thresholds, "done" definition
+      6. KNOWLEDGE TRANSFER: Documentation, education, standards
+
+  scalability_engineering:
+    comprehensive_planning: |
+      CURRENT STATE:
+      - Architecture: [design, bottlenecks, limitations]
+      - Performance: [throughput, response times, resource usage]
+      - Infrastructure: [servers, databases, caches, CDN]
+      - Cost Structure: [operational costs, cost per user]
+      - Team Capabilities: [ops expertise, automation maturity]
+
+      SCALING TARGETS:
+      - Growth Timeline: [target scale timeline, growth curve]
+      - Target Metrics: [users, RPS, data volume, geographic distribution]
+      - Performance Requirements: [SLA targets at scale]
+      - Cost Constraints: [budget limits, ROI requirements]
+      - Reliability Targets: [uptime SLA, DR, multi-region]
+
+      Develop:
+      1. BOTTLENECK ANALYSIS: Current and projected limitations
+      2. SCALING ARCHITECTURE: Horizontal vs vertical per component
+      3. INFRASTRUCTURE EVOLUTION: Cloud strategy, orchestration
+      4. OPERATIONAL SCALING: Monitoring, automation, incident response
+      5. IMPLEMENTATION ROADMAP: Phased approach with milestones
+      6. COST OPTIMIZATION: Modeling, resource optimization, ROI
+
+# ================================================================================
+# PART 3: IMPLEMENTATION WORKFLOWS (Fusion of Both)
+# ================================================================================
+
+implementation_workflows:
+  ai_optimized_development:
+    setup_phase:
+      description: "Create AI-optimized development environment"
+      components:
+        - "TypeScript strict configuration"
+        - "ESLint comprehensive rules"
+        - "Pre-commit hooks"
+        - ".cursor/rules file"
+        - "Verification automation"
+      
+      verification_script: |
+        #!/bin/bash
+        # Complete verification pipeline
+        echo "🔍 Running AI code verification..."
+        
+        # TypeScript
+        npx tsc --noEmit --strict || exit 1
+        
+        # ESLint
+        npx eslint . --max-warnings 0 || exit 1
+        
+        # Tests
+        npm test -- --run || exit 1
+        
+        # Security
+        npm audit --audit-level=moderate || exit 1
+        
+        echo "✅ All verifications passed"
+
+    planning_phase:
+      xml_structure: |
+        <planning_request>
+          <objective>
+            PLAN FIRST: Create [feature] that [requirements]
+          </objective>
+          
+          <context>
+            <tech_stack>[frameworks, languages, databases]</tech_stack>
+            <existing_patterns>[reference implementations]</existing_patterns>
+            <performance_requirements>[specific targets]</performance_requirements>
+            <security_considerations>[auth, data handling]</security_considerations>
+          </context>
+          
+          <constraints>
+            - Must follow existing patterns
+            - Cannot modify certain systems
+            - Must handle specific edge cases
+            - Should integrate with existing services
+          </constraints>
+          
+          <deliverables>
+            - System architecture diagram
+            - API interface definitions
+            - Database schema changes
+            - Security implementation
+            - Testing approach
+            - Deployment strategy
+          </deliverables>
+          
+          <approval_gate>
+            WAIT FOR EXPLICIT APPROVAL BEFORE IMPLEMENTING
+          </approval_gate>
+        </planning_request>
+
+    context_management:
+      priority_levels:
+        high:
+          - "package.json"
+          - "tsconfig.json"
+          - "schema files"
+          - "type definitions"
+          - ".env.example"
+        
+        medium:
+          - "similar implementations"
+          - "utility functions"
+          - "custom hooks"
+          - "API routes"
+        
+        low:
+          - "external API docs"
+          - "migration files"
+          - "deployment configs"
+      
+      loading_strategy: |
+        # Progressive context loading
+        1. Load core configuration
+        2. Add pattern examples
+        3. Include integration docs
+        4. Optimize for token limit
+
+    verification_loops:
+      three_layer_system:
+        layer1_technical:
+          automated: true
+          checks:
+            - "Syntax and type checking"
+            - "Code quality analysis"
+            - "Integration validation"
+            - "Dependency resolution"
+          
+        layer2_functional:
+          automated: false
+          checks:
+            - "Requirement fulfillment"
+            - "Performance implications"
+            - "Security validation"
+            - "Business logic correctness"
+          
+        layer3_architectural:
+          automated: false
+          checks:
+            - "Architectural alignment"
+            - "Scalability considerations"
+            - "Maintenance implications"
+            - "Technical debt impact"
+
+# ================================================================================
+# PART 4: PROMPT PATTERNS LIBRARY (Combined)
+# ================================================================================
+
+prompt_patterns:
+  foundational_patterns:
+    crud_operations:
+      template: |
+        Create a [entity] management system with:
+        - Create: POST /[entities] with validation
+        - Read: GET /[entities] with pagination
+        - Update: PUT /[entities]/:id with partial updates
+        - Delete: DELETE /[entities]/:id with soft delete
+        Include error handling, authentication, and tests.
+    
+    authentication_system:
+      template: |
+        Implement authentication with:
+        - JWT tokens with refresh token rotation
+        - Secure password hashing (bcrypt/argon2)
+        - Session management
+        - Rate limiting
+        - Account recovery flow
+
+  advanced_patterns:
+    event_driven_system:
+      template: |
+        Design event-driven architecture:
+        - Event producers and consumers
+        - Message broker integration (Kafka/RabbitMQ)
+        - Event sourcing with replay capability
+        - Dead letter queue handling
+        - Monitoring and tracing
+    
+    distributed_tracing:
+      template: |
+        Implement distributed tracing:
+        - Correlation ID propagation
+        - Span creation and management
+        - Performance metrics collection
+        - Error tracking across services
+        - Integration with APM tools
+
+  security_patterns:
+    zero_trust_implementation:
+      template: |
+        Implement zero-trust security:
+        - Mutual TLS between services
+        - Fine-grained authorization (RBAC/ABAC)
+        - Secrets management (Vault/KMS)
+        - Audit logging
+        - Anomaly detection
+
+# ================================================================================
+# PART 5: REAL-WORLD SCENARIOS (Comprehensive)
+# ================================================================================
+
+real_world_scenarios:
+  ecommerce_platform:
+    complexity: "Advanced"
+    components:
+      - "Product catalog with search"
+      - "Shopping cart with persistence"
+      - "Payment processing (Stripe/PayPal)"
+      - "Order management workflow"
+      - "Inventory tracking"
+      - "User reviews and ratings"
+    
+    architecture:
+      frontend: "Next.js with TypeScript"
+      backend: "Node.js microservices"
+      database: "PostgreSQL + Redis"
+      search: "Elasticsearch"
+      queue: "RabbitMQ"
+      monitoring: "Prometheus + Grafana"
+    
+    prompts:
+      initial_planning: "[Use architectural-prompts template]"
+      implementation: "[Use step-by-step-implementation workflow]"
+      scaling: "[Use scalability-planning template]"
+      security: "[Use security-implementation template]"
+
+  realtime_collaboration:
+    complexity: "Advanced"
+    components:
+      - "WebSocket connections"
+      - "Operational transformation"
+      - "Conflict resolution"
+      - "Presence indicators"
+      - "Version history"
+      - "Permission management"
+    
+    challenges:
+      - "Handling network partitions"
+      - "Maintaining consistency"
+      - "Scaling WebSocket connections"
+      - "Cross-region synchronization"
+
+  data_pipeline:
+    complexity: "Intermediate"
+    components:
+      - "Data ingestion (batch/stream)"
+      - "Transformation pipeline"
+      - "Data validation"
+      - "Error handling"
+      - "Monitoring and alerting"
+      - "Data lake storage"
+    
+    technologies:
+      - "Apache Spark/Kafka"
+      - "Airflow/Dagster"
+      - "Delta Lake/Iceberg"
+      - "DBT for transformations"
+
+# ================================================================================
+# PART 6: QUALITY ASSURANCE FRAMEWORK
+# ================================================================================
+
+quality_framework:
+  code_quality_metrics:
+    automated_checks:
+      - metric: "Test Coverage"
+        target: ">= 80%"
+        tool: "Jest/Vitest with coverage reports"
+      
+      - metric: "Type Coverage"
+        target: "100% (no any types)"
+        tool: "TypeScript strict mode"
+      
+      - metric: "Complexity"
+        target: "< 10 cyclomatic complexity"
+        tool: "ESLint complexity rule"
+      
+      - metric: "Duplication"
+        target: "< 3% duplicate code"
+        tool: "jscpd or SonarQube"
+      
+      - metric: "Security"
+        target: "0 high/critical vulnerabilities"
+        tool: "npm audit, Snyk, OWASP"
+
+  review_checklists:
+    code_review:
+      - "Follows established patterns?"
+      - "Proper error handling?"
+      - "Adequate test coverage?"
+      - "Performance acceptable?"
+      - "Security considerations addressed?"
+      - "Documentation updated?"
+    
+    architectural_review:
+      - "Aligns with system architecture?"
+      - "Scalability implications considered?"
+      - "Technical debt impact assessed?"
+      - "Integration points well-defined?"
+      - "Monitoring/observability included?"
+
+  continuous_improvement:
+    metrics_tracking:
+      - "Lead time for changes"
+      - "Deployment frequency"
+      - "Mean time to recovery"
+      - "Change failure rate"
+      - "Code review turnaround"
+    
+    feedback_loops:
+      - "Post-incident reviews"
+      - "Sprint retrospectives"
+      - "Architecture decision records"
+      - "Performance benchmarking"
+      - "Security audits"
+
+# ================================================================================
+# PART 7: LEARNING PATHS
+# ================================================================================
+
+learning_paths:
+  beginner_to_advanced:
+    phase1_fundamentals:
+      duration: "2-4 weeks"
+      topics:
+        - "Basic CRUD operations"
+        - "Simple authentication"
+        - "Database basics"
+        - "RESTful API design"
+        - "Basic testing"
+      
+      projects:
+        - "Todo API"
+        - "Blog platform"
+        - "URL shortener"
+    
+    phase2_intermediate:
+      duration: "2-3 months"
+      topics:
+        - "Design patterns"
+        - "Microservices basics"
+        - "Caching strategies"
+        - "Message queues"
+        - "CI/CD pipelines"
+      
+      projects:
+        - "E-commerce API"
+        - "Real-time chat"
+        - "File processing pipeline"
+    
+    phase3_advanced:
+      duration: "3-6 months"
+      topics:
+        - "System design"
+        - "Distributed systems"
+        - "Event-driven architecture"
+        - "Performance optimization"
+        - "Security architecture"
+      
+      projects:
+        - "Video streaming platform"
+        - "Distributed task queue"
+        - "Multi-tenant SaaS"
+
+  specialization_tracks:
+    backend_engineer:
+      focus_areas:
+        - "API design and implementation"
+        - "Database optimization"
+        - "Microservices architecture"
+        - "Message queue systems"
+        - "Performance tuning"
+    
+    devops_engineer:
+      focus_areas:
+        - "Infrastructure as code"
+        - "Container orchestration"
+        - "CI/CD pipelines"
+        - "Monitoring and observability"
+        - "Security automation"
+    
+    architect:
+      focus_areas:
+        - "System design patterns"
+        - "Scalability strategies"
+        - "Technology selection"
+        - "Integration patterns"
+        - "Migration strategies"
+
+# ================================================================================
+# PART 8: TOOLING AND AUTOMATION
+# ================================================================================
+
+tooling:
+  development_tools:
+    essential:
+      - tool: "VS Code/Cursor"
+        purpose: "AI-enhanced development"
+        plugins: ["GitHub Copilot", "ESLint", "Prettier"]
+      
+      - tool: "Docker Desktop"
+        purpose: "Containerization"
+        usage: "Local development environments"
+      
+      - tool: "Postman/Insomnia"
+        purpose: "API testing"
+        features: ["Collections", "Environments", "Tests"]
+    
+    monitoring:
+      - tool: "Datadog/New Relic"
+        purpose: "APM and monitoring"
+      
+      - tool: "Sentry"
+        purpose: "Error tracking"
+      
+      - tool: "Grafana"
+        purpose: "Metrics visualization"
+
+  automation_scripts:
+    project_setup: |
+      #!/bin/bash
+      # Universal project setup script
+      
+      echo "🚀 Setting up new project: $1"
+      
+      # Create directory structure
+      mkdir -p $1/{src,tests,docs,.vibe/scripts}
+      cd $1
+      
+      # Initialize git
+      git init
+      
+      # Setup Node.js project
+      npm init -y
+      npm install -D typescript @types/node eslint prettier
+      
+      # Create configs
+      npx tsc --init --strict
+      echo '{}' > .prettierrc
+      
+      # Create verification scripts
+      cp ~/.vibe/templates/verify.sh .vibe/scripts/
+      
+      echo "✅ Project setup complete!"
+    
+    continuous_verification: |
+      #!/bin/bash
+      # Continuous quality verification
+      
+      while true; do
+        clear
+        echo "🔄 Continuous Verification Running..."
+        
+        # Run all checks
+        npm run lint
+        npm run type-check
+        npm test
+        
+        # Wait for file changes
+        inotifywait -r -e modify ./src
+      done
+
+# ================================================================================
+# PART 9: INTEGRATION GUIDE
+# ================================================================================
+
+integration_guide:
+  how_to_use:
+    step1_assess:
+      description: "Assess your project needs"
+      questions:
+        - "What is the scale? (users, data, traffic)"
+        - "What are the constraints? (time, budget, team)"
+        - "What is the complexity? (basic/intermediate/advanced)"
+    
+    step2_select:
+      description: "Select appropriate templates"
+      mapping:
+        basic_project: "Use foundational.basic_template"
+        complex_system: "Use advanced_patterns.architectural_decision_making"
+        refactoring: "Use advanced_patterns.refactoring_mastery"
+        scaling: "Use advanced_patterns.scalability_engineering"
+    
+    step3_customize:
+      description: "Customize for your context"
+      process:
+        - "Fill in placeholder values"
+        - "Add specific constraints"
+        - "Include relevant examples"
+        - "Adjust quality targets"
+    
+    step4_execute:
+      description: "Execute with verification"
+      workflow:
+        - "Generate initial code"
+        - "Run Layer 1 verification"
+        - "Perform Layer 2 functional checks"
+        - "Conduct Layer 3 architectural review"
+        - "Iterate until quality met"
+
+  best_practices:
+    prompt_engineering:
+      - "Start with planning, not coding"
+      - "Include context progressively"
+      - "Verify at each step"
+      - "Document decisions"
+      - "Build on patterns"
+    
+    ai_collaboration:
+      - "Treat AI as junior developer"
+      - "Provide clear specifications"
+      - "Review everything critically"
+      - "Maintain human oversight"
+      - "Learn from generated patterns"
+
+# ================================================================================
+# PART 10: FUTURE EVOLUTION
+# ================================================================================
+
+future_roadmap:
+  upcoming_features:
+    v3.1:
+      - "Multi-modal prompting (diagrams + code)"
+      - "Auto-context optimization"
+      - "Performance prediction models"
+      - "Security vulnerability scanning"
+    
+    v4.0:
+      - "Self-improving prompt templates"
+      - "Team collaboration features"
+      - "Industry-specific templates"
+      - "Compliance automation"
+    
+    long_term_vision:
+      - "AI agents for complete SDLC"
+      - "Automatic architecture evolution"
+      - "Self-healing systems"
+      - "Predictive scaling"
+
+  community_contribution:
+    how_to_contribute:
+      - "Submit new prompt patterns"
+      - "Share real-world scenarios"
+      - "Improve verification scripts"
+      - "Add language-specific templates"
+      - "Create video tutorials"
+    
+    contribution_guidelines:
+      - "Follow existing structure"
+      - "Include practical examples"
+      - "Test thoroughly"
+      - "Document clearly"
+      - "Consider edge cases"
+
+# ================================================================================
+# METADATA AND VERSION CONTROL
+# ================================================================================
+
+version_control:
+  current_version: "3.0.0"
+  created_date: "2024-01-15"
+  contributors:
+    - name: "AI Assistant"
+      role: "Foundational framework"
+      contributions: ["Basic templates", "Examples", "Best practices"]
+    
+    - name: "Power User"
+      role: "Advanced patterns"
+      contributions: ["Architectural prompts", "Implementation workflows", "Verification loops"]
+  
+  changelog:
+    "3.0.0":
+      date: "2024-01-15"
+      changes:
+        - "Merged foundational and advanced frameworks"
+        - "Added real-world scenarios"
+        - "Integrated verification workflows"
+        - "Enhanced learning paths"
+        - "Added tooling automation"
+    
+    "2.0.0":
+      date: "2024-01-14"
+      changes:
+        - "Original foundational framework"
+    
+    "1.0.0":
+      date: "2024-01-13"
+      changes:
+        - "Initial advanced patterns"
+
+  license: "MIT - Free to use and modify"
+  
+  acknowledgments:
+    message: |
+      This guide represents the collective wisdom of the prompt engineering community.
+      Special thanks to all contributors who share their knowledge freely.
+      
+      Together, we're making AI-assisted development more reliable, efficient, and accessible.
+      
+      "The best code is not just written, it's engineered with wisdom."
+      
+      🚀 Happy Prompting!
+
+# ================================================================================
+# END OF ULTIMATE GUIDE
+# ================================================================================
