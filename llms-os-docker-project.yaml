@@ -1,0 +1,782 @@
+-
+# llms-os-docker-project.yaml
+# Lưu toàn bộ cấu trúc project LLMs_OS với Docker
+
+project:
+  name: "LLMs_OS Docker Project"
+  version: "1.0.0"
+  description: "Complete LLMs_OS workflow CLI tool with Docker"
+
+# ==========================================
+# CẤU TRÚC THƯ MỤC
+# ==========================================
+directory_structure: |
+  project/
+  ├── Dockerfile
+  ├── docker-compose.yml
+  ├── requirements.txt
+  ├── .dockerignore
+  └── src/
+      ├── LLMs_OS/
+      │   ├── __init__.py
+      │   ├── registry.py
+      │   ├── core.py
+      │   ├── cli.py
+      │   └── actions/
+      │       ├── __init__.py
+      │       ├── print_message.py
+      │       └── chat_completion.py
+      ├── setup.py
+      └── test_llm.yaml
+
+# ==========================================
+# DOCKERFILE
+# ==========================================
+dockerfile:
+  main: |
+    FROM python:3.12-alpine3.19
+
+    LABEL maintainer="you@example.com" \
+          description="LLMs_OS workflow CLI tool"
+
+    WORKDIR /app
+
+    # Install system dependencies và Python packages
+    RUN apk add --no-cache gcc musl-dev libffi-dev curl && \
+        pip install --no-cache-dir \
+            pyyaml \
+            requests \
+            jinja2 \
+            openai==0.28
+
+    # Copy source code
+    COPY ./src/ /app/
+
+    # Install package và cleanup
+    RUN pip install --no-cache-dir -e /app && \
+        apk del gcc musl-dev libffi-dev && \
+        rm -rf /root/.cache
+
+    # Health check
+    HEALTHCHECK --interval=30s --timeout=3s \
+        CMD python -c "import LLMs_OS" || exit 1
+
+    # Create non-root user for security
+    RUN adduser -D -u 1000 appuser && \
+        chown -R appuser:appuser /app
+    USER appuser
+
+    ENTRYPOINT ["llms-os"]
+    CMD ["test_llm.yaml"]
+
+  multistage: |
+    # Build stage
+    FROM python:3.12-alpine3.19 AS builder
+    WORKDIR /app
+    RUN apk add --no-cache gcc musl-dev libffi-dev
+    COPY requirements.txt .
+    RUN pip wheel --no-cache-dir --no-deps --wheel-dir /app/wheels -r requirements.txt
+
+    # Runtime stage  
+    FROM python:3.12-alpine3.19
+    WORKDIR /app
+    COPY --from=builder /app/wheels /wheels
+    RUN pip install --no-cache /wheels/*
+    COPY ./src/ /app/
+    RUN pip install -e /app
+    RUN adduser -D -u 1000 appuser && chown -R appuser:appuser /app
+    USER appuser
+    ENTRYPOINT ["llms-os"]
+    CMD ["test_llm.yaml"]
+
+# ==========================================
+# SOURCE CODE FILES
+# ==========================================
+source_files:
+  
+  # src/LLMs_OS/__init__.py
+  llms_os_init: |
+    """LLMs_OS - Workflow automation CLI tool"""
+    __version__ = "0.1.0"
+
+  # src/LLMs_OS/registry.py
+  registry: |
+    """Action registry for LLMs_OS"""
+    
+    ACTION_REGISTRY = {}
+    
+    def register(name):
+        """Decorator to register an action"""
+        def wrapper(func):
+            ACTION_REGISTRY[name] = func
+            return func
+        return wrapper
+    
+    def get_action(name):
+        """Get registered action by name"""
+        return ACTION_REGISTRY.get(name)
+    
+    def list_actions():
+        """List all registered actions"""
+        return list(ACTION_REGISTRY.keys())
+
+  # src/LLMs_OS/core.py
+  core: |
+    """Core execution engine for LLMs_OS"""
+    import yaml
+    import importlib
+    import os
+    import sys
+    from jinja2 import Template
+    from LLMs_OS.registry import get_action, list_actions
+    
+    def render(value, context=None):
+        """Render template with environment variables and context"""
+        ctx = dict(os.environ)
+        if context:
+            ctx.update(context)
+        return Template(str(value)).render(**ctx)
+    
+    def load_actions():
+        """Dynamically load all action modules"""
+        actions_path = os.path.join(os.path.dirname(__file__), 'actions')
+        if not os.path.exists(actions_path):
+            print("⚠️ Actions directory not found")
+            return
+        
+        for filename in os.listdir(actions_path):
+            if filename.endswith('.py') and not filename.startswith('_'):
+                module_name = f'LLMs_OS.actions.{filename[:-3]}'
+                try:
+                    importlib.import_module(module_name)
+                except Exception as e:
+                    print(f"⚠️ Failed to load action {module_name}: {e}")
+    
+    def execute_yaml(file_path):
+        """Execute workflow from YAML file"""
+        # Load all available actions
+        load_actions()
+        
+        # Parse YAML file
+        try:
+            with open(file_path, 'r', encoding='utf-8') as f:
+                data = yaml.safe_load(f)
+        except Exception as e:
+            print(f"❌ Error loading YAML file: {e}")
+            sys.exit(1)
+        
+        # Display metadata
+        metadata = data.get('metadata', {})
+        print('\n' + '='*50)
+        print('📄', metadata.get('title', 'LLMs_OS Workflow'))
+        if metadata.get('description'):
+            print('📝', metadata.get('description'))
+        print('='*50 + '\n')
+        
+        # Execute tasks
+        tasks = data.get('tasks', [])
+        context = {}
+        
+        for idx, task in enumerate(tasks, 1):
+            action = task.get('action')
+            print(f"\n[Task {idx}] Executing: {action}")
+            
+            # Get action function
+            fn = get_action(action)
+            if not fn:
+                print(f"❌ Unknown action: {action}")
+                if task.get('continue_on_error'):
+                    continue
+                sys.exit(1)
+            
+            # Execute action
+            try:
+                result = fn(task, context)
+                if result:
+                    context.update(result)
+            except Exception as e:
+                print(f"❌ Error in action '{action}': {e}")
+                if not task.get('continue_on_error'):
+                    sys.exit(1)
+        
+        print('\n' + '='*50)
+        print('✅ Workflow completed successfully')
+        print('='*50 + '\n')
+
+  # src/LLMs_OS/cli.py
+  cli: |
+    """Command-line interface for LLMs_OS"""
+    import argparse
+    import os
+    import sys
+    from LLMs_OS.core import execute_yaml
+    from LLMs_OS.registry import list_actions
+    
+    def main():
+        """Main CLI entry point"""
+        parser = argparse.ArgumentParser(
+            description='LLMs_OS - Workflow automation CLI tool',
+            formatter_class=argparse.RawDescriptionHelpFormatter
+        )
+        
+        parser.add_argument(
+            'yaml_file',
+            nargs='?',
+            help='Path to YAML workflow file'
+        )
+        
+        parser.add_argument(
+            '--list-actions',
+            action='store_true',
+            help='List all available actions'
+        )
+        
+        parser.add_argument(
+            '--version',
+            action='store_true',
+            help='Show version'
+        )
+        
+        args = parser.parse_args()
+        
+        if args.version:
+            from LLMs_OS import __version__
+            print(f"LLMs_OS version {__version__}")
+            sys.exit(0)
+        
+        if args.list_actions:
+            from LLMs_OS.core import load_actions
+            load_actions()
+            actions = list_actions()
+            print("Available actions:")
+            for action in sorted(actions):
+                print(f"  - {action}")
+            sys.exit(0)
+        
+        if not args.yaml_file:
+            parser.print_help()
+            sys.exit(1)
+        
+        if not os.path.exists(args.yaml_file):
+            print(f"❌ File not found: {args.yaml_file}")
+            sys.exit(1)
+        
+        execute_yaml(args.yaml_file)
+    
+    if __name__ == '__main__':
+        main()
+
+  # src/LLMs_OS/actions/__init__.py
+  actions_init: |
+    """Actions module for LLMs_OS"""
+
+  # src/LLMs_OS/actions/print_message.py
+  print_message: |
+    """Print message action"""
+    from LLMs_OS.registry import register
+    from LLMs_OS.core import render
+    
+    @register('print_message')
+    def print_message_action(task, context):
+        """Print a message to console"""
+        message = task.get('message', '')
+        message = render(message, context)
+        
+        style = task.get('style', 'info')
+        prefix = {
+            'info': 'ℹ️',
+            'success': '✅',
+            'warning': '⚠️',
+            'error': '❌',
+            'debug': '🔍'
+        }.get(style, '📢')
+        
+        print(f"{prefix} {message}")
+        
+        # Store in context if name provided
+        if task.get('save_as'):
+            return {task['save_as']: message}
+
+  # src/LLMs_OS/actions/chat_completion.py
+  chat_completion: |
+    """OpenRouter/OpenAI chat completion action"""
+    import os
+    import json
+    from LLMs_OS.registry import register
+    from LLMs_OS.core import render
+    
+    @register('chat_completion')
+    def chat_completion_action(task, context):
+        """Execute chat completion via OpenRouter API"""
+        # Get API key
+        api_key = os.environ.get('OPENROUTER_API_KEY', '')
+        
+        if not api_key:
+            print('❌ OPENROUTER_API_KEY not found in environment')
+            return
+        
+        if not api_key.startswith('sk-or-'):
+            print('⚠️ API key format seems incorrect (should start with sk-or-)')
+        
+        # Get parameters
+        model = task.get('model', 'openai/gpt-3.5-turbo')
+        messages = task.get('messages', [])
+        
+        # Render messages with context
+        rendered_messages = []
+        for msg in messages:
+            rendered_msg = {
+                'role': msg.get('role', 'user'),
+                'content': render(msg.get('content', ''), context)
+            }
+            rendered_messages.append(rendered_msg)
+        
+        print(f"🤖 Model: {model}")
+        print(f"💬 Messages: {len(rendered_messages)}")
+        
+        # Simulated response for demo
+        if api_key == "sk-or-testkey1234567890":
+            response_text = "This is a simulated response. Please use a real API key for actual completions."
+            print(f"🔮 Response (simulated): {response_text}")
+        else:
+            # Here you would make actual API call
+            try:
+                import openai
+                openai.api_key = api_key
+                openai.api_base = "https://openrouter.ai/api/v1"
+                
+                response = openai.ChatCompletion.create(
+                    model=model,
+                    messages=rendered_messages,
+                    max_tokens=task.get('max_tokens', 150),
+                    temperature=task.get('temperature', 0.7)
+                )
+                response_text = response.choices[0].message['content']
+                print(f"🔮 Response: {response_text}")
+            except Exception as e:
+                print(f"❌ API call failed: {e}")
+                response_text = None
+        
+        # Save to context if specified
+        if task.get('save_as') and response_text:
+            return {task['save_as']: response_text}
+
+  # src/setup.py
+  setup: |
+    """Setup configuration for LLMs_OS package"""
+    from setuptools import setup, find_packages
+    
+    with open("README.md", "r", encoding="utf-8") as fh:
+        long_description = fh.read()
+    
+    setup(
+        name="LLMs_OS",
+        version="0.1.0",
+        author="Your Name",
+        author_email="you@example.com",
+        description="Workflow automation CLI tool for LLMs",
+        long_description=long_description,
+        long_description_content_type="text/markdown",
+        url="https://github.com/yourusername/LLMs_OS",
+        packages=find_packages(),
+        classifiers=[
+            "Programming Language :: Python :: 3",
+            "License :: OSI Approved :: MIT License",
+            "Operating System :: OS Independent",
+        ],
+        python_requires=">=3.8",
+        install_requires=[
+            "pyyaml>=6.0",
+            "requests>=2.28.0",
+            "jinja2>=3.1.0",
+            "openai==0.28.0",
+        ],
+        entry_points={
+            "console_scripts": [
+                "llms-os=LLMs_OS.cli:main",
+            ],
+        },
+    )
+
+  # src/test_llm.yaml
+  test_llm: |
+    metadata:
+      title: "🧪 Test LLMs_OS Workflow"
+      description: "Demo workflow showcasing various actions"
+      version: "1.0.0"
+      author: "LLMs_OS Team"
+    
+    tasks:
+      - action: print_message
+        message: "Starting workflow execution..."
+        style: info
+    
+      - action: print_message
+        message: "Current working directory: {{ PWD }}"
+        style: debug
+    
+      - action: chat_completion
+        model: "openai/gpt-3.5-turbo"
+        messages:
+          - role: system
+            content: "You are a helpful AI assistant."
+          - role: user
+            content: "Write a haiku about Docker containers."
+        max_tokens: 100
+        temperature: 0.7
+        save_as: haiku_response
+    
+      - action: print_message
+        message: "Workflow completed successfully!"
+        style: success
+
+# ==========================================
+# CONFIGURATION FILES
+# ==========================================
+config_files:
+  
+  # docker-compose.yml
+  docker_compose: |
+    version: '3.8'
+    
+    services:
+      llms-os:
+        build:
+          context: .
+          dockerfile: Dockerfile
+        image: llms-os:latest
+        container_name: llms-os-cli
+        environment:
+          - OPENROUTER_API_KEY=${OPENROUTER_API_KEY:-sk-or-testkey1234567890}
+          - LOG_LEVEL=${LOG_LEVEL:-INFO}
+        volumes:
+          - ./workflows:/app/workflows:ro
+          - ./output:/app/output
+        working_dir: /app
+        command: ${WORKFLOW_FILE:-test_llm.yaml}
+        networks:
+          - llms-network
+    
+      # Optional: Add Redis for caching
+      redis:
+        image: redis:7-alpine
+        container_name: llms-redis
+        ports:
+          - "6379:6379"
+        networks:
+          - llms-network
+        profiles:
+          - with-cache
+    
+    networks:
+      llms-network:
+        driver: bridge
+    
+    volumes:
+      workflows:
+      output:
+
+  # requirements.txt
+  requirements: |
+    pyyaml==6.0.1
+    requests==2.31.0
+    jinja2==3.1.2
+    openai==0.28.0
+    python-dotenv==1.0.0
+    colorama==0.4.6
+    rich==13.7.0
+
+  # .dockerignore
+  dockerignore: |
+    # Git
+    .git
+    .gitignore
+    
+    # Python
+    __pycache__
+    *.pyc
+    *.pyo
+    *.pyd
+    .Python
+    pip-log.txt
+    pip-delete-this-directory.txt
+    .tox/
+    .coverage
+    .coverage.*
+    .cache
+    nosetests.xml
+    coverage.xml
+    *.cover
+    *.log
+    .pytest_cache/
+    
+    # Virtual environments
+    venv/
+    ENV/
+    env/
+    
+    # IDEs
+    .vscode/
+    .idea/
+    *.swp
+    *.swo
+    *~
+    .DS_Store
+    
+    # Project specific
+    *.md
+    docs/
+    tests/
+    examples/
+    .env
+    .env.*
+    
+    # Docker
+    Dockerfile*
+    docker-compose*.yml
+    .dockerignore
+
+  # .env.example
+  env_example: |
+    # OpenRouter API Configuration
+    OPENROUTER_API_KEY=sk-or-your-actual-key-here
+    
+    # Application Settings
+    LOG_LEVEL=INFO
+    WORKFLOW_FILE=test_llm.yaml
+    
+    # Optional: Redis Cache
+    REDIS_URL=redis://redis:6379/0
+    CACHE_TTL=3600
+
+  # README.md
+  readme: |
+    # LLMs_OS - Workflow Automation CLI Tool
+    
+    ## 🚀 Quick Start
+    
+    ### Using Docker
+    
+    ```bash
+    # Build the image
+    docker build -t llms-os .
+    
+    # Run with test workflow
+    docker run --rm llms-os
+    
+    # Run with custom workflow
+    docker run --rm -v ./my-workflow.yaml:/app/my-workflow.yaml llms-os my-workflow.yaml
+    
+    # Using docker-compose
+    docker-compose up
+    ```
+    
+    ### Local Installation
+    
+    ```bash
+    # Install from source
+    pip install -e ./src
+    
+    # Run CLI
+    llms-os test_llm.yaml
+    
+    # List available actions
+    llms-os --list-actions
+    ```
+    
+    ## 📁 Project Structure
+    
+    ```
+    project/
+    ├── Dockerfile              # Docker configuration
+    ├── docker-compose.yml      # Docker Compose setup
+    ├── requirements.txt        # Python dependencies
+    └── src/
+        ├── LLMs_OS/           # Main package
+        │   ├── actions/       # Action modules
+        │   ├── core.py        # Core engine
+        │   └── cli.py         # CLI interface
+        └── setup.py           # Package setup
+    ```
+    
+    ## 🔧 Configuration
+    
+    Set environment variables:
+    
+    ```bash
+    export OPENROUTER_API_KEY="sk-or-your-key"
+    ```
+    
+    Or use `.env` file:
+    
+    ```bash
+    cp .env.example .env
+    # Edit .env with your settings
+    ```
+    
+    ## 📝 Creating Workflows
+    
+    Create YAML files with your workflow definition:
+    
+    ```yaml
+    metadata:
+      title: "My Workflow"
+    
+    tasks:
+      - action: print_message
+        message: "Hello World"
+      
+      - action: chat_completion
+        model: "openai/gpt-3.5-turbo"
+        messages:
+          - role: user
+            content: "Hello!"
+    ```
+    
+    ## 🤝 Contributing
+    
+    1. Fork the repository
+    2. Create your feature branch
+    3. Commit your changes
+    4. Push to the branch
+    5. Open a Pull Request
+    
+    ## 📄 License
+    
+    MIT License - see LICENSE file for details
+
+# ==========================================
+# COMMANDS & USAGE
+# ==========================================
+commands:
+  setup_project: |
+    # Create project directory structure
+    mkdir -p project/src/LLMs_OS/actions
+    cd project
+    
+    # Create all files from this YAML
+    # Use a script or manually create each file with content above
+    
+    # Build Docker image
+    docker build -t llms-os .
+    
+    # Run with docker-compose
+    docker-compose up
+    
+    # Or run directly
+    docker run --rm -e OPENROUTER_API_KEY=sk-or-test llms-os
+
+  development: |
+    # For development with hot reload
+    docker-compose up --build
+    
+    # Run specific workflow
+    docker run --rm \
+      -e OPENROUTER_API_KEY=$OPENROUTER_API_KEY \
+      -v $(pwd)/workflows:/app/workflows \
+      llms-os workflows/my-workflow.yaml
+    
+    # Interactive shell
+    docker run --rm -it llms-os /bin/sh
+
+  deployment: |
+    # Build for production
+    docker build -t llms-os:prod -f Dockerfile .
+    
+    # Tag and push to registry
+    docker tag llms-os:prod myregistry/llms-os:latest
+    docker push myregistry/llms-os:latest
+    
+    # Deploy with Kubernetes
+    kubectl apply -f k8s/deployment.yaml
+
+# ==========================================
+# NOTES & BEST PRACTICES
+# ==========================================
+notes:
+  security:
+    - "Never hardcode API keys in Dockerfile"
+    - "Use Docker secrets or environment variables"
+    - "Run containers as non-root user"
+    - "Scan images for vulnerabilities"
+    
+  optimization:
+    - "Use multi-stage builds to reduce image size"
+    - "Minimize layers by combining RUN commands"
+    - "Use .dockerignore to exclude unnecessary files"
+    - "Cache dependencies layer for faster builds"
+    
+  maintenance:
+    - "Pin all dependency versions"
+    - "Use semantic versioning for releases"
+    - "Document all configuration options"
+    - "Implement comprehensive error handling"
+    
+  monitoring:
+    - "Add health checks to containers"
+    - "Implement proper logging"
+    - "Use structured logging (JSON)"
+    - "Monitor resource usage"
+-
+# syntax=docker/dockerfile:1.4
+# This uses BuildKit's heredoc feature to embed the Python code directly.
+
+# Use a lightweight Python base image.
+FROM python:3.11-slim
+
+# Set the working directory inside the container.
+WORKDIR /app
+
+# Create a requirements.txt using a heredoc.
+RUN <<EOT > requirements.txt
+Flask
+requests
+EOT
+
+# Install the Python dependencies.
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Use a heredoc to embed the entire Python application code directly into app.py.
+# This code creates a simple Flask server that simulates the OpenRouter API.
+RUN <<EOT > app.py
+from flask import Flask, request, jsonify
+import os
+
+app = Flask(__name__)
+SIMULATED_API_KEY = "sk-simulated-key"
+
+@app.route("/api/v1/chat/completions", methods=["POST"])
+def handle_chat():
+    """Mocks the OpenRouter chat completions API endpoint."""
+    auth_header = request.headers.get("Authorization")
+    if auth_header != f"Bearer {SIMULATED_API_KEY}":
+        return jsonify({"error": "Invalid API key"}), 401
+
+    data = request.json
+    model = data.get("model", "unknown")
+    messages = data.get("messages", [])
+    prompt = messages[-1]["content"] if messages else "No prompt"
+
+    # Simulated response logic.
+    simulated_response = f"This is a simulated response from {model} for your prompt: '{prompt[:40]}...'"
+    
+    return jsonify({
+        "choices": [{
+            "message": {
+                "content": simulated_response,
+                "role": "assistant"
+            }
+        }],
+        "model": model,
+        "usage": {"prompt_tokens": 10, "completion_tokens": 20, "total_tokens": 30}
+    })
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8000)
+EOT
+
+# Expose the port the Flask app will run on.
+EXPOSE 8000
+
+# Specify the command to run the Python application.
+CMD ["python", "app.py"]
