@@ -1,0 +1,132 @@
+FROM python:3.14.0b3-alpine3.21
+
+LABEL maintainer="you@example.com"
+LABEL description="LLMs_OS workflow CLI tool - with simulated OpenRouter API key"
+
+WORKDIR /app
+
+# Cài hệ thống & pip packages (dùng openai phiên bản cũ để giữ cú pháp cũ)
+#RUN apk add --no-cache gcc musl-dev libffi-dev curl \
+# && pip install --no-cache-dir pyyaml requests jinja2 openai==0.28
+
+# Tạo cấu trúc project
+RUN mkdir -p /app/LLMs_OS/actions && \
+    touch /app/LLMs_OS/__init__.py && \
+    touch /app/LLMs_OS/actions/__init__.py
+
+# registry.py
+RUN printf '%s\n' \
+"ACTION_REGISTRY = {}" \
+"def register(name):" \
+"    def wrapper(func):" \
+"        ACTION_REGISTRY[name] = func" \
+"        return func" \
+"    return wrapper" \
+"def get_action(name):" \
+"    return ACTION_REGISTRY.get(name)" \
+> /app/LLMs_OS/registry.py
+
+# core.py
+RUN printf '%s\n' \
+"import yaml, importlib, os" \
+"from jinja2 import Template" \
+"from LLMs_OS.registry import get_action" \
+"" \
+"def render(value):" \
+"    return Template(value).render(env=os.environ)" \
+"" \
+"def load_actions():" \
+"    path = os.path.join(os.path.dirname(__file__), 'actions')" \
+"    for f in os.listdir(path):" \
+"        if f.endswith('.py') and not f.startswith('_'):" \
+"            importlib.import_module(f'LLMs_OS.actions.' + f[:-3])" \
+"" \
+"def execute_yaml(file_path):" \
+"    load_actions()" \
+"    with open(file_path, 'r') as f:" \
+"        data = yaml.safe_load(f)" \
+"    print('\\n📄', data.get('metadata', {}).get('title', 'LLMs_OS script'))" \
+"    print('='*40)" \
+"    for task in data.get('tasks', []):" \
+"        action = task.get('action')" \
+"        fn = get_action(action)" \
+"        if fn:" \
+"            try:" \
+"                fn(task)" \
+"            except Exception as e:" \
+"                print(f\"❌ Lỗi với action '{action}': {e}\")" \
+"        else:" \
+"            print(f\"⚠️ Action không hỗ trợ: {action}\")" \
+> /app/LLMs_OS/core.py
+
+# cli.py
+RUN printf '%s\n' \
+"import argparse, os, sys" \
+"from LLMs_OS.core import execute_yaml" \
+"" \
+"def main():" \
+"    parser = argparse.ArgumentParser()" \
+"    parser.add_argument('yaml_file', help='Path to YAML script')" \
+"    args = parser.parse_args()" \
+"    if not os.path.exists(args.yaml_file):" \
+"        print(f'❌ File không tồn tại: {args.yaml_file}')" \
+"        sys.exit(1)" \
+"    execute_yaml(args.yaml_file)" \
+> /app/LLMs_OS/cli.py
+
+# setup.py
+RUN printf '%s\n' \
+"from setuptools import setup, find_packages" \
+"setup(" \
+"    name='LLMs_OS'," \
+"    version='0.1.0'," \
+"    packages=find_packages()," \
+"    install_requires=['pyyaml', 'requests', 'jinja2', 'openai==0.28']," \
+"    entry_points={'console_scripts': ['llms-os = LLMs_OS.cli:main']}," \
+")" \
+> /app/setup.py
+
+# Action: print_message
+RUN printf '%s\n' \
+"from LLMs_OS.registry import register" \
+"@register('print_message')" \
+"def _(task):" \
+"    print('[PRINT]', task.get('message'))" \
+> /app/LLMs_OS/actions/print_message.py
+
+# Action: chat_completion (giả lập API key)
+RUN printf '%s\n' \
+"import os" \
+"from LLMs_OS.registry import register" \
+"" \
+"@register('chat_completion')" \
+"def _(task):" \
+"    key = os.environ.get('OPENROUTER_API_KEY', '')" \
+"    if not key or not key.startswith('sk-or-'):" \
+"        print('❌ Không tìm thấy API key hợp lệ.')" \
+"        return" \
+"    print('✅ Đã nhận API key:', key)" \
+"    print('[LLM] (giả lập) Xin chào! Đây là phản hồi từ mô hình AI.')" \
+> /app/LLMs_OS/actions/chat_completion.py
+
+# Sample script: test_llm.yaml
+RUN printf '%s\n' \
+"metadata:" \
+"  title: '🧪 Test LLMs_OS with Simulated Key'" \
+"tasks:" \
+"  - action: chat_completion" \
+"    model: 'openrouter/gpt-3.5-turbo'" \
+"    messages:" \
+"      - role: system" \
+"        content: 'Bạn là trợ lý AI thân thiện.'" \
+"      - role: user" \
+"        content: 'Hãy giới thiệu về thành phố Huế.'" \
+> /app/test_llm.yaml
+
+# Giả lập API key trong môi trường
+ENV OPENROUTER_API_KEY="sk-or-testkey1234567890"
+
+# Cài tool & chạy mặc định
+RUN pip install --no-cache-dir -e /app
+ENTRYPOINT ["llms-os"]
+CMD ["test_llm.yaml"]
